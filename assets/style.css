@@ -4,17 +4,17 @@
    Kampai beveik statūs (2 px), vietoj šešėlių — 1 px linijos.
    ============================================================ */
 :root{
-  /* spalvos */
-  --primary:#1A2B3C;            /* pagrindinė – gilus grafito mėlis */
-  --deep-navy:#0F172A;          /* tamsios sekcijos */
-  --eng-blue:#0047AB;           /* inžinerinis mėlynas – akcentas ir logotipas */
-  --grid-line:#E2E8F0;          /* visos linijos ir rėmeliai */
-  --surface:#F7F9FB;            /* fonas */
-  --surface-white:#FFFFFF;      /* kortelės */
-  --surface-low:#F2F4F6;
-  --surface-high:#E6E8EA;
-  --on-surface:#191C1E;
-  --on-variant:#434653;         /* antrinis tekstas */
+  /* spalvos — pagal Brand Book (Pomelli) */
+  --primary:#0F172A;            /* Obsidian Black – pagrindinė tamsi */
+  --deep-navy:#0F172A;          /* Obsidian Black – tamsios sekcijos */
+  --eng-blue:#0055D4;           /* Sapphire Blue – akcentas ir logotipas */
+  --grid-line:#E2E8F0;          /* Soft Lavender – visos linijos ir rėmeliai */
+  --surface:#F8FAFC;            /* Snow White – fonas */
+  --surface-white:#FFFFFF;      /* Pure White – kortelės */
+  --surface-low:#F1F5F9;
+  --surface-high:#E8EDF3;
+  --on-surface:#0F172A;
+  --on-variant:#475569;         /* antrinis tekstas */
   --slate:#64748B;              /* trečiaeilis tekstas */
   --on-dark-soft:#AFBFD9;
   --light-blue:#DAE2FD;         /* akcentas tamsiame fone */
@@ -91,8 +91,8 @@ section{padding:64px 0}
 /* --- mygtukai --- */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:500;
-  padding:16px 28px; border-radius:var(--r); border:1px solid transparent;
+  font-family:var(--f-head); font-size:16px; letter-spacing:.01em; font-weight:600;
+  padding:15px 28px; border-radius:var(--r); border:1px solid transparent;
   text-decoration:none; cursor:pointer; transition:.15s;
 }
 .btn-primary{background:var(--primary); color:#fff; border-color:var(--primary)}
@@ -119,11 +119,11 @@ section{padding:64px 0}
   max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);
   height:var(--nav-h); display:flex; align-items:center; gap:28px;
 }
-.logo{display:flex; align-items:center; text-decoration:none; flex:none}
-.logo img{height:38px; width:auto}
+.logo{display:flex; align-items:center; text-decoration:none; flex:none; padding-right:16px}
+.logo img{height:52px; width:auto}      /* Brand Book: min. plotis 152 px */
 .nav-links{display:flex; align-items:center; gap:26px; margin-left:auto}
 .nav-links a{
-  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; color:var(--on-variant);
+  font-family:var(--f-body); font-size:15px; font-weight:500; color:var(--on-variant);
   text-decoration:none; padding-bottom:4px; border-bottom:2px solid transparent; transition:.15s;
 }
 .nav-links a:hover{color:var(--primary); border-color:var(--grid-line)}
@@ -141,7 +141,7 @@ section{padding:64px 0}
 .nav-mobile a{
   display:flex; align-items:center; justify-content:space-between;
   padding:16px var(--pad); border-bottom:1px solid var(--grid-line); text-decoration:none;
-  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; color:var(--on-variant);
+  font-family:var(--f-head); font-size:17px; font-weight:600; color:var(--on-variant);
 }
 .nav-mobile a.active{color:var(--primary); background:var(--surface-low)}
 .nav-mobile .cta{background:var(--primary); color:#fff; border-bottom:0}
@@ -184,7 +184,7 @@ section{padding:64px 0}
 }
 .hero-note{
   display:flex; align-items:flex-start; gap:8px; margin-top:20px;
-  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-variant);
+  font-family:var(--f-body); font-size:15px; color:var(--on-variant);
 }
 .hero-note .ms{color:var(--eng-blue)}
 .hero-fig{position:relative; border:1px solid var(--grid-line); background:var(--surface-white); padding:8px; margin:0}
@@ -209,7 +209,7 @@ section{padding:64px 0}
 .fact{padding:24px 24px 24px 0; border-right:1px solid var(--grid-line)}
 .fact:last-child{border-right:0}
 .fact b{display:block; font-family:var(--f-head); font-size:24px; font-weight:700; color:var(--primary); line-height:1.2}
-.fact span{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate); display:block; margin-top:6px}
+.fact span{font-family:var(--f-body); font-size:14px; color:var(--slate); display:block; margin-top:6px; line-height:1.4}
 
 /* ============================================================
    KORTELĖS
@@ -228,12 +228,12 @@ section{padding:64px 0}
 .card ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
 .card ul li{
   display:flex; align-items:flex-start; gap:10px;
-  font-family:var(--f-mono); font-size:12px; line-height:1.5; letter-spacing:.05em; color:var(--on-variant);
+  font-family:var(--f-body); font-size:15px; line-height:1.5; color:var(--on-variant);
 }
-.card ul li .ms{color:var(--eng-blue); flex:none; margin-top:1px}
+.card ul li .ms{color:var(--eng-blue); flex:none; margin-top:3px}
 .card-link{
   margin-top:24px; padding-top:16px; border-top:1px solid var(--grid-line);
-  font-family:var(--f-mono); font-size:13px; letter-spacing:.05em; color:var(--eng-blue);
+  font-family:var(--f-head); font-size:15px; font-weight:600; color:var(--eng-blue);
   text-decoration:none; display:flex; align-items:center; gap:8px;
 }
 .card-link:hover{gap:12px}
@@ -295,7 +295,7 @@ section{padding:64px 0}
 .cat:hover:before{background:var(--eng-blue)}
 .cat-top{display:flex; align-items:center; gap:14px; margin-bottom:16px}
 .cat-top .ms{color:var(--primary)}
-.cat h4{font-family:var(--f-mono); font-size:13px; letter-spacing:.06em; font-weight:700; text-transform:uppercase; color:var(--primary); margin:0}
+.cat h4{font-family:var(--f-head); font-size:17px; letter-spacing:0; font-weight:700; color:var(--primary); margin:0}
 .cat ul{list-style:none; margin:0; padding:0}
 .cat ul li{font-size:14px; line-height:1.5; color:var(--on-variant); padding:6px 0 6px 16px; position:relative}
 .cat ul li:before{content:""; position:absolute; left:0; top:13px; width:6px; height:1px; background:var(--slate)}
@@ -311,7 +311,7 @@ section{padding:64px 0}
   border-radius:50%; display:flex; align-items:center; justify-content:center;
 }
 .banner-icon .ms{color:var(--eng-blue)}
-.banner h5{font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:700; color:var(--primary); margin:0 0 8px}
+.banner h5{font-family:var(--f-head); font-size:19px; font-weight:700; color:var(--primary); margin:0 0 8px}
 .banner p{margin:0; color:var(--on-variant); font-size:15px; max-width:74ch}
 
 /* ============================================================
@@ -366,7 +366,7 @@ figcaption{
 .rev-card>p{font-style:italic; color:var(--on-variant); flex:1; margin:16px 0 20px}
 .rev-meta{border-top:1px solid var(--grid-line); padding-top:14px}
 .rev-meta b{font-family:var(--f-head); font-size:16px; color:var(--primary); display:block}
-.rev-meta span{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate)}
+.rev-meta span{font-family:var(--f-body); font-size:14px; color:var(--slate)}
 
 /* ============================================================
    KONTAKTAI
@@ -376,8 +376,8 @@ figcaption{
 .sheet-row{display:flex; align-items:center; gap:20px; padding:18px 24px; border-bottom:1px solid rgba(255,255,255,.12)}
 .sheet-row:last-child{border-bottom:0}
 .sheet-row .k{
-  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-dark-soft);
-  width:110px; flex:none; text-transform:uppercase;
+  font-family:var(--f-body); font-size:14px; color:var(--on-dark-soft);
+  width:110px; flex:none;
 }
 .sheet-row .v{font-family:var(--f-head); font-size:20px; font-weight:600; color:#fff; text-decoration:none}
 a.v:hover{color:var(--light-blue)}
@@ -403,7 +403,7 @@ a.v:hover{color:var(--light-blue)}
 .field{margin-bottom:24px}
 .field:last-child{margin-bottom:0}
 .field label{
-  display:block; font-family:var(--f-mono); font-size:14px; letter-spacing:.05em;
+  display:block; font-family:var(--f-head); font-size:16px; font-weight:600;
   color:var(--on-surface); margin-bottom:10px;
 }
 .field label .req{color:var(--eng-blue)}
@@ -421,7 +421,7 @@ a.v:hover{color:var(--light-blue)}
 .field input:focus,.field select:focus,.field textarea:focus{
   outline:none; border-color:var(--eng-blue); background:var(--surface-white);
 }
-.field input::placeholder,.field textarea::placeholder{color:var(--slate); font-family:var(--f-mono); font-size:14px}
+.field input::placeholder,.field textarea::placeholder{color:var(--slate); font-family:var(--f-body); font-size:15px}
 .field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
 .hint{
   display:flex; gap:10px; align-items:flex-start; margin-top:10px;
@@ -453,11 +453,11 @@ a.v:hover{color:var(--light-blue)}
    ============================================================ */
 .site-footer{background:var(--surface-low); border-top:1px solid var(--grid-line)}
 .foot{max-width:var(--maxw); margin:0 auto; padding:48px var(--pad); display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gutter)}
-.foot h4{font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:700; color:var(--primary); margin:0 0 16px}
+.foot h4{font-family:var(--f-head); font-size:17px; font-weight:700; color:var(--primary); margin:0 0 16px}
 .foot ul{list-style:none; margin:0; padding:0; display:grid; gap:10px}
 .foot a{color:var(--on-variant); text-decoration:none; font-size:15px}
 .foot a:hover{color:var(--primary); text-decoration:underline}
-.foot img{height:34px; width:auto; margin-bottom:16px}
+.foot img{height:46px; width:auto; margin-bottom:16px}
 .foot .copy{
   grid-column:1/-1; border-top:1px solid var(--grid-line); padding-top:24px; margin-top:16px;
   font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate); text-align:center;
@@ -512,7 +512,7 @@ a.v:hover{color:var(--light-blue)}
   }
   .callbar a{
     flex:1; text-align:center; padding:18px 8px; text-decoration:none; color:#fff;
-    font-family:var(--f-mono); font-size:13px; letter-spacing:.05em;
+    font-family:var(--f-head); font-size:16px; font-weight:600;
     display:flex; align-items:center; justify-content:center; gap:8px;
   }
   .callbar a+a{border-left:1px solid rgba(255,255,255,.2)}

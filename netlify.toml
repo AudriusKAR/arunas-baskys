@@ -1,0 +1,17 @@
+# Netlify konfigūracija.
+# Puslapis statinis – nieko kompiliuoti nereikia, tik nurodom katalogą.
+# Formų priėmimą Netlify įjungia automatiškai, radęs <form data-netlify="true">.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

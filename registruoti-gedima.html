@@ -57,13 +57,16 @@
         Tą pačią formą naudokite ir tada, kai reikia planinio įrangos aptarnavimo.
       </p>
 
-      <form id="uzklausa" novalidate>
+      <form id="uzklausa" name="uzklausa" method="POST" data-netlify="true"
+            netlify-honeypot="bot-field" action="/aciu.html" novalidate>
+        <input type="hidden" name="form-name" value="uzklausa">
+        <p style="display:none"><label>Nepildykite: <input name="bot-field"></label></p>
 
         <div class="form-section">
           <h2><span class="ms">assignment</span> Užklausos tipas</h2>
           <div class="field">
             <label for="tipas">Ko reikia <span class="req">*</span></label>
-            <select id="tipas" required>
+            <select id="tipas" name="tipas" required>
               <option value="">Pasirinkite užklausos tipą</option>
               <option>Gedimas – įranga neveikia arba veikia netinkamai</option>
               <option>Sudėtingas gedimas – jau buvo bandyta taisyti</option>
@@ -79,7 +82,7 @@
           <h2><span class="ms">build</span> Įrangos informacija</h2>
           <div class="field">
             <label for="iranga">Įrangos tipas <span class="req">*</span></label>
-            <select id="iranga" required>
+            <select id="iranga" name="iranga" required>
               <option value="">Pasirinkite įrangos tipą</option>
             <option>Šilumos siurblys (oras–oras)</option>
             <option>Šilumos siurblys (oras–vanduo)</option>
@@ -103,7 +106,7 @@
           </div>
           <div class="field">
             <label for="modelis">Gamintojas / Modelis</label>
-            <input type="text" id="modelis" placeholder="Pvz., Daikin Altherma 3">
+            <input type="text" id="modelis" name="modelis" placeholder="Pvz., Daikin Altherma 3">
             <div class="hint">
               <span class="ms ms-sm">info</span>
               Užrašas paprastai būna ant įrenginio techninių duomenų lentelės.
@@ -115,11 +118,11 @@
           <h2><span class="ms">warning</span> Problemos aprašymas</h2>
           <div class="field">
             <label for="klaida">Klaidos kodas (jei rodo)</label>
-            <input type="text" id="klaida" placeholder="Pvz., E-04, U4, 7H">
+            <input type="text" id="klaida" name="klaida" placeholder="Pvz., E-04, U4, 7H">
           </div>
           <div class="field">
             <label for="simptomai">Simptomai ir situacija <span class="req">*</span></label>
-            <textarea id="simptomai" required placeholder="Išsamiai aprašykite, kas vyksta. Kada prasidėjo problema? Ar atsiranda specifinėmis sąlygomis? Ar jau buvo taisyta, kokios detalės keistos?"></textarea>
+            <textarea id="simptomai" name="simptomai" required placeholder="Išsamiai aprašykite, kas vyksta. Kada prasidėjo problema? Ar atsiranda specifinėmis sąlygomis? Ar jau buvo taisyta, kokios detalės keistos?"></textarea>
             <div class="hint">
               <span class="ms ms-sm">info</span>
               Kuo detalesnis aprašymas padės greičiau įvertinti situaciją.
@@ -132,26 +135,26 @@
           <h2><span class="ms">contact_page</span> Kontaktinė informacija</h2>
           <div class="field">
             <label for="vardas">Vardas <span class="req">*</span></label>
-            <input type="text" id="vardas" required autocomplete="name">
+            <input type="text" id="vardas" name="vardas" required autocomplete="name">
             <div class="err-msg">Įrašykite vardą</div>
           </div>
           <div class="field">
             <label for="telefonas">Telefonas <span class="req">*</span></label>
-            <input type="tel" id="telefonas" required placeholder="+370..." autocomplete="tel">
+            <input type="tel" id="telefonas" name="telefonas" required placeholder="+370..." autocomplete="tel">
             <div class="err-msg">Įrašykite telefono numerį</div>
           </div>
           <div class="field">
             <label for="elpastas">El. paštas</label>
-            <input type="email" id="elpastas" placeholder="vardas@pastas.lt" autocomplete="email">
+            <input type="email" id="elpastas" name="elpastas" placeholder="vardas@pastas.lt" autocomplete="email">
           </div>
           <div class="field">
             <label for="adresas">Objekto adresas (miestas / rajonas) <span class="req">*</span></label>
-            <input type="text" id="adresas" required placeholder="Pvz., Vilnius, Antakalnis">
+            <input type="text" id="adresas" name="adresas" required placeholder="Pvz., Vilnius, Antakalnis">
             <div class="err-msg">Nurodykite miestą ar rajoną</div>
           </div>
           <div class="field">
             <label for="objektas">Objekto tipas</label>
-            <select id="objektas">
+            <select id="objektas" name="objektas">
               <option value="">Nenurodyta</option>
               <option>Butas</option>
               <option>Privatus namas</option>
@@ -176,19 +179,35 @@
 
     <div class="form-done" id="form-done">
       <div class="ms ok-icon fill">check_circle</div>
-      <h2 class="h-md">Užklausa paruošta</h2>
-      <p class="lead">
-        Pasirinkite, kaip ją išsiųsti. Tekstą taip pat galite nukopijuoti ir atsiųsti bet kuriuo kitu būdu.
-      </p>
+
+      <div id="done-auto" style="display:none">
+        <h2 class="h-md">Užklausa išsiųsta</h2>
+        <p class="lead">
+          Ačiū. Užklausa jau iškeliavo Arūnui. Su jumis susisieks nurodytu telefonu.
+          Skubiu atveju skambinkite <a href="tel:+37061170101" style="color:var(--eng-blue)">+370 611 70101</a>.
+        </p>
+      </div>
+
+      <div id="done-manual" style="display:none">
+        <h2 class="h-md">Užklausa paruošta</h2>
+        <p class="lead">
+          Pasirinkite, kaip ją išsiųsti. Tekstą taip pat galite nukopijuoti ir atsiųsti bet kuriuo kitu būdu.
+        </p>
+      </div>
+
       <div class="summary" id="summary"></div>
-      <div class="btn-row">
+
+      <div class="btn-row" id="send-buttons">
         <a class="btn btn-blue" id="send-mail" href="#"><span class="ms ms-sm">mail</span> Siųsti el. paštu</a>
         <a class="btn btn-outline" id="send-sms" href="#"><span class="ms ms-sm">sms</span> Siųsti SMS</a>
         <button class="btn btn-outline" id="copy-btn" type="button"><span class="ms ms-sm">content_copy</span> Kopijuoti</button>
         <a class="btn btn-outline" href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
       </div>
+
       <p class="form-note" style="text-align:left; margin-top:24px">
-        <a href="#" id="back-to-form" style="color:var(--eng-blue)">← Grįžti ir pataisyti duomenis</a>
+        <a href="index.html" style="color:var(--eng-blue)">← Grįžti į pradžią</a>
+        &nbsp;·&nbsp;
+        <a href="#" id="back-to-form" style="color:var(--eng-blue)">Pataisyti duomenis</a>
       </p>
     </div>
   </div>
@@ -251,9 +270,39 @@
     document.getElementById('send-sms').href =
       'sms:' + TEL + '?body=' + encodeURIComponent(text);
 
-    box.style.display = 'none';
-    done.classList.add('on');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* Pirmiausia bandom išsiųsti automatiškai (veikia ten, kur yra formų
+       tarnyba, pvz. Netlify). Jei serveris to nepalaiko – parodom rankinį
+       siuntimo variantą, kad užklausa nedingtų. */
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.innerHTML = 'Siunčiama…';
+
+    var data = new FormData(form);
+    var body = new URLSearchParams(data).toString();
+
+    /* GitHub Pages ir vietinis failas formų nepriima – ten iš karto rankinis būdas */
+    var canPost = location.protocol.indexOf('http') === 0 &&
+                  location.hostname.indexOf('github.io') === -1;
+    if (!canPost) { finish(false); return; }
+
+    fetch(form.getAttribute('action') || '/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body
+    })
+      .then(function (r) { finish(r.ok); })
+      .catch(function () { finish(false); });
+
+    function finish(auto) {
+      document.getElementById('done-auto').style.display = auto ? '' : 'none';
+      document.getElementById('done-manual').style.display = auto ? 'none' : '';
+      document.getElementById('send-buttons').style.display = auto ? 'none' : '';
+      box.style.display = 'none';
+      done.classList.add('on');
+      btn.disabled = false;
+      btn.innerHTML = 'Registruoti gedimą <span class="ms ms-sm">send</span>';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   });
 
   form.addEventListener('input', function (e) {
