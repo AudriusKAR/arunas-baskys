@@ -937,9 +937,9 @@ def p_forma():
         Tą pačią formą naudokite ir tada, kai reikia planinio įrangos aptarnavimo.
       </p>
 
-      <form id="uzklausa" name="uzklausa" method="POST" data-netlify="true"
+      <form id="uzklausa" name="Gedimo registracija" method="POST" data-netlify="true"
             netlify-honeypot="bot-field" action="/aciu.html" novalidate>
-        <input type="hidden" name="form-name" value="uzklausa">
+        <input type="hidden" name="form-name" value="Gedimo registracija">
         <p style="display:none"><label>Nepildykite: <input name="bot-field"></label></p>
 
         <div class="form-section">
