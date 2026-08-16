@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F172A">
+<title>Arūnas Baškys — ŠVOK sistemų diagnostika ir remontas | Vilnius, visa Lietuva</title>
+<meta name="description" content="Gedimų paieška, diagnostika ir remontas: šilumos siurbliai, kondicionieriai, rekuperatoriai, šildymo įranga, katilai, šaldymo mašinos, baseinų vėdinimo sistemos. Daugiau nei 25 metų praktinė patirtis. Vilnius, visa Lietuva.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arūnas Baškys — ŠVOK sistemų diagnostika ir remontas">
+<meta property="og:description" content="Gedimų paieška ir remontas ten, kur priežastis nėra akivaizdi. Daugiau nei 25 metų praktinė patirtis.">
+<meta property="og:image" content="images/darbas-01.jpg">
+<meta property="og:locale" content="lt_LT">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DIZAINO SISTEMA
+   Spalvos, šriftai ir tarpai — vienoje vietoje.
+   Kampai beveik statūs (2 px), vietoj šešėlių — 1 px linijos.
+   ============================================================ */
+:root{
+  /* spalvos */
+  --primary:#1A2B3C;            /* pagrindinė – gilus grafito mėlis */
+  --deep-navy:#0F172A;          /* tamsios sekcijos */
+  --eng-blue:#0047AB;           /* inžinerinis mėlynas – tik akcentams */
+  --grid-line:#E2E8F0;          /* visos linijos ir rėmeliai */
+  --surface:#F7F9FB;            /* fonas */
+  --surface-white:#FFFFFF;      /* kortelės */
+  --surface-low:#F2F4F6;
+  --surface-high:#E6E8EA;
+  --on-surface:#191C1E;
+  --on-variant:#434653;         /* antrinis tekstas */
+  --slate:#64748B;              /* trečiaeilis tekstas */
+  --on-dark:#FFFFFF;
+  --on-dark-soft:#AFBFD9;
+  --light-blue:#DAE2FD;         /* akcentas tamsiame fone */
+
+  /* šriftai */
+  --f-head:'Hanken Grotesk', system-ui, sans-serif;
+  --f-body:'Inter', system-ui, sans-serif;
+  --f-mono:'JetBrains Mono', ui-monospace, monospace;
+
+  /* matmenys */
+  --maxw:1280px;
+  --gutter:24px;
+  --pad:20px;                   /* mobilus */
+  --pad-lg:64px;                /* desktop */
+  --r:2px;
+  --nav-h:80px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 8px)}
+body{
+  margin:0; background:var(--surface); color:var(--on-surface);
+  font-family:var(--f-body); font-size:16px; line-height:1.6; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+button{font:inherit}
+
+/* --- tipografija --- */
+h1,h2,h3,h4,h5{font-family:var(--f-head); margin:0; color:var(--primary)}
+.h-lg{font-size:48px; line-height:1.1; letter-spacing:-.02em; font-weight:700}
+.h-md{font-size:32px; line-height:1.2; font-weight:600}
+.h-sm{font-size:24px; line-height:1.3; font-weight:600}
+.body-lg{font-size:18px; line-height:1.6}
+.label-md{font-family:var(--f-mono); font-size:14px; line-height:1; letter-spacing:.05em; font-weight:500}
+.label-sm{font-family:var(--f-mono); font-size:12px; line-height:1.5; letter-spacing:.05em; font-weight:500}
+p{margin:0 0 16px}
+.muted{color:var(--on-variant)}
+
+/* --- tinklelis / konteineriai --- */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad)}
+section{padding:64px 0}
+.blueprint{
+  background-color:var(--surface);
+  background-image:linear-gradient(var(--grid-line) 1px, transparent 1px),
+                   linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.grid{display:grid; gap:var(--gutter)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+/* --- ikonos --- */
+.ms{
+  font-family:'Material Symbols Outlined'; font-weight:normal; font-style:normal;
+  line-height:1; letter-spacing:normal; text-transform:none; display:inline-block;
+  white-space:nowrap; direction:ltr; -webkit-font-feature-settings:'liga'; font-variation-settings:'FILL' 0,'wght' 300;
+  user-select:none;
+}
+.ms.fill{font-variation-settings:'FILL' 1,'wght' 400}
+.ms-sm{font-size:16px}
+.ms-lg{font-size:30px}
+
+/* --- sekcijos antraštė --- */
+.sec-head{
+  display:flex; flex-wrap:wrap; gap:12px 24px; align-items:flex-end; justify-content:space-between;
+  border-bottom:1px solid var(--grid-line); padding-bottom:16px; margin-bottom:40px;
+}
+.sec-head p{margin:6px 0 0; color:var(--on-variant)}
+.sec-index{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate)}
+
+/* --- mygtukai --- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:500;
+  padding:16px 28px; border-radius:var(--r); border:1px solid transparent;
+  text-decoration:none; cursor:pointer; transition:.15s;
+}
+.btn-primary{background:var(--primary); color:#fff; border-color:var(--primary)}
+.btn-primary:hover{background:#243B52}
+.btn-outline{background:transparent; color:var(--primary); border-color:rgba(26,43,60,.25)}
+.btn-outline:hover{border-color:var(--primary); background:var(--surface-low)}
+.btn-light{background:transparent; color:#fff; border-color:rgba(255,255,255,.3)}
+.btn-light:hover{border-color:#fff; background:rgba(255,255,255,.08)}
+.btn-sm{padding:11px 20px}
+
+/* ============================================================
+   NAVIGACIJA
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:60; background:rgba(247,249,251,.97);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--grid-line);
+}
+.nav-in{
+  max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);
+  height:var(--nav-h); display:flex; align-items:center; gap:32px;
+}
+.logo{display:flex; flex-direction:column; text-decoration:none; gap:5px}
+.logo b{font-family:var(--f-head); font-size:19px; font-weight:700; letter-spacing:-.01em; color:var(--primary)}
+.logo span{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; color:var(--slate); text-transform:uppercase}
+.nav-links{display:flex; align-items:center; gap:30px; margin-left:auto}
+.nav-links a{
+  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; color:var(--on-variant);
+  text-decoration:none; padding-bottom:4px; border-bottom:2px solid transparent; transition:.15s;
+}
+.nav-links a:hover{color:var(--primary); border-color:var(--primary)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:80px 0 72px}
+.hero-grid{display:grid; grid-template-columns:7fr 5fr; gap:48px; align-items:center}
+.pill{
+  display:inline-flex; align-items:center; gap:9px; padding:7px 14px;
+  background:var(--surface-high); border:1px solid var(--grid-line); border-radius:var(--r);
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-variant); text-transform:uppercase;
+}
+.pulse{width:8px; height:8px; border-radius:50%; background:var(--eng-blue); animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1} 50%{opacity:.25}}
+.hero h1{margin:24px 0 0; text-wrap:balance}
+.hero-sub{
+  margin:28px 0 0; border-left:2px solid var(--grid-line); padding-left:24px;
+  font-size:18px; line-height:1.6; color:var(--on-variant); max-width:60ch;
+}
+.hero-sub strong{color:var(--primary); font-weight:600}
+.hero-years{
+  display:inline-flex; align-items:center; gap:10px; margin-top:24px;
+  border-left:2px solid var(--eng-blue); padding-left:16px;
+  font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; color:var(--primary);
+}
+.hero-cta{display:flex; flex-wrap:wrap; gap:16px; margin-top:32px}
+.hero-note{
+  display:flex; align-items:flex-start; gap:8px; margin-top:20px;
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-variant);
+}
+.hero-note .ms{color:var(--eng-blue)}
+
+/* hero nuotrauka su techniniais užrašais */
+.hero-fig{position:relative; border:1px solid var(--grid-line); background:var(--surface-white); padding:8px}
+.hero-fig>img{width:100%; height:560px; object-fit:cover; filter:contrast(1.1) saturate(.6)}
+.tag-dark{
+  position:absolute; top:24px; left:24px; background:var(--deep-navy); color:#fff;
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; padding:5px 10px; opacity:.9;
+}
+.tag-light{
+  position:absolute; bottom:24px; right:24px; background:rgba(247,249,251,.94);
+  border:1px solid rgba(26,43,60,.2); padding:8px 12px; backdrop-filter:blur(4px);
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-variant);
+  display:flex; align-items:center; gap:8px;
+}
+.tag-light .ms{color:var(--eng-blue)}
+
+/* ============================================================
+   FAKTŲ JUOSTA
+   ============================================================ */
+.facts{border-top:1px solid var(--grid-line); border-bottom:1px solid var(--grid-line); background:var(--surface-white)}
+.facts-in{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); display:grid; grid-template-columns:repeat(4,1fr)}
+.fact{padding:24px 24px 24px 0; border-right:1px solid var(--grid-line)}
+.fact:last-child{border-right:0}
+.fact b{display:block; font-family:var(--f-head); font-size:24px; font-weight:700; color:var(--primary); line-height:1.2}
+.fact span{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate); display:block; margin-top:6px}
+
+/* ============================================================
+   KORTELĖS
+   ============================================================ */
+.card{
+  background:var(--surface-white); border:1px solid var(--grid-line); border-radius:var(--r);
+  padding:32px; display:flex; flex-direction:column; transition:border-color .15s;
+}
+.card:hover{border-color:var(--primary)}
+.card-head{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  border-bottom:1px solid var(--grid-line); padding-bottom:16px; margin-bottom:24px;
+}
+.card-head .ms{color:var(--primary)}
+.card>p{color:var(--on-variant); flex:1}
+.card ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.card ul li{
+  display:flex; align-items:flex-start; gap:10px;
+  font-family:var(--f-mono); font-size:12px; line-height:1.5; letter-spacing:.05em; color:var(--on-variant);
+}
+.card ul li .ms{color:var(--eng-blue); flex:none; margin-top:1px}
+
+/* tamsi „filosofijos“ kortelė */
+.card-dark{
+  background:var(--primary); border-color:var(--deep-navy); color:#fff; position:relative; overflow:hidden;
+}
+.card-dark:hover{border-color:var(--deep-navy)}
+.card-dark h3{color:var(--light-blue)}
+.card-dark p{color:rgba(255,255,255,.82)}
+.card-dark .watermark{
+  position:absolute; right:-30px; top:-30px; opacity:.08; font-size:170px; pointer-events:none;
+}
+.card-dark blockquote{
+  margin:0; border-left:2px solid var(--light-blue); padding-left:18px;
+}
+.card-dark blockquote p{font-size:18px; line-height:1.5; color:#fff; font-style:italic; margin:0}
+.card-dark blockquote footer{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:rgba(255,255,255,.65); margin-top:10px;
+}
+
+/* ============================================================
+   SIMPTOMŲ SĄRAŠAS
+   ============================================================ */
+.sympt{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:0 40px}
+.sympt li{
+  display:flex; align-items:baseline; gap:16px; padding:16px 0;
+  border-bottom:1px solid var(--grid-line); color:var(--on-variant);
+}
+.sympt li em{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate);
+  font-style:normal; flex:none; width:24px;
+}
+
+/* ============================================================
+   TAMSI SEKCIJA
+   ============================================================ */
+.dark{background:var(--deep-navy); color:#fff; position:relative; overflow:hidden}
+.dark:before{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.dark .wrap{position:relative}
+.dark h2,.dark h3{color:#fff}
+.dark .sec-head{border-color:rgba(255,255,255,.14)}
+.dark .sec-head p,.dark .sec-index{color:var(--on-dark-soft)}
+.dark .lead{color:var(--on-dark-soft)}
+.checklist{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:0 40px}
+.checklist li{
+  display:flex; gap:14px; align-items:flex-start; padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.12); color:#DCE6F0;
+}
+.checklist li .ms{color:var(--light-blue); flex:none; margin-top:2px}
+
+/* ============================================================
+   ĮRANGOS KATEGORIJOS
+   ============================================================ */
+.cat{
+  background:var(--surface-white); border:1px solid var(--grid-line); padding:28px 24px 24px;
+  position:relative; overflow:hidden; transition:border-color .15s;
+}
+.cat:before{
+  content:""; position:absolute; left:0; top:0; width:3px; height:100%;
+  background:var(--grid-line); transition:background .15s;
+}
+.cat:hover{border-color:var(--primary)}
+.cat:hover:before{background:var(--eng-blue)}
+.cat-top{display:flex; align-items:center; gap:14px; margin-bottom:16px}
+.cat-top .ms{color:var(--primary)}
+.cat h4{
+  font-family:var(--f-mono); font-size:13px; letter-spacing:.06em; font-weight:700;
+  text-transform:uppercase; color:var(--primary); margin:0;
+}
+.cat ul{list-style:none; margin:0; padding:0}
+.cat ul li{
+  font-size:14px; line-height:1.5; color:var(--on-variant); padding:6px 0 6px 16px; position:relative;
+}
+.cat ul li:before{
+  content:""; position:absolute; left:0; top:13px; width:6px; height:1px; background:var(--slate);
+}
+
+/* banneris */
+.banner{
+  margin-top:24px; background:var(--surface-low); border:1px solid var(--grid-line);
+  padding:28px; display:flex; flex-wrap:wrap; align-items:center; gap:24px; justify-content:space-between;
+}
+.banner-l{display:flex; gap:20px; align-items:flex-start}
+.banner-icon{
+  width:52px; height:52px; flex:none; border:1px solid var(--grid-line); background:var(--surface-white);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.banner-icon .ms{color:var(--eng-blue)}
+.banner h5{font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:700; color:var(--primary); margin:0 0 8px}
+.banner p{margin:0; color:var(--on-variant); font-size:15px; max-width:74ch}
+
+/* ============================================================
+   MATAVIMAI
+   ============================================================ */
+.measure{display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:center}
+.measure figure{margin:0; border:1px solid var(--grid-line); background:var(--surface-white); padding:8px}
+.measure figure img{width:100%; max-height:520px; object-fit:contain; background:var(--surface-low)}
+.measure figcaption{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate);
+  border-top:1px solid var(--grid-line); margin-top:8px; padding-top:10px;
+}
+.quotes{display:grid; grid-template-columns:repeat(2,1fr); gap:24px 32px; margin-top:40px}
+.quote{
+  margin:0; border-left:2px solid var(--eng-blue); padding-left:20px;
+  font-family:var(--f-head); font-size:19px; line-height:1.45; font-weight:500; color:var(--primary);
+}
+
+/* ============================================================
+   PATIRTIS
+   ============================================================ */
+.exp{display:grid; grid-template-columns:7fr 5fr; gap:48px; align-items:start}
+.tl{list-style:none; margin:0; padding:0}
+.tl li{
+  display:grid; grid-template-columns:132px 1fr; gap:24px;
+  padding:24px 0; border-bottom:1px solid var(--grid-line);
+}
+.tl li:first-child{padding-top:0}
+.tl .yr{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate); line-height:1.5}
+.tl h3{font-size:19px; font-weight:600; margin:0 0 8px}
+.tl p{margin:0; color:var(--on-variant); font-size:15px}
+.proof{display:grid; gap:16px}
+.proof figure{margin:0; border:1px solid var(--grid-line); background:var(--surface-white); padding:8px}
+.proof figcaption{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate);
+  border-top:1px solid var(--grid-line); margin-top:8px; padding-top:10px;
+}
+
+/* ============================================================
+   GALERIJA
+   ============================================================ */
+.gal{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.gal button{
+  padding:6px; border:1px solid var(--grid-line); background:var(--surface-white);
+  cursor:zoom-in; transition:border-color .15s; display:block;
+}
+.gal button:hover{border-color:var(--primary)}
+.gal img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:contrast(1.05) saturate(.85)}
+
+/* ============================================================
+   ATSILIEPIMAI
+   ============================================================ */
+.score{
+  display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-bottom:32px;
+  background:var(--surface-white); border:1px solid var(--grid-line); padding:24px 28px;
+}
+.score .num{font-family:var(--f-head); font-size:44px; font-weight:700; color:var(--primary); line-height:1}
+.stars{display:flex; gap:2px; color:var(--eng-blue)}
+.score .meta{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate)}
+.rev{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gutter)}
+.rev-card{background:var(--surface-white); border:1px solid var(--grid-line); padding:28px; display:flex; flex-direction:column}
+.rev-card>p{font-style:italic; color:var(--on-variant); flex:1; margin:16px 0 20px}
+.rev-meta{border-top:1px solid var(--grid-line); padding-top:14px}
+.rev-meta b{font-family:var(--f-head); font-size:16px; color:var(--primary); display:block}
+.rev-meta span{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate)}
+
+/* ============================================================
+   KONTAKTAI
+   ============================================================ */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start}
+.sheet{border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04)}
+.sheet-row{display:flex; align-items:center; gap:20px; padding:18px 24px; border-bottom:1px solid rgba(255,255,255,.12)}
+.sheet-row:last-child{border-bottom:0}
+.sheet-row .k{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--on-dark-soft);
+  width:110px; flex:none; text-transform:uppercase;
+}
+.sheet-row .v{font-family:var(--f-head); font-size:20px; font-weight:600; color:#fff; text-decoration:none}
+a.v:hover{color:var(--light-blue)}
+.tips{list-style:none; margin:0; padding:0}
+.tips li{
+  display:flex; gap:14px; align-items:flex-start; padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.12); color:#DCE6F0; font-size:15px;
+}
+.tips li .ms{color:var(--light-blue); flex:none; margin-top:2px}
+
+/* ============================================================
+   PORAŠTĖ
+   ============================================================ */
+.site-footer{background:var(--surface-low); border-top:1px solid var(--grid-line)}
+.foot{max-width:var(--maxw); margin:0 auto; padding:48px var(--pad); display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gutter)}
+.foot h4{font-family:var(--f-mono); font-size:14px; letter-spacing:.05em; font-weight:700; color:var(--primary); margin:0 0 16px}
+.foot ul{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.foot a{color:var(--on-variant); text-decoration:none; font-size:15px}
+.foot a:hover{color:var(--primary); text-decoration:underline}
+.foot .copy{
+  grid-column:1/-1; border-top:1px solid var(--grid-line); padding-top:24px; margin-top:16px;
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate); text-align:center;
+}
+
+/* ============================================================
+   LIGHTBOX + MOBILI JUOSTA
+   ============================================================ */
+.lb{position:fixed; inset:0; background:rgba(15,23,42,.96); display:none; z-index:200; align-items:center; justify-content:center; padding:32px}
+.lb.on{display:flex}
+.lb img{max-width:94vw; max-height:88vh; border:1px solid rgba(255,255,255,.2)}
+.lb button{position:absolute; background:transparent; border:1px solid rgba(255,255,255,.3); color:#fff; cursor:pointer; border-radius:var(--r)}
+.lb-close{top:20px; right:24px; width:44px; height:44px; font-size:24px}
+.lb-prev,.lb-next{top:50%; transform:translateY(-50%); width:48px; height:48px; font-size:22px}
+.lb-prev{left:24px} .lb-next{right:24px}
+.callbar{display:none}
+
+/* ============================================================
+   ADAPTYVUMAS
+   ============================================================ */
+@media(min-width:1024px){
+  .wrap,.nav-in,.facts-in,.foot{padding-left:var(--pad-lg); padding-right:var(--pad-lg)}
+  section{padding:80px 0}
+}
+@media(max-width:1100px){
+  .h-lg{font-size:40px}
+  .hero-grid,.measure,.exp,.contact-grid{grid-template-columns:1fr; gap:40px}
+  .hero-fig>img{height:420px}
+  .g3,.g4,.rev{grid-template-columns:repeat(2,1fr)}
+  .nav-links a:not(.btn){display:none}
+}
+@media(max-width:760px){
+  .h-lg{font-size:32px} .h-md{font-size:26px} .h-sm{font-size:20px}
+  section{padding:48px 0}
+  .hero{padding:48px 0 40px}
+  .g2,.g3,.g4,.rev,.sympt,.checklist,.quotes,.facts-in{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .fact{border-right:0; border-bottom:1px solid var(--grid-line); padding:18px 0}
+  .facts-in .fact:last-child{border-bottom:0}
+  .card{padding:24px}
+  .tl li{grid-template-columns:1fr; gap:8px}
+  .banner{padding:22px}
+  .foot{grid-template-columns:1fr; gap:32px}
+  .btn{width:100%}
+  .nav-links .btn{display:none}
+  .hero-fig>img{height:300px}
+  body{padding-bottom:64px}
+  .callbar{
+    display:flex; position:fixed; left:0; right:0; bottom:0; z-index:80;
+    background:var(--primary); border-top:1px solid var(--deep-navy);
+  }
+  .callbar a{
+    flex:1; text-align:center; padding:18px 8px; text-decoration:none; color:#fff;
+    font-family:var(--f-mono); font-size:13px; letter-spacing:.05em;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .callbar a+a{border-left:1px solid rgba(255,255,255,.2)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVIGACIJA ===================== -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">
+      <b>ARŪNAS BAŠKYS</b>
+      <span>ŠVOK serviso inžinierius</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#paslaugos">Diagnostika</a>
+      <a href="#kada">Kada kreiptis</a>
+      <a href="#sudetingi">Sudėtingi gedimai</a>
+      <a href="#iranga">Įranga</a>
+      <a href="#patirtis">Patirtis</a>
+      <a class="btn btn-primary btn-sm" href="#kontaktai">
+        Aprašyti gedimą <span class="ms ms-sm">arrow_forward</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="blueprint" id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill"><span class="pulse"></span> Gedimų paieška · Diagnostika · Remontas</div>
+
+      <h1 class="h-lg">ŠVOK sistemų diagnostika ir remontas</h1>
+
+      <p class="hero-sub">
+        Nuo šilumos siurblio ar rekuperatoriaus iki sudėtingos komercinio objekto inžinerinės sistemos.
+        <br><br>
+        Gedimų paieška, diagnostika ir remontas – <strong>šilumos siurblių, kondicionierių, rekuperatorių,
+        šildymo įrangos, katilų, šaldymo, baseinų</strong> ir kitose ŠVOK sistemose.
+      </p>
+
+      <div class="hero-years">Daugiau nei 25 metų praktinė patirtis</div>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#kontaktai"><span class="ms ms-sm">assignment</span> Aprašyti gedimą</a>
+        <a class="btn btn-outline" href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
+      </div>
+
+      <p class="hero-note">
+        <span class="ms ms-sm">warning</span>
+        Sudėtingas ar nestandartinis gedimas? Tokias užduotis verta aptarti.
+      </p>
+    </div>
+
+    <figure class="hero-fig">
+      <img src="images/darbas-01.jpg" alt="Šaldymo kontūro parametrų matavimas skaitmeniniu manometru ir programėle">
+      <div class="tag-dark">SYS_ANALYSIS: ACTIVE</div>
+      <div class="tag-light"><span class="ms ms-sm">timeline</span> Duomenų registravimas</div>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== FAKTAI ===================== -->
+<div class="facts">
+  <div class="facts-in">
+    <div class="fact"><b>5,0</b><span>12 atsiliepimų · Paslaugos.lt</span></div>
+    <div class="fact"><b>25+</b><span>metų ŠVOK servise</span></div>
+    <div class="fact"><b>17</b><span>metų Londono komerciniuose pastatuose</span></div>
+    <div class="fact"><b>Vilnius</b><span>ir visa Lietuva · nuo 70 €/val.</span></div>
+  </div>
+</div>
+
+<!-- ===================== PASLAUGOS ===================== -->
+<section id="paslaugos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Ką darau</h2>
+        <p>Nuo priežasties nustatymo iki veikiančios sistemos</p>
+      </div>
+      <div class="sec-index">01 / 06</div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="card-head">
+          <h3 class="h-sm">Diagnostika</h3>
+          <span class="ms ms-lg fill">manage_search</span>
+        </div>
+        <p>
+          Kai įranga dirba nestabiliai, rodo klaidų kodus, praranda efektyvumą ar suvartoja neįprastai
+          daug energijos. Matavimai ir sistemos veikimo logikos analizė, o ne spėliojimas.
+        </p>
+        <ul>
+          <li><span class="ms ms-sm">check</span> Veikimo parametrų matavimas ir registravimas</li>
+          <li><span class="ms ms-sm">check</span> Klaidų kodų interpretavimas</li>
+          <li><span class="ms ms-sm">check</span> Termovizinė ir elektrinė analizė</li>
+          <li><span class="ms ms-sm">check</span> Automatikos ir daviklių patikra</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3 class="h-sm">Remontas</h3>
+          <span class="ms ms-lg fill">build_circle</span>
+        </div>
+        <p>
+          Nustačius priežastį – techniškai ir ekonomiškai pagrįstas remontas. Tikslus įsikišimas į
+          probleminį mazgą. Jei remontas neapsimoka, apie tai pasakau atvirai.
+        </p>
+        <ul>
+          <li><span class="ms ms-sm">check</span> Šaldymo kontūro remontas ir pildymas</li>
+          <li><span class="ms ms-sm">check</span> Elektronikos plokščių defektavimas</li>
+          <li><span class="ms ms-sm">check</span> Automatika ir valdikliai</li>
+          <li><span class="ms ms-sm">check</span> Sistemos darbo parametrų atstatymas</li>
+        </ul>
+      </div>
+
+      <div class="card card-dark">
+        <span class="ms watermark">troubleshoot</span>
+        <div class="card-head" style="border-color:rgba(255,255,255,.2)">
+          <h3 class="h-sm">Sudėtingų problemų sprendimas</h3>
+        </div>
+        <p>
+          Naujos įrangos nemontuoju. Mano sritis – diagnozuoti ir atstatyti tai, kas neveikia:
+          gilus sistemos veikimo išmanymas, nestandartiniai gedimai ir atvejai, kai kiti meistrai
+          jau nuleido rankas.
+        </p>
+        <blockquote>
+          <p>„Diagnostika – tai ne klaidos kodo perskaitymas. Tai priežasties nustatymas.“</p>
+          <footer>— Arūnas Baškys</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KADA KREIPTIS ===================== -->
+<section id="kada">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Kada verta kreiptis</h2>
+        <p>Dažniausios situacijos, dėl kurių į mane kreipiasi</p>
+      </div>
+      <div class="sec-index">02 / 06</div>
+    </div>
+
+    <ul class="sympt">
+      <li><em>01</em> Įranga neveikia arba visai neįsijungia</li>
+      <li><em>02</em> Veikia nestabiliai, su pertrūkiais</li>
+      <li><em>03</em> Rodo klaidos kodą</li>
+      <li><em>04</em> Nepasiekia reikiamos temperatūros</li>
+      <li><em>05</em> Per dažnai įsijungia ir išsijungia</li>
+      <li><em>06</em> Naudoja per daug energijos</li>
+      <li><em>07</em> Kelia neįprastą triukšmą ar vibraciją</li>
+      <li><em>08</em> Dirba, tačiau rezultatas netenkina</li>
+      <li><em>09</em> Jau buvo remontuota, bet problema liko</li>
+      <li><em>10</em> Gedimas kartojasi arba sunkiai nustatomas</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<!-- ===================== SUDĖTINGI GEDIMAI ===================== -->
+<section id="sudetingi" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Sudėtingi gedimai – ne problema, o įdomi užduotis</h2>
+        <p>Man įdomios sudėtingos užduotys</p>
+      </div>
+      <div class="sec-index">03 / 06</div>
+    </div>
+
+    <p class="lead body-lg" style="max-width:78ch">
+      Ne visi gedimai telpa į serviso instrukcijos lentelę. Kartais reikia perprasti konkrečios sistemos
+      veikimą, analizuoti matavimus, techninę dokumentaciją, automatiką ir kelių įrenginių tarpusavio
+      sąveiką. Tokie darbai – viena įdomiausių mano veiklos dalių.
+    </p>
+
+    <h3 class="h-sm" style="margin:40px 0 8px; font-size:18px">Ypač aktualu, kai:</h3>
+    <ul class="checklist">
+      <li><span class="ms ms-sm">arrow_forward</span> keli meistrai jau bandė spręsti problemą;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> pakeistos detalės, bet gedimas išliko;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> įranga reta arba nestandartinė;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> problema pasireiškia tik tam tikromis sąlygomis;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> neaišku, ar gedimas mechaninis, elektrinis, automatikos, ar hidraulinės sistemos;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> vienas įrenginys veikia, tačiau visa sistema neveikia tinkamai;</li>
+      <li><span class="ms ms-sm">arrow_forward</span> reikia suprasti ne tik įrangą, bet ir jos integraciją į visą objektą.</li>
+    </ul>
+
+    <div style="margin-top:40px">
+      <a class="btn btn-light" href="#kontaktai">
+        Turite sudėtingą gedimą? Aprašykite problemą <span class="ms ms-sm">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<main class="blueprint">
+
+<!-- ===================== ĮRANGA ===================== -->
+<section id="iranga">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Įrangos kategorijos</h2>
+        <p>Sistemos, kurioms teikiama diagnostika ir remontas</p>
+      </div>
+      <div class="sec-index">04 / 06</div>
+    </div>
+
+    <div class="grid g3">
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">air_purifier_gen</span><h4>Rekuperatoriai ir vėdinimas</h4></div>
+        <ul>
+          <li>Rekuperatorių diagnostika ir remontas</li>
+          <li>Ventiliatorių gedimai, guolių keitimas</li>
+          <li>Vėdinimo kamerų diagnostika</li>
+          <li>Oro srautų ir valdymo problemos</li>
+          <li>Automatika ir davikliai</li>
+          <li>Ventiliatoriniai konvektoriai („fancoil“)</li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">heat_pump</span><h4>Šilumos siurbliai</h4></div>
+        <ul>
+          <li>Oras–oras, oras–vanduo, geoterminiai</li>
+          <li>Šaldymo kontūro diagnostika</li>
+          <li>Kompresoriaus darbo analizė</li>
+          <li>Elektronikos ir automatikos gedimai</li>
+          <li>Darbo parametrų diagnostika</li>
+          <li>Šaltnešio pildymas pagal išmatuotą perkaitimą</li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">ac_unit</span><h4>Kondicionieriai ir šaldymas</h4></div>
+        <ul>
+          <li>Split ir multi-split sistemos</li>
+          <li>Komercinės kondicionavimo sistemos</li>
+          <li>Šaldymo mašinos („čileriai“)</li>
+          <li>Serverinių šaldymo įranga (CRAC, CCU)</li>
+          <li>Pramoniniai šaldytuvai</li>
+          <li>Slėgių, temperatūrų ir režimų diagnostika</li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">thermostat</span><h4>Šildymo įranga</h4></div>
+        <ul>
+          <li>Šildymo sistemų diagnostika</li>
+          <li>Valdymo sistemos ir šildymo automatika</li>
+          <li>Hidraulinės sistemos</li>
+          <li>Cirkuliaciniai kontūrai</li>
+          <li>Sistemos darbo parametrų vertinimas</li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">local_fire_department</span><h4>Katilai</h4></div>
+        <ul>
+          <li>Dujiniai katilai</li>
+          <li>Granuliniai katilai</li>
+          <li>Dyzeliniai katilai</li>
+          <li>Kieto kuro katilai</li>
+          <li>Šilumokaičių valymas</li>
+          <li>Degimo mišinio optimizavimas, kasmetinis servisas</li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <div class="cat-top"><span class="ms ms-lg">humidity_percentage</span><h4>Baseinai ir oro paruošimas</h4></div>
+        <ul>
+          <li>Baseinų vėdinimo kameros su šilumos siurbliais</li>
+          <li>Baseinų ventiliacinių sistemų remontas ir derinimas</li>
+          <li>Ortakių sausintuvai ir drėkintuvai</li>
+          <li>Baseininiai sausintuvai</li>
+          <li>Ortakiniai ozono generatoriai</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner">
+      <div class="banner-l">
+        <div class="banner-icon"><span class="ms">contact_support</span></div>
+        <div>
+          <h5>Neradote savo įrangos sąraše?</h5>
+          <p>
+            Susisiekite. Jeigu tai susiję su šildymo, vėdinimo, kondicionavimo ar šaldymo sistema,
+            pirmiausia įvertinsiu, ar galiu padėti. Nepažįstama sistema nėra priežastis jos atsisakyti –
+            pirmiausia reikia suprasti, kaip ji veikia.
+          </p>
+        </div>
+      </div>
+      <a class="btn btn-outline btn-sm" href="tel:+37061170101"><span class="ms ms-sm">call</span> Susisiekti</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MATAVIMAI / MĄSTYSENA ===================== -->
+<section id="matavimai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">„Ko negali išmatuoti, to negali kontroliuoti“</h2>
+        <p>Inžinieriaus mąstysena ir darbo įrankiai</p>
+      </div>
+      <div class="sec-index">05 / 06</div>
+    </div>
+
+    <div class="measure">
+      <figure>
+        <img src="images/darbas-08.jpg" alt="Termovizinis matavimas prieš ir po remonto, Testo matavimo duomenys">
+        <figcaption>PRIEŠ / PO — termovizija ir Testo 549i matavimų registravimas</figcaption>
+      </figure>
+      <div>
+        <p class="body-lg muted">
+          Geram darbui atlikti būtini geri įrankiai. Dirbu pažangia diagnostikos įranga – skaitmeniniais
+          manometrais, termovizoriumi, bevieliais matavimo davikliais, vakuumo matuokliais.
+        </p>
+        <p class="muted">
+          Matavimai leidžia pamatyti, kas iš tikrųjų vyksta sistemoje, o ne spėlioti. Rezultatas
+          užfiksuojamas skaičiais – prieš ir po remonto.
+        </p>
+
+        <div class="quotes">
+          <blockquote class="quote">„Kiekvienas sudėtingas gedimas pirmiausia yra techninis klausimas, į kurį reikia rasti atsakymą.“</blockquote>
+          <blockquote class="quote">„Man įdomiausi darbai prasideda ten, kur atsakymas nėra akivaizdus.“</blockquote>
+          <blockquote class="quote">„Nauja ar nepažįstama sistema nėra priežastis jos atsisakyti – pirmiausia reikia suprasti, kaip ji veikia.“</blockquote>
+          <blockquote class="quote">„Didžiausia vertė atsiranda tada, kai reikia ne pakeisti detalę, o suprasti, kodėl sistema neveikia.“</blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PATIRTIS ===================== -->
+<section id="patirtis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Patirtis</h2>
+        <p>Daugiau nei 25 metai ŠVOK servise, iš jų 17 – Londono komerciniuose pastatuose</p>
+      </div>
+      <div class="sec-index">06 / 06</div>
+    </div>
+
+    <div class="exp">
+      <ul class="tl">
+        <li>
+          <div class="yr">PRADŽIA</div>
+          <div>
+            <h3>Buitinės technikos servisas</h3>
+            <p>Darbas „Senukuose“, buitinių prietaisų parduotuvėse, vėliau – „BMS Megapolis“ garantinio aptarnavimo servise.</p>
+          </div>
+        </li>
+        <li>
+          <div class="yr">17 METŲ<br>LONDONAS</div>
+          <div>
+            <h3>Komercinių pastatų serviso inžinierius</h3>
+            <p>4 metai – St. Magnus House (3 Lower Thames St.). 11 metų – kritinio serviso inžinierius Turner House (16 Great Marlborough St.), kur veikė CNN, Time Warner, HBO, Cartoon Network ir kitos kompanijos.</p>
+          </div>
+        </li>
+        <li>
+          <div class="yr">PROJEKTAI</div>
+          <div>
+            <h3>Dešimtys Londono objektų</h3>
+            <p>Iki ilgalaikių sutarčių – trumpalaikiai darbai per įdarbinimo agentūras. Taip susipažinta su daugelio Londono komercinių pastatų inžinerija.</p>
+          </div>
+        </li>
+        <li>
+          <div class="yr">2020<br>KARANTINAS</div>
+          <div>
+            <h3>350+ klientų per metus</h3>
+            <p>Per darbų platformą „TaskRabbit“ kaip inžinierius aplankyta virš 350 klientų. Surinkta 100 penkių žvaigždučių atsiliepimų iš 103.</p>
+          </div>
+        </li>
+        <li>
+          <div class="yr">NUO 2021<br>LIETUVA</div>
+          <div>
+            <h3>Serviso inžinierius „NIT UAB“</h3>
+            <p>Grįžus į Lietuvą – serviso inžinieriaus darbas su Lietuvos objektais.</p>
+          </div>
+        </li>
+        <li>
+          <div class="yr">ŠIANDIEN</div>
+          <div>
+            <h3>Savarankiška diagnostikos ir remonto praktika</h3>
+            <p>Vilnius ir visa Lietuva. Buitinė ir komercinė įranga. Įvertinimas 5,0 iš 12 atsiliepimų Paslaugos.lt portale.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="proof">
+        <figure>
+          <img src="images/darbas-02.jpg" alt="TaskRabbit atsiliepimų suvestinė: 103 atsiliepimai, 4,9 įvertinimas">
+          <figcaption>„TASKRABBIT“ LONDONAS — 103 atsiliepimai, 4,9</figcaption>
+        </figure>
+        <figure>
+          <img src="images/darbas-04.jpg" alt="Londono klientų atsiliepimai apie Arūno darbą">
+          <figcaption>LONDONO KLIENTŲ ATSILIEPIMAI</figcaption>
+        </figure>
+        <div class="card" style="padding:24px">
+          <h3 class="h-sm" style="font-size:18px; margin-bottom:12px">Ką tai reiškia praktiškai</h3>
+          <p style="font-size:15px; margin-bottom:12px">
+            Komerciniame pastate sistema negali „palaukti iki rytojaus“. Tokia aplinka išmoko dirbti
+            metodiškai: matuoti, tikrinti versijas, skaityti dokumentaciją ir suprasti visos sistemos
+            logiką, o ne tik atskirą įrenginį.
+          </p>
+          <p style="font-size:15px; margin:0">Ta pati metodika taikoma ir privačiame name – tik mastelis kitas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALERIJA ===================== -->
+<section id="galerija">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Iš darbo objektuose</h2>
+        <p>Matavimai, šaldymo kontūrai, automatika, vėdinimo kameros, komercinė šaldymo įranga</p>
+      </div>
+      <div class="sec-index">FOTO</div>
+    </div>
+
+    <div class="gal" id="gal">
+      <button type="button"><img src="images/darbas-01.jpg" alt="Skaitmeninio manometro ir programėlės matavimai objekte" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-03.jpg" alt="Komercinė šaldymo mašina – čilerio aptarnavimas" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-05.jpg" alt="Diagnostikos ir vakuumavimo įranga objekte lauke" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-06.jpg" alt="Šaldymo kontūro slėgių matavimas skaitmeniniu manometru" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-07.jpg" alt="Vėdinimo kameros ir ventiliatoriaus mazgas" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-09.jpg" alt="Šaldymo kontūro vakuumavimas prieš pildymą šaltnešiu" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-10.jpg" alt="Lauko blokas ir prijungta diagnostikos įranga" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-11.jpg" alt="Šaldymo agregatas su prijungtais matavimo prietaisais" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-12.jpg" alt="Šaldymo kontūro vamzdynas ir ventilių mazgas" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-13.jpg" alt="Automatikos spinta ir įrangos mazgas objekte" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-14.jpg" alt="Temperatūros matavimas vamzdyne matavimo prietaisu" loading="lazy"></button>
+      <button type="button"><img src="images/darbas-15.jpg" alt="Vakuumo matavimas šaldymo sistemoje" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ATSILIEPIMAI ===================== -->
+<section id="atsiliepimai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Klientų atsiliepimai</h2>
+        <p>Tikri atsiliepimai iš Paslaugos.lt portalo</p>
+      </div>
+      <div class="sec-index">5,0 / 12</div>
+    </div>
+
+    <div class="score">
+      <div class="num">5,0</div>
+      <div>
+        <div class="stars">
+          <span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span>
+        </div>
+        <div class="meta" style="margin-top:8px">12 ATSILIEPIMŲ · VERTINTA KOKYBĖ, KAINA, BENDRAVIMAS, TERMINAI</div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Kuo daugiau tokių specialistų Lietuvoje! Ačiū jums“</p>
+        <div class="rev-meta"><b>Karolis</b><span>Kondicionieriaus remontas · 2026</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Rekomenduoju meistrą. Atvyko savaitgalį. Sutvarkė įstrigusį filtrą, atliko profilaktiką. Greitai, atsakingai, kokybiškai.“</p>
+        <div class="rev-meta"><b>Rimantas</b><span>Vėdinimo sistemos remontas · 2026</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Arūnas Baškys iš tikrųjų gali vadintis specialistu. Sutrikus šilumos siurbliui po elektros atjungimo, jis ieškojo priežasties ir priėmė sprendimą, kaip jį sutvarkyti, kad šilumos siurblys vėl veiktų. Iš tikrųjų jį rekomenduoju visiems.“</p>
+        <div class="rev-meta"><b>Virginija</b><span>Šilumos siurblio gedimo paieška · 2023</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Puikus žmogus – net ir nevažiuodamas į objektą, kaip sakant, neturint tiesioginės naudos, mielai pakonsultavo dėl rekuperatoriaus užsikimšusių grotelių.“</p>
+        <div class="rev-meta"><b>Gintaras Grigalaitis</b><span>Vėdinimo sistemos remontas · 2025</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Kompetentingas specialistas, viską ir net daugiau atliko pagal užsakymą. 100 % rekomenduoju.“</p>
+        <div class="rev-meta"><b>Marija</b><span>Kondicionieriaus remontas · 2025</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Viskas puiku. Meistras profesionalus, viskas atlikta laiku, kokybiškai ir be klausimų.“</p>
+        <div class="rev-meta"><b>Aidas</b><span>Kondicionieriaus remontas · 2025</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Operatyviai, profesionaliai bendraujantis, tvarkingas, likome patenkinti. Rekomenduoju.“</p>
+        <div class="rev-meta"><b>Giedrius Kavoliūnas</b><span>Rekuperatoriaus variklių guolių keitimas · 2024</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Kokybė, žinios, atsakingumas.“</p>
+        <div class="rev-meta"><b>Marius Lunys</b><span>Granulinio katilo remontas · 2023</span></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars"><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span><span class="ms ms-sm fill">star</span></div>
+        <p>„Labai profesionalus ir malonus meistras.“</p>
+        <div class="rev-meta"><b>Kristina Karvelytė</b><span>Vėdinimo sistemos remontas · 2025</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===================== KONTAKTAI ===================== -->
+<section id="kontaktai" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h-md">Aprašykite gedimą</h2>
+        <p>Trumpas pokalbis dažnai parodo, ar problema sprendžiama patarimu, ar reikia atvykti su matavimo įranga</p>
+      </div>
+      <div class="sec-index">KONTAKTAI</div>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="sheet">
+          <div class="sheet-row"><span class="k">Telefonas</span><a class="v" href="tel:+37061170101">+370 611 70101</a></div>
+          <div class="sheet-row"><span class="k">Žinutė</span><a class="v" href="sms:+37061170101">Rašyti SMS</a></div>
+          <div class="sheet-row"><span class="k">Regionas</span><span class="v">Vilnius · visa Lietuva</span></div>
+          <div class="sheet-row"><span class="k">Įkainis</span><span class="v">nuo 70 € / val.</span></div>
+          <div class="sheet-row"><span class="k">Profilis</span><a class="v" href="https://paslaugos.lt/arunas-baskys-av3050" target="_blank" rel="noopener">Paslaugos.lt →</a></div>
+        </div>
+        <div class="hero-cta" style="margin-top:28px">
+          <a class="btn btn-light" href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
+          <a class="btn btn-light" href="https://paslaugos.lt/arunas-baskys-av3050" target="_blank" rel="noopener"><span class="ms ms-sm">mail</span> Rašyti žinutę</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="h-sm" style="font-size:18px; margin-bottom:8px">Kad pokalbis būtų greitesnis</h3>
+        <p class="lead" style="font-size:15px">Jei turite – pravartu iš karto pasakyti:</p>
+        <ul class="tips">
+          <li><span class="ms ms-sm">check</span> įrangos gamintoją ir modelį (užrašas ant lentelės);</li>
+          <li><span class="ms ms-sm">check</span> kaip problema pasireiškia ir kada prasidėjo;</li>
+          <li><span class="ms ms-sm">check</span> ar rodomas klaidos kodas;</li>
+          <li><span class="ms ms-sm">check</span> ar problema nuolatinė, ar tik tam tikromis sąlygomis;</li>
+          <li><span class="ms ms-sm">check</span> ką jau bandė kiti meistrai ir kokios detalės keistos;</li>
+          <li><span class="ms ms-sm">check</span> objekto tipą – butas, namas ar komercinis objektas.</li>
+        </ul>
+        <p class="lead" style="font-style:italic; margin-top:20px">
+          „Jeigu gedimas nėra akivaizdus – tokios užduotys man įdomiausios.“
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PORAŠTĖ ===================== -->
+<footer class="site-footer">
+  <div class="foot">
+    <div>
+      <div class="logo" style="margin-bottom:16px">
+        <b>ARŪNAS BAŠKYS</b>
+        <span>ŠVOK serviso inžinierius</span>
+      </div>
+      <p class="muted" style="font-size:15px; max-width:34ch">
+        Specializuota techninė diagnostika ir inžinerinių problemų sprendimas. Naujos įrangos montavimu neužsiimu.
+      </p>
+    </div>
+    <div>
+      <h4>Kontaktai</h4>
+      <ul>
+        <li><a href="tel:+37061170101">Telefonas: +370 611 70101</a></li>
+        <li><a href="sms:+37061170101">SMS žinutė</a></li>
+        <li><a href="https://paslaugos.lt/arunas-baskys-av3050" target="_blank" rel="noopener">Paslaugos.lt profilis</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Puslapis</h4>
+      <ul>
+        <li><a href="#paslaugos">Diagnostika ir remontas</a></li>
+        <li><a href="#sudetingi">Sudėtingi gedimai</a></li>
+        <li><a href="#iranga">Įrangos kategorijos</a></li>
+        <li><a href="#atsiliepimai">Atsiliepimai</a></li>
+      </ul>
+    </div>
+    <div class="copy">© Arūnas Baškys · ŠVOK sistemų diagnostika ir remontas · Vilnius, visa Lietuva</div>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a href="#kontaktai"><span class="ms ms-sm">assignment</span> Aprašyti gedimą</a>
+  <a href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <button class="lb-close" aria-label="Uždaryti">&times;</button>
+  <button class="lb-prev" aria-label="Ankstesnė">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-next" aria-label="Kita">&#8250;</button>
+</div>
+
+<script>
+(function(){
+  var gal=document.getElementById('gal'), lb=document.getElementById('lb'), lbImg=document.getElementById('lb-img');
+  var imgs=[].slice.call(gal.querySelectorAll('img')), idx=0;
+  function show(i){ idx=(i+imgs.length)%imgs.length; lbImg.src=imgs[idx].src; lbImg.alt=imgs[idx].alt; lb.classList.add('on'); }
+  function close(){ lb.classList.remove('on'); }
+  gal.addEventListener('click', function(e){ var b=e.target.closest('button'); if(b) show(imgs.indexOf(b.querySelector('img'))); });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.querySelector('.lb-prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); });
+  lb.querySelector('.lb-next').addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); });
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Arūnas Baškys — ŠVOK sistemų diagnostika ir remontas",
+  "description":"Gedimų paieška, diagnostika ir remontas: šilumos siurbliai, kondicionieriai, rekuperatoriai, šildymo įranga, katilai, šaldymo mašinos, baseinų vėdinimo sistemos.",
+  "telephone":"+37061170101",
+  "areaServed":"Lietuva",
+  "address":{"@type":"PostalAddress","addressLocality":"Vilnius","addressCountry":"LT"},
+  "priceRange":"nuo 70 EUR/val.",
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"12"},
+  "knowsAbout":["Šilumos siurblių diagnostika","Kondicionierių remontas","Rekuperatorių remontas","Katilų diagnostika","Šaldymo mašinų remontas","Baseinų vėdinimo sistemos"]
+}
+</script>
+
+</body>
+</html>
