@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F172A">
+<title>Registruoti gedimą arba užsakyti aptarnavimą | Arūnas Baškys</title>
+<meta name="description" content="Užpildykite formą: įrangos tipas, klaidos kodas, simptomai ir kontaktai. Kuo daugiau techninės informacijos, tuo greičiau įvertinsiu situaciją.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Registruoti gedimą arba užsakyti aptarnavimą | Arūnas Baškys">
+<meta property="og:description" content="Užpildykite formą: įrangos tipas, klaidos kodas, simptomai ir kontaktai. Kuo daugiau techninės informacijos, tuo greičiau įvertinsiu situaciją.">
+<meta property="og:image" content="images/darbas-01.jpg">
+<meta property="og:locale" content="lt_LT">
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Arūnas Baškys"></a>
+    <nav class="nav-links">
+      <a href="paslaugos.html">Paslaugos</a>
+      <a href="sudetingi-gedimai.html">Sudėtingi gedimai</a>
+      <a href="iranga.html">Įranga</a>
+      <a href="patirtis.html">Patirtis</a>
+      <a href="atsiliepimai.html">Atsiliepimai</a>
+      <a class="btn btn-primary btn-sm" href="registruoti-gedima.html">Registruoti gedimą <span class="ms ms-sm">arrow_forward</span></a>
+    </nav>
+    <button class="nav-toggle" aria-label="Meniu" aria-expanded="false"><span class="ms">menu</span></button>
+  </div>
+  <div class="nav-mobile">
+    <a href="paslaugos.html">Paslaugos <span class="ms ms-sm">chevron_right</span></a>
+    <a href="sudetingi-gedimai.html">Sudėtingi gedimai <span class="ms ms-sm">chevron_right</span></a>
+    <a href="iranga.html">Įranga <span class="ms ms-sm">chevron_right</span></a>
+    <a href="patirtis.html">Patirtis <span class="ms ms-sm">chevron_right</span></a>
+    <a href="atsiliepimai.html">Atsiliepimai <span class="ms ms-sm">chevron_right</span></a>
+    <a class="cta" href="registruoti-gedima.html">Registruoti gedimą <span class="ms ms-sm">arrow_forward</span></a>
+  </div>
+</header>
+
+<main class="blueprint">
+<section>
+  <div class="wrap form-wrap">
+    <div class="crumbs" style="margin-bottom:24px">
+      <a href="index.html"><span class="ms ms-sm" style="vertical-align:-3px">arrow_back</span> Grįžti į pradžią</a>
+    </div>
+
+    <div class="form-box" id="form-box">
+      <h1 class="h-lg" style="margin-bottom:16px">Gedimo registracija</h1>
+      <p class="lead" style="font-size:18px; margin-bottom:32px">
+        Pateikite kuo daugiau techninės informacijos apie sistemą ir pastebėtus simptomus.
+        Tą pačią formą naudokite ir tada, kai reikia planinio įrangos aptarnavimo.
+      </p>
+
+      <form id="uzklausa" novalidate>
+
+        <div class="form-section">
+          <h2><span class="ms">assignment</span> Užklausos tipas</h2>
+          <div class="field">
+            <label for="tipas">Ko reikia <span class="req">*</span></label>
+            <select id="tipas" required>
+              <option value="">Pasirinkite užklausos tipą</option>
+              <option>Gedimas – įranga neveikia arba veikia netinkamai</option>
+              <option>Sudėtingas gedimas – jau buvo bandyta taisyti</option>
+              <option>Įrangos aptarnavimas ir priežiūra (profilaktika)</option>
+              <option>Kasmetinis katilo ar sistemos servisas</option>
+              <option>Konsultacija / nuomonė dėl sistemos</option>
+            </select>
+            <div class="err-msg">Pasirinkite užklausos tipą</div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2><span class="ms">build</span> Įrangos informacija</h2>
+          <div class="field">
+            <label for="iranga">Įrangos tipas <span class="req">*</span></label>
+            <select id="iranga" required>
+              <option value="">Pasirinkite įrangos tipą</option>
+            <option>Šilumos siurblys (oras–oras)</option>
+            <option>Šilumos siurblys (oras–vanduo)</option>
+            <option>Geoterminis šilumos siurblys</option>
+            <option>Kondicionierius (split / multi-split)</option>
+            <option>Komercinė kondicionavimo sistema</option>
+            <option>Rekuperatorius / vėdinimo įranga</option>
+            <option>Ventiliatorinis konvektorius („fancoil“)</option>
+            <option>Dujinis katilas</option>
+            <option>Granulinis katilas</option>
+            <option>Dyzelinis katilas</option>
+            <option>Kieto kuro katilas</option>
+            <option>Šaldymo mašina („čileris“)</option>
+            <option>Pramoninis šaldytuvas / šaldymo įranga</option>
+            <option>Serverinės šaldymo įranga (CRAC, CCU)</option>
+            <option>Baseino vėdinimo kamera / sausintuvas</option>
+            <option>Šildymo sistema / automatika</option>
+            <option>Kita įranga (nurodysiu aprašyme)</option>
+            </select>
+            <div class="err-msg">Pasirinkite įrangos tipą</div>
+          </div>
+          <div class="field">
+            <label for="modelis">Gamintojas / Modelis</label>
+            <input type="text" id="modelis" placeholder="Pvz., Daikin Altherma 3">
+            <div class="hint">
+              <span class="ms ms-sm">info</span>
+              Užrašas paprastai būna ant įrenginio techninių duomenų lentelės.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2><span class="ms">warning</span> Problemos aprašymas</h2>
+          <div class="field">
+            <label for="klaida">Klaidos kodas (jei rodo)</label>
+            <input type="text" id="klaida" placeholder="Pvz., E-04, U4, 7H">
+          </div>
+          <div class="field">
+            <label for="simptomai">Simptomai ir situacija <span class="req">*</span></label>
+            <textarea id="simptomai" required placeholder="Išsamiai aprašykite, kas vyksta. Kada prasidėjo problema? Ar atsiranda specifinėmis sąlygomis? Ar jau buvo taisyta, kokios detalės keistos?"></textarea>
+            <div class="hint">
+              <span class="ms ms-sm">info</span>
+              Kuo detalesnis aprašymas padės greičiau įvertinti situaciją.
+            </div>
+            <div class="err-msg">Trumpai aprašykite, kas vyksta</div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2><span class="ms">contact_page</span> Kontaktinė informacija</h2>
+          <div class="field">
+            <label for="vardas">Vardas <span class="req">*</span></label>
+            <input type="text" id="vardas" required autocomplete="name">
+            <div class="err-msg">Įrašykite vardą</div>
+          </div>
+          <div class="field">
+            <label for="telefonas">Telefonas <span class="req">*</span></label>
+            <input type="tel" id="telefonas" required placeholder="+370..." autocomplete="tel">
+            <div class="err-msg">Įrašykite telefono numerį</div>
+          </div>
+          <div class="field">
+            <label for="elpastas">El. paštas</label>
+            <input type="email" id="elpastas" placeholder="vardas@pastas.lt" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="adresas">Objekto adresas (miestas / rajonas) <span class="req">*</span></label>
+            <input type="text" id="adresas" required placeholder="Pvz., Vilnius, Antakalnis">
+            <div class="err-msg">Nurodykite miestą ar rajoną</div>
+          </div>
+          <div class="field">
+            <label for="objektas">Objekto tipas</label>
+            <select id="objektas">
+              <option value="">Nenurodyta</option>
+              <option>Butas</option>
+              <option>Privatus namas</option>
+              <option>Komercinis objektas</option>
+              <option>Pramoninis objektas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-blue">
+            Registruoti gedimą <span class="ms ms-sm">send</span>
+          </button>
+          <a class="btn btn-ghost btn-sm" href="index.html">Atšaukti</a>
+          <p class="form-note">
+            Paspaudus mygtuką duomenys surenkami į vieną žinutę – ją išsiųsite el. paštu arba SMS žinute.
+            Skubiu atveju skambinkite <a href="tel:+37061170101" style="color:var(--eng-blue)">+370 611 70101</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-done" id="form-done">
+      <div class="ms ok-icon fill">check_circle</div>
+      <h2 class="h-md">Užklausa paruošta</h2>
+      <p class="lead">
+        Pasirinkite, kaip ją išsiųsti. Tekstą taip pat galite nukopijuoti ir atsiųsti bet kuriuo kitu būdu.
+      </p>
+      <div class="summary" id="summary"></div>
+      <div class="btn-row">
+        <a class="btn btn-blue" id="send-mail" href="#"><span class="ms ms-sm">mail</span> Siųsti el. paštu</a>
+        <a class="btn btn-outline" id="send-sms" href="#"><span class="ms ms-sm">sms</span> Siųsti SMS</a>
+        <button class="btn btn-outline" id="copy-btn" type="button"><span class="ms ms-sm">content_copy</span> Kopijuoti</button>
+        <a class="btn btn-outline" href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
+      </div>
+      <p class="form-note" style="text-align:left; margin-top:24px">
+        <a href="#" id="back-to-form" style="color:var(--eng-blue)">← Grįžti ir pataisyti duomenis</a>
+      </p>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function () {
+  var EMAIL = 'arunas@baskys.lt';
+  var TEL = '+37061170101';
+
+  var form = document.getElementById('uzklausa');
+  var box = document.getElementById('form-box');
+  var done = document.getElementById('form-done');
+  var summary = document.getElementById('summary');
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function fieldOf(id) { return document.getElementById(id).closest('.field'); }
+
+  var required = ['tipas', 'iranga', 'simptomai', 'vardas', 'telefonas', 'adresas'];
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var bad = null;
+    required.forEach(function (id) {
+      var ok = val(id) !== '';
+      fieldOf(id).classList.toggle('invalid', !ok);
+      if (!ok && !bad) bad = id;
+    });
+    if (bad) {
+      document.getElementById(bad).focus();
+      document.getElementById(bad).scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return;
+    }
+
+    var rows = [
+      ['Užklausos tipas', val('tipas')],
+      ['Įrangos tipas', val('iranga')],
+      ['Gamintojas / modelis', val('modelis')],
+      ['Klaidos kodas', val('klaida')],
+      ['Simptomai ir situacija', val('simptomai')],
+      ['Vardas', val('vardas')],
+      ['Telefonas', val('telefonas')],
+      ['El. paštas', val('elpastas')],
+      ['Objekto adresas', val('adresas')],
+      ['Objekto tipas', val('objektas')]
+    ];
+
+    var text = rows
+      .filter(function (r) { return r[1]; })
+      .map(function (r) { return r[0] + ': ' + r[1]; })
+      .join('\n');
+
+    summary.textContent = text;
+
+    var subject = 'Užklausa: ' + val('iranga') + ' — ' + val('vardas');
+    document.getElementById('send-mail').href =
+      'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+    document.getElementById('send-sms').href =
+      'sms:' + TEL + '?body=' + encodeURIComponent(text);
+
+    box.style.display = 'none';
+    done.classList.add('on');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  form.addEventListener('input', function (e) {
+    var f = e.target.closest('.field');
+    if (f && e.target.value.trim()) f.classList.remove('invalid');
+  });
+
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    var btn = this;
+    navigator.clipboard.writeText(summary.textContent).then(function () {
+      btn.innerHTML = '<span class="ms ms-sm">check</span> Nukopijuota';
+      setTimeout(function () {
+        btn.innerHTML = '<span class="ms ms-sm">content_copy</span> Kopijuoti';
+      }, 2000);
+    });
+  });
+
+  document.getElementById('back-to-form').addEventListener('click', function (e) {
+    e.preventDefault();
+    done.classList.remove('on');
+    box.style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+<footer class="site-footer">
+  <div class="foot">
+    <div>
+      <img src="assets/logo.png" alt="Arūnas Baškys">
+      <p class="muted" style="font-size:15px; max-width:34ch">
+        Specializuota techninė diagnostika, remontas ir įrangos priežiūra.
+        Naujos įrangos montavimu neužsiimu.
+      </p>
+    </div>
+    <div>
+      <h4>Kontaktai</h4>
+      <ul>
+        <li><a href="tel:+37061170101">Telefonas: +370 611 70101</a></li>
+        <li><a href="mailto:arunas@baskys.lt">El. paštas: arunas@baskys.lt</a></li>
+        <li><a href="https://paslaugos.lt/arunas-baskys-av3050" target="_blank" rel="noopener">Paslaugos.lt profilis</a></li>
+        <li class="muted" style="font-size:15px">Vilnius · visa Lietuva</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Puslapiai</h4>
+      <ul>
+        <li><a href="paslaugos.html">Paslaugos</a></li>
+        <li><a href="sudetingi-gedimai.html">Sudėtingi gedimai</a></li>
+        <li><a href="iranga.html">Įrangos kategorijos</a></li>
+        <li><a href="patirtis.html">Patirtis ir darbai</a></li>
+        <li><a href="registruoti-gedima.html">Registruoti gedimą</a></li>
+      </ul>
+    </div>
+    <div class="copy">© Arūnas Baškys · ŠVOK sistemų diagnostika, remontas ir priežiūra · Vilnius, visa Lietuva</div>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a href="registruoti-gedima.html"><span class="ms ms-sm">assignment</span> Registruoti gedimą</a>
+  <a href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
