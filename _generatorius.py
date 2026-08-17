@@ -13,6 +13,7 @@ TEL_RAW = "+37061170101"
 TEL = "+370 611 70101"
 EMAIL = "arunas@baskys.lt"
 PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
+BASE_URL = "https://arunas-baskys.netlify.app"
 
 NAV = [
     ("paslaugos.html", "Paslaugos"),
@@ -26,6 +27,8 @@ CTA_TEXT = "Registruoti gedimą"
 
 
 def head(title, desc, page):
+    # Netlify „pretty URLs": index.html → /, kiti → /vardas-be-.html
+    url = BASE_URL + "/" + ("" if page == "index.html" else page[: -len(".html")])
     return f"""<!doctype html>
 <html lang="lt">
 <head>
@@ -38,8 +41,10 @@ def head(title, desc, page):
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="images/darbas-01.jpg">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{BASE_URL}/images/darbas-01.jpg">
 <meta property="og:locale" content="lt_LT">
+<link rel="canonical" href="{url}">
 <link rel="icon" href="assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1199,7 +1204,7 @@ def p_aciu():
     return head(
         "Ačiū — užklausa gauta | Arūnas Baškys",
         "Užklausa gauta. Su jumis susisieks nurodytu telefonu.",
-        "",
+        "aciu.html",
     ) + f"""<main class="blueprint">
 <section>
   <div class="wrap form-wrap">
