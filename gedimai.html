@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F172A">
+<title>Gedimai / Diagnostika | Arūnas Baškys</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--pr:#0F172A;--bl:#0055D4;--ln:#E2E8F0;--mut:#475569;--sl:#64748B;--bg:#F8FAFC}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--pr);font-family:'Inter',system-ui,sans-serif;font-size:15px}
+  .wrap{max-width:680px;margin:0 auto;padding:14px}
+  h1{font-family:'Hanken Grotesk',sans-serif;font-size:22px;margin:6px 0 12px}
+  input{width:100%;border:1px solid var(--ln);border-radius:3px;padding:12px 14px;font:inherit;background:#fff;margin-bottom:10px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .chips button{border:1px solid var(--ln);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer}
+  .chips button.akt{background:var(--pr);color:#fff;border-color:var(--pr)}
+  a.kort{display:block;background:#fff;border:1px solid var(--ln);border-radius:3px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:inherit}
+  .kort .v{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .kort b{font-family:'Hanken Grotesk',sans-serif;font-size:16px}
+  .kort .m{color:var(--mut);font-size:14px;margin-top:2px}
+  .kort .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sl);margin-top:6px;display:flex;justify-content:space-between}
+  .tuscia{text-align:center;color:var(--sl);padding:40px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Gedimai / Diagnostika</h1>
+  <input id="q" type="search" placeholder="Paieška: klientas, adresas, telefonas, įranga, modelis, kodas, ID…">
+  <div class="chips" id="chips"></div>
+  <div id="sar" class="tuscia">Kraunama…</div>
+</div>
+<script>
+const T = new URLSearchParams(location.search).get('t');
+const STAT = {naujas:['🟡','Naujas'],analizuojamas:['🔵','Analizuojamas'],reikia_info:['🟣','Reikia info'],suplanuotas:['🟠','Suplanuotas'],sutvarkyta:['🟢','Sutvarkyta'],uzdaryta:['⚫','Uždaryta']};
+let VISI = [], stF = '';
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function piesk(){
+  const q = document.getElementById('q').value.toLowerCase().trim();
+  const rodyti = VISI.filter(g=>{
+    if(stF && g.statusas!==stF) return false;
+    if(!q) return true;
+    return [g.id,g.vardas,g.adresas,g.telefonas,g.iranga,g.gamintojas_modelis,g.klaidos_kodas,g.sukurta]
+      .some(v=>String(v||'').toLowerCase().includes(q));
+  });
+  const el = document.getElementById('sar');
+  if(!rodyti.length){ el.className='tuscia'; el.textContent='Nieko nerasta.'; return; }
+  el.className='';
+  el.innerHTML = rodyti.map(g=>{
+    const s = STAT[g.statusas]||['❔',g.statusas];
+    return `<a class="kort" href="/byla?id=${g.id}&t=${g.t}">
+      <div class="v"><b>${esc(g.iranga||'')}</b><span>${s[0]} ${s[1]}</span></div>
+      <div class="m">${esc(g.gamintojas_modelis||'')}${g.klaidos_kodas?` · <span style="font-family:'JetBrains Mono',monospace">${esc(g.klaidos_kodas)}</span>`:''}</div>
+      <div class="m">${esc(g.vardas||'')} · ${esc(g.adresas||'')}</div>
+      <div class="mono"><span>#${g.id}</span><span>${new Date(g.sukurta).toLocaleString('lt-LT',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}</span></div>
+    </a>`;
+  }).join('');
+}
+function chips(){
+  const c = document.getElementById('chips');
+  const kiek = k => VISI.filter(g=>g.statusas===k).length;
+  c.innerHTML = `<button class="${stF===''?'akt':''}" data-s="">Visi (${VISI.length})</button>` +
+    Object.entries(STAT).filter(([k])=>kiek(k)).map(([k,v])=>`<button class="${stF===k?'akt':''}" data-s="${k}">${v[0]} ${v[1]} (${kiek(k)})</button>`).join('');
+  c.querySelectorAll('button').forEach(b=>b.onclick=()=>{stF=b.dataset.s;chips();piesk();});
+}
+document.getElementById('q').addEventListener('input', piesk);
+fetch('/.netlify/functions/gedimai-data?t='+T).then(r=>r.ok?r.json():Promise.reject()).then(d=>{VISI=d;chips();piesk();})
+  .catch(()=>{document.getElementById('sar').textContent='Prieiga negalima — patikrinkite nuorodą.';});
+</script>
+</body>
+</html>
