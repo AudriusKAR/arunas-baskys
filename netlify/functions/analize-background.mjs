@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { dbInsert, dbUpdate, dbSelect, storageDownload, verify } from "./_supabase.mjs";
 
-const PROMPT_VERSION = "1.1";
+const PROMPT_VERSION = "1.2";
 
 function promptText() {
   const kandidatai = [

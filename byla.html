@@ -87,7 +87,8 @@ const esc = s => String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>
 /* **raktažodžiai** -> paryškinta mėlynai */
 const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b style="color:var(--bl)">$1</b>');
 /* punktas su „Daugiau" išskleidimu */
-const mini = (esme, detales) => `<div class="hip"><details class="pl"><summary style="padding:0;font-weight:600;font-size:14px">${md(esme)}</summary><div style="font-size:13px;margin-top:6px;color:var(--mut)">${detales}</div></details></div>`;
+/* esme čia jau paruoštas HTML (md() taiko kviečiantysis) */
+const mini = (esme, detales) => `<div class="hip"><details class="pl"><summary style="padding:0;font-weight:600;font-size:14px">${esme}</summary><div style="font-size:13px;margin-top:6px;color:var(--mut)">${detales}</div></details></div>`;
 const bull = arr => '<ul style="padding-left:18px;margin:0">'+arr.map(x=>`<li style="margin-bottom:7px">${md(String(x).replace(/^\d+\.\s*/,''))}</li>`).join('')+'</ul>';
 const zin = t => { const z=document.getElementById('zinute'); z.textContent=t; z.style.display='block'; setTimeout(()=>z.style.display='none',2200); };
 const kop = t => navigator.clipboard.writeText(t).then(()=>zin('Nukopijuota'));
@@ -154,22 +155,22 @@ function pieskRez(baigtos){
     h += sek('2. Informacija klientui', `<p>${md(K.tekstas||'')}</p>${(K.ka_daryti||[]).length?bull(K.ka_daryti):''}${typeof R.klientui!=='object'&&R.pasitikslinti?.zinute_klientui?`<p style="background:var(--lo);padding:10px;border-radius:3px">${esc(R.pasitikslinti.zinute_klientui)}</p>`:''}<textarea id="kli-txt" style="display:none">${esc(kliTxt)}</textarea><button class="kopij" onclick="kop(document.getElementById('kli-txt').value)">📋 Kopijuoti klientui</button>`);
   }
   if(R.hipotezes?.length) h += sek('3. Tikėtinos priežastys', R.hipotezes.map(x=>
-    mini(`${esc(x.tikimybe)} — ${x.esme||x.priezastis}`,
+    mini(`${esc(x.tikimybe)} — ${md(x.esme||x.priezastis)}`,
       `${x.esme?`${md(x.priezastis)}<br>`:''}Kodėl: ${esc(x.kodel)}<br>Patvirtintų: ${esc(x.patvirtintu)}<br>Paneigtų: ${esc(x.paneigtu)}`)).join(''));
   if(R.diagnostikos_seka?.length) h += sek('4. Diagnostikos seka', '<ol style="padding-left:18px;margin:0">'+R.diagnostikos_seka.map(x=>`<li style="margin-bottom:7px">${md(String(x).replace(/^\d+\.\s*/,''))}</li>`).join('')+'</ol>');
   if(R.konkretus_patikrinimai?.length) h += sek('5. Konkretūs patikrinimai', R.konkretus_patikrinimai.map(x=>
-    mini(`${x.esme||x.patikra} <span class="mono">${x.saltinis==='dokumentacija'?'📄':'💡'}</span>`,
+    mini(`${md(x.esme||x.patikra)} <span class="mono">${x.saltinis==='dokumentacija'?'📄':'💡'}</span>`,
       `${x.esme?`<b>${esc(x.patikra)}</b><br>`:''}Kur: ${esc(x.kur)}<br>Tikėtina: ${esc(x.tiketina_reiksme)}<br>Jei nėra: ${esc(x.jei_nera)}<br>Jei yra: ${esc(x.jei_yra)}`)).join(''));
   if(R.klaidu_kodai?.length) h += sek('6. Klaidų kodai', R.klaidu_kodai.map(x=>
-    mini(`<span style="font-family:'JetBrains Mono',monospace">${esc(x.kodas)}</span> — ${x.esme||x.reiksme}`,
+    mini(`<span style="font-family:'JetBrains Mono',monospace">${esc(x.kodas)}</span> — ${md(x.esme||x.reiksme)}`,
       `${x.esme?`${md(x.reiksme)}<br>`:''}Priežastys: ${esc(x.priezastys)}<br>Diagnostika: ${esc(x.gamintojo_diagnostika)}${x.reset?`<br>Reset: ${esc(x.reset)}`:''}<br>Šaltinis: ${esc(x.saltinis)}`)).join(''));
   const ps = R.pasiimti||{};
-  const psRow = it => typeof it==='object' ? mini(it.pavadinimas||'', md(it.detales||'')) : `<div class="eil">${md(it)}</div>`;
+  const psRow = it => typeof it==='object' ? mini(md(it.pavadinimas||''), md(it.detales||'')) : `<div class="eil">${md(it)}</div>`;
   if(['matavimo_iranga','irankiai','dalys','dokumentacija'].some(k=>ps[k]?.length))
     h += sek('7. Ką pasiimti į objektą', ['matavimo_iranga','irankiai','dalys','dokumentacija'].filter(k=>ps[k]?.length).map(k=>`<div class="mono" style="margin:10px 0 4px">${{matavimo_iranga:'Matavimo įranga',irankiai:'Įrankiai',dalys:'Galimos dalys',dokumentacija:'Dokumentacija'}[k]}</div>${ps[k].map(psRow).join('')}`).join(''));
   if(R.saugumas){
     const S = typeof R.saugumas==='object' ? R.saugumas : {esme:R.saugumas, detales:''};
-    h += sek('8. Saugumas', S.detales ? mini('⚠️ '+(S.esme||''), md(S.detales)) : `<p>⚠️ ${md(S.esme||'')}</p>`);
+    h += sek('8. Saugumas', S.detales ? mini(`⚠️ ${md(S.esme||'')}`, md(S.detales)) : `<p>⚠️ ${md(S.esme||'')}</p>`);
   }
   if(R.saltiniai?.length) h += sek('9. Naudoti šaltiniai', R.saltiniai.map(x=>`<a class="saltinis" href="${esc(x.url)}" target="_blank" rel="noopener">${x.tipas&&x.tipas.includes('gamintojo')?'📄':'🔗'} ${esc(x.pavadinimas)}</a>`).join(''));
   h += `<p class="mono" style="margin:4px 0 14px">v${a.versija} · ${esc(a.modelis||'')} · prompt ${esc(a.prompt_version||'')} · ${a.input_tokens||0}/${a.output_tokens||0} tok · ${a.web_searches||0} paieškos</p>`;

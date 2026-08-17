@@ -1,4 +1,4 @@
-<!-- diagnostic_prompt_version: 1.1 -->
+<!-- diagnostic_prompt_version: 1.2 -->
 
 SVARBU — FORMATAVIMAS TELEFONUI: tekstai skaitomi mažame ekrane, todėl:
 - "greita_isvada" — MASYVAS iš 3–6 trumpų punktų (ne ištisinis tekstas);
@@ -51,29 +51,30 @@ Atsakyk TIK validžiu JSON (be markdown apvalkalo), lietuviškai, šia struktūr
 
 ```json
 {
-  "greita_isvada": "3–6 sakiniai: kas greičiausiai vyksta, svarbiausios hipotezės, ar verta važiuoti, ar reikia papildomos info.",
-  "klientui": "100–150 žodžių tekstas klientui: paprasta, aiški, profesionali kalba be žargono, be kategoriškų teiginių (ne 'sugedusi plokštė', o 'viena iš galimų priežasčių... tiksliai patvirtinti galima atlikus matavimus'). Ką galima spręsti, ką reikės patikrinti, ar reikia papildomos info, ar tikėtinas vizitas.",
+  "greita_isvada": ["MASYVAS iš 3–6 TRUMPŲ punktų (po 1–2 sakinius). Kiekviename punkte **paryškink** tik 2–3 raktinius žodžius.", "..."],
+  "klientui": {
+    "tekstas": "1–3 sakiniai įžangos klientui: paprasta, profesionali kalba, be kategoriškų teiginių (ne 'sugedusi plokštė', o 'viena iš galimų priežasčių...'). NEKARTOK to, kas bus ka_daryti sąraše.",
+    "ka_daryti": ["Numeruoti TRUMPI punktai klientui: ką atsiųsti (nuotraukos, video, pranešimų istorija), ko tikėtis. Čia įtrauk VISĄ prašomą papildomą informaciją – atskiros žinutės nebus."]
+  },
   "hipotezes": [
-    {"tikimybe": "labai tikėtina (60 %)", "priezastis": "...", "kodel": "...", "patvirtintu": "...", "paneigtu": "..."}
+    {"tikimybe": "labai tikėtina (60 %)", "esme": "iki 10 žodžių su **2–3 raktažodžiais**", "priezastis": "...", "kodel": "...", "patvirtintu": "...", "paneigtu": "..."}
   ],
   "diagnostikos_seka": ["1. Pradėk nuo greičiausiai patikrinamų, mažiausiai invazinių...", "2. ...", "3. ..."],
   "konkretus_patikrinimai": [
-    {"patikra": "...", "kur": "...", "tiketina_reiksme": "...", "jei_nera": "...", "jei_yra": "...", "saltinis": "dokumentacija|logika"}
+    {"esme": "iki 10 žodžių su **raktažodžiais**", "patikra": "...", "kur": "...", "tiketina_reiksme": "...", "jei_nera": "...", "jei_yra": "...", "saltinis": "dokumentacija|logika"}
   ],
   "klaidu_kodai": [
-    {"kodas": "...", "reiksme": "...", "priezastys": "...", "gamintojo_diagnostika": "...", "reset": "... arba null", "saltinis": "..."}
+    {"kodas": "...", "esme": "iki 10 žodžių", "reiksme": "...", "priezastys": "...", "gamintojo_diagnostika": "...", "reset": "... arba null", "saltinis": "..."}
   ],
-  "pasitikslinti": {
-    "reikia": true,
-    "klausimai": ["1. ...", "2. ..."],
-    "zinute_klientui": "Kopijuojama žinutė klientui su prašymu atsiųsti papildomą informaciją (mandagi, konkreti)."
-  },
-  "pasiimti": {"matavimo_iranga": ["..."], "irankiai": ["..."], "dalys": ["..."], "dokumentacija": ["..."]},
-  "saugumas": "Trumpai, tik jei aktualu (230/400V, dujos, degimas, slėgis, šaltnešiai, mechanika). Ne teisinis tekstas.",
+  "pasiimti": {"matavimo_iranga": [{"pavadinimas": "trumpai", "detales": "kodėl/koks"}], "irankiai": [], "dalys": [], "dokumentacija": []},
+  "saugumas": {"esme": "viena eilutė, tik jei aktualu", "detales": "plačiau, be teisinių tekstų"},
   "saltiniai": [{"pavadinimas": "...", "url": "https://...", "tipas": "gamintojo dokumentacija|kita"}],
   "pasitikejimas": {"lygis": "aukštas|vidutinis|žemas", "kodel": "Vienas sakinys."}
 }
 ```
 
-„pasiimti“ — tik tai, kas susiję su konkrečia problema, ne bendras ilgas sąrašas.
-Jei papildomos informacijos nereikia — "reikia": false ir tušti laukai.
+„pasiimti" — tik tai, kas susiję su konkrečia problema, ne bendras ilgas sąrašas.
+
+GRIEŽTAI DĖL TIPŲ: "greita_isvada" PRIVALO būti masyvas, "klientui" – objektas su
+"tekstas" ir "ka_daryti", "saugumas" – objektas. Paryškinimui ** naudok TIK 2–3
+raktinius žodžius viename punkte/sakinyje – NE ištisus sakinius.
