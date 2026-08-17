@@ -6,6 +6,10 @@
   publish = "."
   command = ""
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Subpuslapis „Paslaugos" panaikintas – jį atstoja pradžios puslapis
 [[redirects]]
   from = "/paslaugos"

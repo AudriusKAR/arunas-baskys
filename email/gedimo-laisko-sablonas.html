@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="lt" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>Gedimo registracija {{UZKLAUSOS_NR}}</title>
+<!--[if mso]>
+<xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+<![endif]-->
+<style>
+  /* KINTAMIEJI ŠABLONE:
+     {{UZKLAUSOS_NR}} {{DATA_LAIKAS}} {{SKUBUMO_ZYME}} {{LOGO_URL}}
+     {{KO_REIKIA}} {{IRANGOS_TIPAS}} {{GAMINTOJAS_MODELIS}} {{KLAIDOS_KODAS}}
+     {{SIMPTOMAI}} {{VARDAS}} {{TEL_RODOMAS}} {{TEL_HREF}} {{EMAIL}}
+     {{ADRESAS}} {{ADRESAS_MAPS_URL}} {{OBJEKTO_TIPAS}} {{PRIEDAI_HTML}}
+     {{FORMOS_URL}}
+     Blokus su sąlyga žymi {{#IF_...}} ... {{/IF_...}} — tuščias laukas eilutės nerodo. */
+  body { margin:0; padding:0; width:100% !important; background:#EAF0F4; }
+  table { border-collapse:collapse; }
+  img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; }
+  a { color:#0E3A57; }
+  @media only screen and (max-width:600px) {
+    .wrap { width:100% !important; }
+    .px { padding-left:20px !important; padding-right:20px !important; }
+    .btn-cell { display:block !important; width:100% !important; padding:0 0 10px 0 !important; }
+    .btn-a { display:block !important; width:auto !important; }
+    .h1 { font-size:22px !important; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .card { background:#16242C !important; }
+    .t-main { color:#FBFCFD !important; }
+    .t-sub { color:#A9B7C0 !important; }
+    .rule { border-color:#2A3B45 !important; }
+    .soft { background:#1E2F38 !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#EAF0F4;">
+
+<!-- Peržiūros tekstas pašto sąraše -->
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">
+  {{KLAIDOS_KODAS}} · {{ADRESAS}} · {{TEL_RODOMAS}} · {{IRANGOS_TIPAS}}
+  &#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EAF0F4;">
+<tr><td align="center" style="padding:24px 12px;">
+
+<table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
+
+  <!-- ANTRAŠTĖ -->
+  <tr>
+    <td class="px" style="background:#0E3A57;padding:24px 32px;border-radius:6px 6px 0 0;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td align="left" style="vertical-align:middle;">
+            <img src="{{LOGO_URL}}" width="112" height="28" alt="KRAULIS"
+                 style="display:block;height:28px;width:auto;color:#FBFCFD;font-family:Arial,sans-serif;font-size:20px;font-weight:800;letter-spacing:1px;">
+          </td>
+          <td align="right" style="vertical-align:middle;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;color:#8FB6CE;letter-spacing:1px;">
+            {{SKUBUMO_ZYME}}
+          </td>
+        </tr>
+      </table>
+      <div class="h1" style="font-family:'Archivo',Arial,Helvetica,sans-serif;font-size:26px;line-height:1.2;font-weight:800;color:#FBFCFD;padding-top:20px;">
+        Gedimo registracija
+      </div>
+      <div style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:12px;color:#8FB6CE;padding-top:8px;letter-spacing:0.5px;">
+        {{UZKLAUSOS_NR}} &nbsp;·&nbsp; {{DATA_LAIKAS}}
+      </div>
+    </td>
+  </tr>
+
+  <!-- VEIKSMŲ JUOSTA -->
+  <tr>
+    <td class="px" style="background:#0B2F47;padding:16px 32px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="btn-cell" width="33%" style="padding-right:8px;">
+            <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{TEL_HREF}}" style="height:44px;v-text-anchor:middle;width:170px;" arcsize="14%" fillcolor="#2E9BD6" stroke="f"><w:anchorlock/><center style="color:#FFFFFF;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;">Skambinti</center></v:roundrect><![endif]-->
+            <!--[if !mso]><!-->
+            <a class="btn-a" href="{{TEL_HREF}}"
+               style="display:block;background:#2E9BD6;color:#FFFFFF;font-family:'IBM Plex Sans',Arial,sans-serif;font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:6px;mso-line-height-rule:exactly;line-height:16px;">
+              Skambinti
+            </a>
+            <!--<![endif]-->
+          </td>
+          <td class="btn-cell" width="33%" style="padding-right:8px;">
+            <a class="btn-a" href="mailto:{{EMAIL}}?subject=Kraulis%20MB%20{{UZKLAUSOS_NR}}"
+               style="display:block;background:#FBFCFD;color:#0E3A57;font-family:'IBM Plex Sans',Arial,sans-serif;font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:6px;mso-line-height-rule:exactly;line-height:16px;">
+              Rašyti
+            </a>
+          </td>
+          <td class="btn-cell" width="33%">
+            <a class="btn-a" href="{{ADRESAS_MAPS_URL}}"
+               style="display:block;background:#FBFCFD;color:#0E3A57;font-family:'IBM Plex Sans',Arial,sans-serif;font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:6px;mso-line-height-rule:exactly;line-height:16px;">
+              Žemėlapis
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- TURINYS -->
+  <tr>
+    <td class="card px" style="background:#FBFCFD;padding:28px 32px 8px 32px;">
+
+      <!-- Ko reikia -->
+      <div style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:17px;line-height:1.45;color:#16242C;font-weight:600;" class="t-main">
+        {{KO_REIKIA}}
+      </div>
+
+      {{#IF_KLAIDOS_KODAS}}
+      <!-- Klaidos kodas -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+        <tr>
+          <td class="soft" style="background:#EAF0F4;border-left:4px solid #2E9BD6;padding:16px 18px;border-radius:0 6px 6px 0;">
+            <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;">Klaidos kodas</div>
+            <div class="t-main" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:24px;font-weight:600;color:#0E3A57;padding-top:4px;">{{KLAIDOS_KODAS}}</div>
+          </td>
+        </tr>
+      </table>
+      {{/IF_KLAIDOS_KODAS}}
+
+      <!-- Simptomai -->
+      <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:26px 0 8px 0;">Simptomai ir situacija</div>
+      <div class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;line-height:1.65;color:#16242C;">
+        {{SIMPTOMAI}}
+      </div>
+
+      <!-- ĮRANGA -->
+      <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:30px 0 4px 0;">Įranga</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <span class="t-sub" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:13px;color:#6E7E88;">Tipas</span><br>
+            <span class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#16242C;">{{IRANGOS_TIPAS}}</span>
+          </td>
+        </tr>
+        {{#IF_GAMINTOJAS}}
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <span class="t-sub" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:13px;color:#6E7E88;">Gamintojas / modelis</span><br>
+            <span class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#16242C;">{{GAMINTOJAS_MODELIS}}</span>
+          </td>
+        </tr>
+        {{/IF_GAMINTOJAS}}
+      </table>
+
+      <!-- OBJEKTAS -->
+      <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:30px 0 4px 0;">Objektas</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <span class="t-sub" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:13px;color:#6E7E88;">Adresas</span><br>
+            <a href="{{ADRESAS_MAPS_URL}}" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#2E9BD6;text-decoration:none;font-weight:600;">{{ADRESAS}} &rsaquo;</a>
+          </td>
+        </tr>
+        {{#IF_OBJEKTO_TIPAS}}
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <span class="t-sub" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:13px;color:#6E7E88;">Objekto tipas</span><br>
+            <span class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#16242C;">{{OBJEKTO_TIPAS}}</span>
+          </td>
+        </tr>
+        {{/IF_OBJEKTO_TIPAS}}
+      </table>
+
+      <!-- KONTAKTAI -->
+      <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:30px 0 4px 0;">Kontaktai</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <span class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#16242C;font-weight:600;">{{VARDAS}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <a href="{{TEL_HREF}}" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#2E9BD6;text-decoration:none;font-weight:600;">{{TEL_RODOMAS}}</a>
+          </td>
+        </tr>
+        {{#IF_EMAIL}}
+        <tr>
+          <td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
+            <a href="mailto:{{EMAIL}}" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:16px;color:#2E9BD6;text-decoration:none;font-weight:600;">{{EMAIL}}</a>
+          </td>
+        </tr>
+        {{/IF_EMAIL}}
+      </table>
+
+      {{#IF_PRIEDAI}}
+      <!-- PRIEDAI -->
+      <div class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:30px 0 10px 0;">Priedai</div>
+      {{PRIEDAI_HTML}}
+      {{/IF_PRIEDAI}}
+
+      <div style="height:20px;line-height:20px;">&nbsp;</div>
+    </td>
+  </tr>
+
+  <!-- PORAŠTĖ -->
+  <tr>
+    <td class="px" style="background:#0E3A57;padding:20px 32px;border-radius:0 0 6px 6px;">
+      <div style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:12px;line-height:1.6;color:#8FB6CE;">
+        Užklausa gauta iš <a href="{{FORMOS_URL}}" style="color:#FBFCFD;text-decoration:underline;">gedimų registracijos formos</a> · {{DATA_LAIKAS}}<br>
+        Kraulis MB · šildymas, vėdinimas, vėsinimas
+      </div>
+    </td>
+  </tr>
+
+</table>
+</td></tr>
+</table>
+
+<!-- PRIEDO KORTELĖS ŠABLONAS (kartojamas per kiekvieną priedą, įdedamas į {{PRIEDAI_HTML}}):
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;">
+  <tr>
+    <td class="soft" style="background:#EAF0F4;border-radius:6px;padding:14px 16px;">
+      <table role="presentation" width="100%"><tr>
+        <td><span class="t-main" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:15px;color:#16242C;font-weight:600;">{{FAILO_PAVADINIMAS}}</span><br>
+            <span class="t-sub" style="font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;color:#6E7E88;">{{FAILO_TIPAS}} · {{FAILO_DYDIS}}</span></td>
+        <td align="right"><a href="{{FAILO_URL}}" style="font-family:'IBM Plex Sans',Arial,sans-serif;font-size:14px;color:#2E9BD6;text-decoration:none;font-weight:600;">Atidaryti &rsaquo;</a></td>
+      </tr></table>
+    </td>
+  </tr>
+</table>
+-->
+
+</body>
+</html>

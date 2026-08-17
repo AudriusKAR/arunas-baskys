@@ -1,0 +1,8 @@
+{
+  "name": "arunas-baskys-puslapis",
+  "private": true,
+  "description": "Statinis puslapis + Netlify funkcija, siunčianti formos laiškus pagal Kraulis šabloną",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

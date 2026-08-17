@@ -816,7 +816,8 @@ def p_forma():
       </p>
 
       <form id="uzklausa" name="Gedimo registracija" method="POST" data-netlify="true"
-            netlify-honeypot="bot-field" action="/aciu.html" enctype="multipart/form-data" novalidate>
+            netlify-honeypot="bot-field" action="/aciu.html" enctype="multipart/form-data"
+            accept-charset="UTF-8" novalidate>
         <input type="hidden" name="form-name" value="Gedimo registracija">
         <p style="display:none"><label>Nepildykite: <input name="bot-field"></label></p>
 
