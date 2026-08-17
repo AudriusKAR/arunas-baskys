@@ -16,7 +16,8 @@ PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
 BASE_URL = "https://arunas-baskys.netlify.app"
 
 NAV = [
-    ("paslaugos.html", "Paslaugos"),
+    # „Paslaugos" – tai pats pradžios puslapis (atskiro subpuslapio nebėra)
+    ("index.html", "Paslaugos"),
     ("sudetingi-gedimai.html", "Sudėtingi gedimai"),
     ("iranga.html", "Įranga"),
     ("patirtis.html", "Patirtis"),
@@ -102,7 +103,7 @@ FOOTER = f"""<footer class="site-footer">
     <div>
       <h4>Puslapiai</h4>
       <ul>
-        <li><a href="paslaugos.html">Paslaugos</a></li>
+        <li><a href="index.html">Paslaugos</a></li>
         <li><a href="sudetingi-gedimai.html">Sudėtingi gedimai</a></li>
         <li><a href="iranga.html">Įrangos kategorijos</a></li>
         <li><a href="patirtis.html">Patirtis ir darbai</a></li>
@@ -332,7 +333,6 @@ def p_index():
     </div>
     <figure class="hero-fig">
       <img src="images/darbas-01.jpg" alt="Šaldymo kontūro parametrų matavimas skaitmeniniu manometru ir programėle">
-      <div class="tag-dark">SYS_ANALYSIS: ACTIVE</div>
       <div class="tag-light"><span class="ms ms-sm">timeline</span> Duomenų registravimas</div>
     </figure>
   </div>
@@ -369,7 +369,6 @@ def p_index():
           Kai įranga dirba nestabiliai, rodo klaidų kodus, praranda efektyvumą ar suvartoja
           neįprastai daug energijos. Matavimai ir sistemos veikimo logikos analizė, o ne spėliojimas.
         </p>
-        <a class="card-link" href="paslaugos.html#diagnostika">Plačiau <span class="ms ms-sm">arrow_forward</span></a>
       </div>
 
       <div class="card">
@@ -381,7 +380,6 @@ def p_index():
           Nustačius priežastį – techniškai ir ekonomiškai pagrįstas remontas. Tikslus įsikišimas
           į probleminį mazgą. Jei remontas neapsimoka, apie tai pasakau atvirai.
         </p>
-        <a class="card-link" href="paslaugos.html#remontas">Plačiau <span class="ms ms-sm">arrow_forward</span></a>
       </div>
 
       <div class="card">
@@ -393,7 +391,6 @@ def p_index():
           Kasmetinis servisas ir profilaktika: valymas, filtrai, šilumokaičiai, šaltnešio kiekio
           patikra, degimo mišinio optimizavimas. Tvarkinga sistema sugenda rečiau ir naudoja mažiau.
         </p>
-        <a class="card-link" href="paslaugos.html#prieziura">Plačiau <span class="ms ms-sm">arrow_forward</span></a>
       </div>
     </div>
   </div>
@@ -457,153 +454,19 @@ def p_index():
 
 
 def p_paslaugos():
-    return head(
-        "Paslaugos — diagnostika, remontas ir įrangos priežiūra | Arūnas Baškys",
-        "ŠVOK sistemų gedimų diagnostika, remontas ir reguliarus įrangos aptarnavimas. Vilnius ir visa Lietuva.",
-        "paslaugos.html",
-    ) + f"""<main class="blueprint">
-{page_head("Paslaugos", "Diagnostika, remontas ir priežiūra",
-           "Trys kryptys, kurios viena kitą papildo: rasti gedimo priežastį, ją pašalinti ir prižiūrėti sistemą taip, kad gedimas nesikartotų.")}
-
-<section id="diagnostika">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">01 — Diagnostika</h2>
-        <p>Priežasties nustatymas, o ne klaidos kodo perskaitymas</p>
-      </div>
-      <div class="sec-index">nuo 70 €/val.</div>
-    </div>
-    <div class="grid g2">
-      <div>
-        <p class="body-lg muted">
-          Diagnostika prasideda nuo klausimo „kodėl“. Matuojami realūs sistemos darbo parametrai,
-          tikrinama automatika, davikliai ir įrenginių tarpusavio sąveika. Tik tada priimamas
-          sprendimas, ką keisti ar derinti.
-        </p>
-        <p class="muted">
-          Dirbu pažangia diagnostikos įranga: skaitmeniniais manometrais, termovizoriumi,
-          bevieliais matavimo davikliais, vakuumo matuokliais. Matavimai leidžia pamatyti,
-          kas iš tikrųjų vyksta sistemoje.
-        </p>
-      </div>
-      <div class="card">
-        <div class="card-head">
-          <h3 class="h-sm">Ką apima</h3>
-          <span class="ms ms-lg fill">manage_search</span>
-        </div>
-        <ul>
-          <li><span class="ms ms-sm">check</span> Veikimo parametrų matavimas ir registravimas</li>
-          <li><span class="ms ms-sm">check</span> Klaidų kodų interpretavimas</li>
-          <li><span class="ms ms-sm">check</span> Termovizinė ir elektrinė analizė</li>
-          <li><span class="ms ms-sm">check</span> Automatikos ir daviklių patikra</li>
-          <li><span class="ms ms-sm">check</span> Šaldymo kontūro slėgių ir perkaitimo matavimas</li>
-          <li><span class="ms ms-sm">check</span> Išvada: ką verta remontuoti, o ko – ne</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="remontas">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">02 — Remontas</h2>
-        <p>Tikslus įsikišimas į probleminį mazgą</p>
-      </div>
-      <div class="sec-index">nuo 70 €/val.</div>
-    </div>
-    <div class="grid g2">
-      <div>
-        <p class="body-lg muted">
-          Nustačius priežastį atliekamas remontas – tada, kai jis techniškai ir ekonomiškai
-          pagrįstas. Be spėliojimų ir be detalių keitimo „dėl visa ko“.
-        </p>
-        <p class="muted">
-          Jei remontas neapsimoka arba įranga jau pasiekė savo ribą, apie tai pasakau atvirai
-          ir paaiškinu, kodėl.
-        </p>
-      </div>
-      <div class="card">
-        <div class="card-head">
-          <h3 class="h-sm">Ką apima</h3>
-          <span class="ms ms-lg fill">build_circle</span>
-        </div>
-        <ul>
-          <li><span class="ms ms-sm">check</span> Šaldymo kontūro remontas, vakuumavimas, pildymas</li>
-          <li><span class="ms ms-sm">check</span> Elektronikos plokščių defektavimas</li>
-          <li><span class="ms ms-sm">check</span> Automatika ir valdikliai</li>
-          <li><span class="ms ms-sm">check</span> Ventiliatorių ir variklių guolių keitimas</li>
-          <li><span class="ms ms-sm">check</span> Hidraulinių mazgų ir cirkuliacinių kontūrų atstatymas</li>
-          <li><span class="ms ms-sm">check</span> Sistemos darbo parametrų atstatymas ir derinimas</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="prieziura">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">03 — Įrangos aptarnavimas ir priežiūra</h2>
-        <p>Kad gedimo išvis netektų ieškoti</p>
-      </div>
-      <div class="sec-index">SEZONINIS / KASMETINIS</div>
-    </div>
-    <div class="grid g2">
-      <div>
-        <p class="body-lg muted">
-          Didelė dalis gedimų, į kuriuos mane kviečia, prasideda nuo paprastų dalykų: užterštų
-          šilumokaičių, nekeistų filtrų, sumažėjusio šaltnešio kiekio ar niekada nederinto
-          degimo mišinio.
-        </p>
-        <p class="muted">
-          Reguliarus aptarnavimas kainuoja kelis kartus mažiau nei avarinis remontas sezono
-          viduryje – ir sistema dirba efektyviau, su mažesnėmis energijos sąnaudomis.
-        </p>
-        <p class="muted">
-          Aptarnavimą galima suderinti kaip vienkartinį darbą arba kaip kasmetinį –
-          priminsiu, kada laikas.
-        </p>
-      </div>
-      <div class="card">
-        <div class="card-head">
-          <h3 class="h-sm">Ką apima</h3>
-          <span class="ms ms-lg fill">event_repeat</span>
-        </div>
-        <ul>
-          <li><span class="ms ms-sm">check</span> Kasmetinis katilų servisas, degimo mišinio optimizavimas</li>
-          <li><span class="ms ms-sm">check</span> Šilumokaičių valymas</li>
-          <li><span class="ms ms-sm">check</span> Rekuperatorių filtrų keitimas ir vidaus valymas</li>
-          <li><span class="ms ms-sm">check</span> Kondicionierių ir šilumos siurblių profilaktika</li>
-          <li><span class="ms ms-sm">check</span> Šaltnešio kiekio ir sistemos sandarumo patikra</li>
-          <li><span class="ms ms-sm">check</span> Oro srautų ir darbo parametrų patikra bei derinimas</li>
-          <li><span class="ms ms-sm">check</span> Ataskaita: kokios būklės sistema ir ko tikėtis</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">Kada verta kreiptis</h2>
-        <p>Dažniausios situacijos, dėl kurių į mane kreipiasi</p>
-      </div>
-      <div class="sec-index">SIMPTOMAI</div>
-    </div>
-    <ul class="sympt">
-{simptomai_html()}    </ul>
-  </div>
-</section>
-</main>
-
-{CTA_BLOCK}
-{FOOTER}"""
+    """Subpuslapis panaikintas (2026-08-17) - turini atstoja pradzios puslapis.
+    Failas paliktas tik kaip peradresavimas, kad seni adresai nezlugtu."""
+    return f"""<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=index.html">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{BASE_URL}/">
+<title>Paslaugos | Arunas Baskys</title>
+</head>
+<body><p><a href="index.html">Paslaugos aprasytos pradzios puslapyje &rarr;</a></p></body>
+</html>"""
 
 
 def p_sudetingi():
@@ -728,9 +591,16 @@ def p_iranga():
 
 
 def p_patirtis():
+    # Pirmos 4 nuotraukos rodomos kairėje kolonoje po patirties sąrašu (užpildo
+    # tuščią plotą šalia ilgų atsiliepimų), likusios 8 – galerijoje apačioje.
+    # Lightbox surenka visas .gal nuotraukas, tad varto per visas 12.
+    mini = "".join(
+        f'        <button type="button"><img src="images/darbas-{n}.jpg" alt="{alt}" loading="lazy"></button>\n'
+        for n, alt in GALERIJA[:4]
+    )
     gal = "".join(
         f'      <button type="button"><img src="images/darbas-{n}.jpg" alt="{alt}" loading="lazy"></button>\n'
-        for n, alt in GALERIJA
+        for n, alt in GALERIJA[4:]
     )
     return head(
         "Patirtis ir darbai — 25+ metai ŠVOK servise | Arūnas Baškys",
@@ -742,7 +612,9 @@ def p_patirtis():
 
 <section>
   <div class="wrap">
+    <a class="btn btn-outline goto-gal" href="#galerija"><span class="ms ms-sm">photo_library</span> Nuotraukos iš objektų</a>
     <div class="exp">
+      <div>
       <ul class="tl">
         <li>
           <div class="yr">PRADŽIA</div>
@@ -788,13 +660,19 @@ def p_patirtis():
         </li>
       </ul>
 
+      <div class="gal gal-mini">
+{mini}      </div>
+      </div>
+
       <div class="proof">
-        <figure>
+        <figure class="clip">
           <img src="images/darbas-02.jpg" alt="TaskRabbit atsiliepimų suvestinė: 103 atsiliepimai, 4,9 įvertinimas">
+          <button class="clip-btn" type="button">Rodyti visą atsiliepimą <span class="ms ms-sm">expand_more</span></button>
           <figcaption>„TASKRABBIT“ LONDONAS — 103 atsiliepimai, 4,9</figcaption>
         </figure>
-        <figure>
+        <figure class="clip">
           <img src="images/darbas-04.jpg" alt="Londono klientų atsiliepimai apie Arūno darbą">
+          <button class="clip-btn" type="button">Rodyti visą atsiliepimą <span class="ms ms-sm">expand_more</span></button>
           <figcaption>LONDONO KLIENTŲ ATSILIEPIMAI</figcaption>
         </figure>
         <div class="card" style="padding:24px">
@@ -841,9 +719,9 @@ def p_atsiliepimai():
 {page_head("Atsiliepimai", "Ką sako klientai",
            "Atsiliepimai iš Paslaugos.lt portalo, kur vertinama kokybė, kaina, bendravimas ir terminai.")}
 
-<section>
+<section style="padding-top:0">
   <div class="wrap">
-    <div class="score">
+    <div class="score" style="margin-top:16px">
       <div class="num">5,0</div>
       <div>
         {STARS}

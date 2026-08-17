@@ -13,13 +13,23 @@
     });
   }
 
-  /* --- galerijos lightbox --- */
-  var gal = document.getElementById('gal');
+  /* --- sutraukti atsiliepimų paveikslai (telefone) --- */
+  [].forEach.call(document.querySelectorAll('.clip-btn'), function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.closest('.clip').classList.toggle('open');
+      btn.innerHTML = open
+        ? 'Suskleisti <span class="ms ms-sm">expand_less</span>'
+        : 'Rodyti visą atsiliepimą <span class="ms ms-sm">expand_more</span>';
+    });
+  });
+
+  /* --- galerijų lightbox (bendras visoms .gal) --- */
+  var gals = [].slice.call(document.querySelectorAll('.gal'));
   var lb = document.getElementById('lb');
-  if (!gal || !lb) return;
+  if (!gals.length || !lb) return;
 
   var lbImg = lb.querySelector('img');
-  var imgs = [].slice.call(gal.querySelectorAll('img'));
+  var imgs = [].slice.call(document.querySelectorAll('.gal img'));
   var idx = 0;
 
   function show(i) {
@@ -30,9 +40,11 @@
   }
   function close() { lb.classList.remove('on'); }
 
-  gal.addEventListener('click', function (e) {
-    var b = e.target.closest('button');
-    if (b) show(imgs.indexOf(b.querySelector('img')));
+  gals.forEach(function (gal) {
+    gal.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (b) show(imgs.indexOf(b.querySelector('img')));
+    });
   });
   lb.querySelector('.lb-close').addEventListener('click', close);
   lb.querySelector('.lb-prev').addEventListener('click', function (e) { e.stopPropagation(); show(idx - 1); });

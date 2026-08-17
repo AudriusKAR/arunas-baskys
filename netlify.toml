@@ -6,6 +6,13 @@
   publish = "."
   command = ""
 
+# Subpuslapis „Paslaugos" panaikintas – jį atstoja pradžios puslapis
+[[redirects]]
+  from = "/paslaugos"
+  to = "/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/assets/*"
   [headers.values]
