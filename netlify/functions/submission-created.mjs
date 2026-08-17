@@ -1,7 +1,7 @@
 /* Netlify event funkcija: suveikia gavus formos užklausą (submission-created).
-   Suformuoja HTML laišką pagal Kraulis šabloną (email/gedimo-laisko-sablonas.html
-   struktūra perkelta čia, nes funkcija turi būti savarankiška) ir išsiunčia per
-   Gmail SMTP. Klientui, palikusiam el. paštą, išsiunčiamas autoatsakas.
+   Suformuoja HTML laišką svetainės (Arūno Baškio brand book) dizainu — struktūra
+   pagal email/gedimo-laisko-sablonas.html, spalvos ir logotipas svetainės — ir
+   išsiunčia per Gmail SMTP. Klientui, palikusiam el. paštą, siunčiamas autoatsakas.
 
    Aplinkos kintamieji (Netlify → Environment variables):
      SMTP_USER  – Gmail adresas, iš kurio siunčiama
@@ -54,38 +54,38 @@ function vilniusTime(iso) {
 
 /* ---------- laiško HTML ---------- */
 
-const MONO = "'IBM Plex Mono','Courier New',monospace";
-const SANS = "'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Arial,sans-serif";
+const MONO = "'JetBrains Mono','Courier New',monospace";
+const SANS = "'Hanken Grotesk','Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif";
 
 const label = (t, pad = "30px 0 4px 0") =>
-  `<div class="t-sub" style="font-family:${MONO};font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;padding:${pad};">${t}</div>`;
+  `<div class="t-sub" style="font-family:${MONO};font-size:11px;letter-spacing:1.5px;color:#64748B;text-transform:uppercase;padding:${pad};">${t}</div>`;
 
-const row = (k, vHtml) => `<tr><td class="rule" style="border-bottom:1px solid #EAF0F4;padding:12px 0;">
-  ${k ? `<span class="t-sub" style="font-family:${SANS};font-size:13px;color:#6E7E88;">${k}</span><br>` : ""}
+const row = (k, vHtml) => `<tr><td class="rule" style="border-bottom:1px solid #E2E8F0;padding:12px 0;">
+  ${k ? `<span class="t-sub" style="font-family:${SANS};font-size:13px;color:#64748B;">${k}</span><br>` : ""}
   ${vHtml}</td></tr>`;
 
 const val = (v, extra = "") =>
-  `<span class="t-main" style="font-family:${SANS};font-size:16px;color:#16242C;${extra}">${v}</span>`;
+  `<span class="t-main" style="font-family:${SANS};font-size:16px;color:#0F172A;${extra}">${v}</span>`;
 
 const link = (href, text) =>
-  `<a href="${href}" style="font-family:${SANS};font-size:16px;color:#2E9BD6;text-decoration:none;font-weight:600;">${text}</a>`;
+  `<a href="${href}" style="font-family:${SANS};font-size:16px;color:#0055D4;text-decoration:none;font-weight:600;">${text}</a>`;
 
 function btn(href, text, primary) {
-  const bg = primary ? "#2E9BD6" : "#FBFCFD";
-  const fg = primary ? "#FFFFFF" : "#0E3A57";
+  const bg = primary ? "#0055D4" : "#FFFFFF";
+  const fg = primary ? "#FFFFFF" : "#0F172A";
   return `<td class="btn-cell" width="33%" style="padding-right:8px;">
-    <a class="btn-a" href="${href}" style="display:block;background:${bg};color:${fg};font-family:${SANS};font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:6px;mso-line-height-rule:exactly;line-height:16px;">${text}</a>
+    <a class="btn-a" href="${href}" style="display:block;background:${bg};color:${fg};font-family:${SANS};font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:3px;mso-line-height-rule:exactly;line-height:16px;">${text}</a>
   </td>`;
 }
 
 function priedoKortele(f) {
   const tipas = (f.filename || "").split(".").pop().toUpperCase();
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;">
-  <tr><td class="soft" style="background:#EAF0F4;border-radius:6px;padding:14px 16px;">
+  <tr><td class="soft" style="background:#E2E8F0;border-radius:3px;padding:14px 16px;">
     <table role="presentation" width="100%"><tr>
-      <td><span class="t-main" style="font-family:${SANS};font-size:15px;color:#16242C;font-weight:600;">${esc(f.filename)}</span><br>
-          <span class="t-sub" style="font-family:${MONO};font-size:11px;color:#6E7E88;">${tipas} · ${fmtBytes(f.size)}</span></td>
-      <td align="right"><a href="${f.url}" style="font-family:${SANS};font-size:14px;color:#2E9BD6;text-decoration:none;font-weight:600;">Atidaryti &rsaquo;</a></td>
+      <td><span class="t-main" style="font-family:${SANS};font-size:15px;color:#0F172A;font-weight:600;">${esc(f.filename)}</span><br>
+          <span class="t-sub" style="font-family:${MONO};font-size:11px;color:#64748B;">${tipas} · ${fmtBytes(f.size)}</span></td>
+      <td align="right"><a href="${f.url}" style="font-family:${SANS};font-size:14px;color:#0055D4;text-decoration:none;font-weight:600;">Atidaryti &rsaquo;</a></td>
     </tr></table>
   </td></tr></table>`;
 }
@@ -98,52 +98,61 @@ function laiskoHtml(v) {
 <meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark">
 <title>Gedimo registracija ${v.nr}</title>
 <style>
-  body{margin:0;padding:0;width:100%!important;background:#EAF0F4;}
-  table{border-collapse:collapse;} img{border:0;} a{color:#0E3A57;}
+  body{margin:0;padding:0;width:100%!important;background:#E2E8F0;}
+  table{border-collapse:collapse;} img{border:0;} a{color:#0F172A;}
   @media only screen and (max-width:600px){
     .wrap{width:100%!important;} .px{padding-left:20px!important;padding-right:20px!important;}
     .btn-cell{display:block!important;width:100%!important;padding:0 0 10px 0!important;}
     .btn-a{display:block!important;width:auto!important;} .h1{font-size:22px!important;}
   }
   @media (prefers-color-scheme: dark){
-    .card{background:#16242C!important;} .t-main{color:#FBFCFD!important;}
+    .card{background:#0F172A!important;} .t-main{color:#FFFFFF!important;}
     .t-sub{color:#A9B7C0!important;} .rule{border-color:#2A3B45!important;} .soft{background:#1E2F38!important;}
   }
 </style></head>
-<body style="margin:0;padding:0;background:#EAF0F4;">
+<body style="margin:0;padding:0;background:#E2E8F0;">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${esc(v.preheader)}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EAF0F4;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#E2E8F0;">
 <tr><td align="center" style="padding:24px 12px;">
 <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
-  <tr><td class="px" style="background:#0E3A57;padding:24px 32px;border-radius:6px 6px 0 0;">
+  <tr><td class="px" style="background:#0F172A;padding:24px 32px;border-radius:3px 3px 0 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-      <td align="left" style="font-family:Arial,sans-serif;font-size:20px;font-weight:800;letter-spacing:2px;color:#FBFCFD;">KRAULIS</td>
-      <td align="right" style="font-family:${MONO};font-size:11px;color:${v.skubu ? "#FFD666" : "#8FB6CE"};letter-spacing:1px;font-weight:${v.skubu ? "700" : "400"};">${v.skubu ? "&#9888; SKUBU" : ""}</td>
+      <td align="left" style="vertical-align:middle;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td style="background:#FFFFFF;border-radius:3px;padding:6px;">
+            <img src="https://arunas-baskys.netlify.app/assets/logo-mark.png" width="26" height="24" alt="AB" style="display:block;">
+          </td>
+          <td style="padding-left:12px;font-family:${SANS};font-size:18px;font-weight:800;letter-spacing:-0.2px;color:#FFFFFF;">Arūnas Baškys</td>
+        </tr></table>
+      </td>
+      <td align="right" style="font-family:${MONO};font-size:11px;color:${v.skubu ? "#FFD666" : "#94A3B8"};letter-spacing:1px;font-weight:${v.skubu ? "700" : "400"};">${v.skubu ? "&#9888; SKUBU" : ""}</td>
     </tr></table>
-    <div class="h1" style="font-family:${SANS};font-size:26px;line-height:1.2;font-weight:800;color:#FBFCFD;padding-top:20px;">${v.antraste}</div>
-    <div style="font-family:${MONO};font-size:12px;color:#8FB6CE;padding-top:8px;letter-spacing:0.5px;">${v.nr} &nbsp;·&nbsp; ${v.laikas}</div>
+    <div class="h1" style="font-family:${SANS};font-size:26px;line-height:1.2;font-weight:800;color:#FFFFFF;padding-top:20px;">${v.antraste}</div>
+    <div style="font-family:${MONO};font-size:12px;color:#94A3B8;padding-top:8px;letter-spacing:0.5px;">${v.nr} &nbsp;·&nbsp; ${v.laikas}</div>
   </td></tr>
-  ${v.veiksmai ? `<tr><td class="px" style="background:#0B2F47;padding:16px 32px;">
+  ${v.veiksmai ? `<tr><td class="px" style="background:#1E293B;padding:16px 32px;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
       ${btn(v.telHref, "Skambinti", true)}
-      ${v.email ? btn(`mailto:${v.email}?subject=${encodeURIComponent("Kraulis MB — gedimo užklausa " + v.nr)}`, "Rašyti", false) : ""}
+      ${v.email ? btn(`mailto:${v.email}?subject=${encodeURIComponent("Dėl jūsų gedimo užklausos " + v.nr)}`, "Rašyti", false) : ""}
       ${v.adresas ? btn(v.mapsUrl, "Žemėlapis", false) : ""}
     </tr></table>
   </td></tr>` : ""}
-  <tr><td class="card px" style="background:#FBFCFD;padding:28px 32px 8px 32px;">
+  <tr><td class="card px" style="background:#FFFFFF;padding:28px 32px 8px 32px;">
     ${v.turinys}
     <div style="height:20px;line-height:20px;">&nbsp;</div>
   </td></tr>
-  <tr><td class="px" style="background:#0E3A57;padding:20px 32px;border-radius:0 0 6px 6px;">
-    <div style="font-family:${SANS};font-size:12px;line-height:1.6;color:#8FB6CE;">
-      ${v.porasteTekstas} <a href="${FORMOS_URL}" style="color:#FBFCFD;text-decoration:underline;">gedimų registracijos formos</a> · ${v.laikas}<br>
-      Kraulis MB · šildymas, vėdinimas, vėsinimas
+  <tr><td class="px" style="background:#0F172A;padding:20px 32px;border-radius:0 0 3px 3px;">
+    <div style="font-family:${SANS};font-size:12px;line-height:1.6;color:#94A3B8;">
+      ${v.porasteTekstas} <a href="${FORMOS_URL}" style="color:#FFFFFF;text-decoration:underline;">gedimų registracijos formos</a> · ${v.laikas}<br>
+      Arūnas Baškys · ŠVOK sistemų diagnostika, remontas ir priežiūra · Vilnius, visa Lietuva
     </div>
   </td></tr>
 </table></td></tr></table></body></html>`;
 }
 
 /* ---------- pagrindinė logika ---------- */
+
+export { laiskoHtml }; // peržiūros generavimui (email/perziura-*.html)
 
 export async function handler(event) {
   const payload = JSON.parse(event.body).payload;
@@ -172,18 +181,18 @@ export async function handler(event) {
     .filter((f) => f && f.url && f.filename);
 
   /* turinio blokai — tušti laukai praleidžiami */
-  let turinys = `<div class="t-main" style="font-family:${SANS};font-size:17px;line-height:1.45;color:#16242C;font-weight:600;">${esc(tipas)}</div>`;
+  let turinys = `<div class="t-main" style="font-family:${SANS};font-size:17px;line-height:1.45;color:#0F172A;font-weight:600;">${esc(tipas)}</div>`;
 
   if (klaida) {
     turinys += `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
-      <tr><td class="soft" style="background:#EAF0F4;border-left:4px solid #2E9BD6;padding:16px 18px;border-radius:0 6px 6px 0;">
-        <div class="t-sub" style="font-family:${MONO};font-size:11px;letter-spacing:1.5px;color:#6E7E88;text-transform:uppercase;">Klaidos kodas</div>
-        <div class="t-main" style="font-family:${MONO};font-size:24px;font-weight:600;color:#0E3A57;padding-top:4px;">${esc(klaida)}</div>
+      <tr><td class="soft" style="background:#E2E8F0;border-left:4px solid #0055D4;padding:16px 18px;border-radius:0 6px 6px 0;">
+        <div class="t-sub" style="font-family:${MONO};font-size:11px;letter-spacing:1.5px;color:#64748B;text-transform:uppercase;">Klaidos kodas</div>
+        <div class="t-main" style="font-family:${MONO};font-size:24px;font-weight:600;color:#0F172A;padding-top:4px;">${esc(klaida)}</div>
       </td></tr></table>`;
   }
 
   turinys += label("Simptomai ir situacija", "26px 0 8px 0");
-  turinys += `<div class="t-main" style="font-family:${SANS};font-size:16px;line-height:1.65;color:#16242C;">${nl2br(d.simptomai)}</div>`;
+  turinys += `<div class="t-main" style="font-family:${SANS};font-size:16px;line-height:1.65;color:#0F172A;">${nl2br(d.simptomai)}</div>`;
 
   turinys += label("Įranga");
   turinys += `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">`;
@@ -254,13 +263,24 @@ export async function handler(event) {
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
   });
 
-  /* tema: informatyvi, telpanti į ~60 simbolių */
-  const tipasTrumpas = tipas.split("–")[0].split("(")[0].trim() || "Užklausa";
-  const subject = [skubu ? "SKUBU" : null, tipasTrumpas, d.iranga, adresas, klaida || null, nr]
-    .filter(Boolean).join(" · ");
+  /* tema: aiškiai — kas sugedo, kokia įranga, kokiu adresu */
+  const tipoFraze =
+    tipas.startsWith("Gedimas") ? "Įrangos gedimas"
+    : tipas.startsWith("Sudėtingas") ? "Sudėtingas gedimas"
+    : tipas.startsWith("Įrangos aptarnavimas") ? "Įrangos aptarnavimas"
+    : tipas.startsWith("Kasmetinis") ? "Kasmetinis servisas"
+    : tipas.startsWith("Konsultacija") ? "Konsultacija"
+    : "Užklausa";
+  const subject = [
+    skubu ? "SKUBU" : null,
+    `${tipoFraze}: ${d.iranga}`,
+    adresas || null,
+    klaida || null,
+    nr,
+  ].filter(Boolean).join(" · ");
 
   await transporter.sendMail({
-    from: { name: "Gedimų registracija · Kraulis MB", address: process.env.SMTP_USER },
+    from: { name: "Gedimo registracija · Arūnas Baškys", address: process.env.SMTP_USER },
     to: process.env.NOTIFY_TO,
     replyTo: validEmail ? { name: d.vardas || "", address: validEmail } : undefined,
     subject, html, text, attachments,
@@ -276,19 +296,19 @@ export async function handler(event) {
         veiksmai: false,
         telHref: "", email: "", adresas: "", mapsUrl: "",
         turinys:
-          `<div class="t-main" style="font-family:${SANS};font-size:16px;line-height:1.65;color:#16242C;">
+          `<div class="t-main" style="font-family:${SANS};font-size:16px;line-height:1.65;color:#0F172A;">
             Sveiki${d.vardas ? ", " + esc(d.vardas) : ""},<br><br>
             gavome jūsų užklausą <b>${nr}</b> (${esc(d.iranga)}${klaida ? ", klaidos kodas " + esc(klaida) : ""}).
             Susisieksime nurodytu telefonu <b>${esc(telRod)}</b> artimiausiu darbo metu.<br><br>
-            Jei situacija skubi, skambinkite <a href="tel:+37061170101" style="color:#2E9BD6;font-weight:600;text-decoration:none;">+370 611 70101</a>.
+            Jei situacija skubi, skambinkite <a href="tel:+37061170101" style="color:#0055D4;font-weight:600;text-decoration:none;">+370 611 70101</a>.
           </div>` +
           (priedai.length ? label("Jūsų pridėti failai", "26px 0 10px 0") + priedai.map(priedoKortele).join("") : ""),
         porasteTekstas: "Šis patvirtinimas išsiųstas automatiškai iš",
       });
       await transporter.sendMail({
-        from: { name: "Gedimų registracija · Kraulis MB", address: process.env.SMTP_USER },
+        from: { name: "Arūnas Baškys · ŠVOK servisas", address: process.env.SMTP_USER },
         to: validEmail,
-        subject: `Jūsų užklausa ${nr} gauta · Gedimo registracija`,
+        subject: `Jūsų užklausa ${nr} gauta · Arūnas Baškys`,
         html: acHtml,
         text: `Sveiki,\n\ngavome jūsų užklausą ${nr} (${d.iranga}). Susisieksime telefonu ${telRod} artimiausiu darbo metu.\n\nSkubiu atveju skambinkite +370 611 70101.`,
       });
