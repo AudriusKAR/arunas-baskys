@@ -123,7 +123,7 @@ export async function handler(event) {
         let ev; try { ev = JSON.parse(e.slice(6)); } catch { continue; }
         if (ev.type === "message_start") j.usage.input_tokens = ev.message?.usage?.input_tokens || 0;
         else if (ev.type === "content_block_start" && ev.content_block?.type === "server_tool_use") {
-          searches++; await etapas(a.id, `Ieškoma gamintojo dokumentacija (paieška ${searches})…`);
+          searches++; await etapas(a.id, `Ieškoma ir analizuojama gamintojo dokumentacija (žingsnis ${searches})…`);
         }
         else if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") tekstas += ev.delta.text;
         else if (ev.type === "message_delta") {
@@ -142,7 +142,9 @@ export async function handler(event) {
     } catch { rezultatas = { greita_isvada: tekstas.slice(0, 4000), neformatuota: true }; }
 
     const u = j.usage || {};
-    const webs = Math.max(u.server_tool_use?.web_search_requests || 0, searches);
+    /* oficialus API skaitiklis; manualinis `searches` skaičiuoja ir vidinius
+       filtravimo žingsnius, tad naudojamas tik kaip atsarga */
+    const webs = u.server_tool_use?.web_search_requests ?? searches;
     /* kaina USD pagal oficialius įkainius (1M tokenų) + $10/1000 paieškų */
     const KAINOS = { "claude-opus-5": [5, 25], "claude-sonnet-5": [3, 15], "claude-haiku-4-5": [1, 5] };
     const [ki, ko] = KAINOS[process.env.CLAUDE_MODEL] || [0, 0];
