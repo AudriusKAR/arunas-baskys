@@ -412,6 +412,13 @@ a.v:hover{color:var(--light-blue)}
 .drop p{margin:8px 0 0; color:var(--on-variant); font-size:15px}
 .drop p b{color:var(--on-surface)}
 .drop .drop-note{font-family:var(--f-mono); font-size:12px; letter-spacing:.03em; color:var(--slate)}
+.doc-add{
+  display:inline-flex; align-items:center; gap:8px; margin-top:10px;
+  background:none; border:0; cursor:pointer; padding:4px 0;
+  font-family:var(--f-head); font-size:14px; font-weight:600; color:var(--eng-blue);
+}
+.doc-add:hover{text-decoration:underline}
+.doc-add .ms{font-size:18px}
 .file-list{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:8px}
 .file-list li{
   display:flex; align-items:center; gap:10px; background:var(--surface-white);
@@ -431,7 +438,10 @@ a.v:hover{color:var(--light-blue)}
 }
 .form-section>h2 .ms{color:var(--eng-blue)}
 .field{margin-bottom:24px}
-.field:last-child{margin-bottom:0}
+/* tarpą nuimam tik pačiam paskutiniam sekcijos laukui, ne kiekvienos .f2 poros
+   paskutiniam – kitaip mobiliajame stulpelyje tarpai tampa nevienodi */
+.form-section > .field:last-child,
+.f2:last-child .field:last-child{margin-bottom:0}
 .field label{
   display:block; font-family:var(--f-head); font-size:16px; font-weight:600;
   color:var(--on-surface); margin-bottom:10px;

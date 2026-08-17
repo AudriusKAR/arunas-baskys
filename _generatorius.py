@@ -16,7 +16,7 @@ PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
 BASE_URL = "https://arunas-baskys.netlify.app"
 # Keičiama su kiekvienu stiliaus/skriptų pakeitimu — priverčia naršykles
 # atsisiųsti naują CSS/JS iš karto, nelaukiant kol pasibaigs kešo galiojimas.
-VERSION = "3"
+VERSION = "4"
 
 NAV = [
     # „Paslaugos" – tai pats pradžios puslapis (atskiro subpuslapio nebėra)
@@ -694,15 +694,6 @@ def p_patirtis():
           <button class="clip-btn" type="button">Rodyti visą atsiliepimą <span class="ms ms-sm">expand_more</span></button>
           <figcaption>LONDONO KLIENTŲ ATSILIEPIMAI</figcaption>
         </figure>
-        <div class="card" style="padding:24px">
-          <h3 class="h-sm" style="font-size:18px; margin-bottom:12px">Ką tai reiškia praktiškai</h3>
-          <p style="font-size:15px; margin-bottom:12px">
-            Komerciniame pastate sistema negali „palaukti iki rytojaus“. Tokia aplinka išmoko dirbti
-            metodiškai: matuoti, tikrinti versijas, skaityti dokumentaciją ir suprasti visos sistemos
-            logiką, o ne tik atskirą įrenginį.
-          </p>
-          <p style="font-size:15px; margin:0">Ta pati metodika taikoma ir privačiame name – tik mastelis kitas.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -884,10 +875,14 @@ def p_forma():
             <label>Nuotraukos ar dokumentai</label>
             <div class="drop" id="drop">
               <span class="ms">upload_file</span>
-              <p><b>Vilkite failus čia</b> arba paspauskite ir pasirinkite iš kompiuterio ar telefono</p>
-              <p class="drop-note">Iki 3 failų po 8 MB – nuotraukos arba PDF</p>
+              <p><b>Vilkite nuotraukas čia</b> arba paspauskite ir pasirinkite iš galerijos</p>
+              <p class="drop-note">Iki 3 failų po 8 MB</p>
             </div>
-            <input type="file" id="failai" accept="image/*,application/pdf" multiple style="display:none">
+            <button type="button" class="doc-add" id="doc-add">
+              <span class="ms ms-sm">description</span> Pridėti PDF ar kitą dokumentą
+            </button>
+            <input type="file" id="failai" accept="image/*" multiple style="display:none">
+            <input type="file" id="failai-doc" multiple style="display:none">
             <input type="file" name="priedas-1" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
             <input type="file" name="priedas-2" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
             <input type="file" name="priedas-3" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
@@ -945,7 +940,6 @@ def p_forma():
           </button>
           <a class="btn btn-ghost btn-sm" href="index.html">Atšaukti</a>
           <p class="form-note">
-            Paspaudus mygtuką duomenys surenkami į vieną žinutę – ją išsiųsite el. paštu arba SMS žinute.
             Skubiu atveju skambinkite <a href="tel:{TEL_RAW}" style="color:var(--eng-blue)">{TEL}</a>.
           </p>
         </div>
@@ -1134,9 +1128,14 @@ def p_forma():
     syncSlots();
   }}
 
+  var docPicker = document.getElementById('failai-doc');
+  var docBtn = document.getElementById('doc-add');
+
   if (drop && picker) {{
     drop.addEventListener('click', function () {{ picker.click(); }});
     picker.addEventListener('change', function () {{ addFiles(picker.files); picker.value = ''; }});
+    docBtn.addEventListener('click', function () {{ docPicker.click(); }});
+    docPicker.addEventListener('change', function () {{ addFiles(docPicker.files); docPicker.value = ''; }});
     ['dragover', 'dragenter'].forEach(function (ev) {{
       drop.addEventListener(ev, function (e) {{ e.preventDefault(); drop.classList.add('over'); }});
     }});

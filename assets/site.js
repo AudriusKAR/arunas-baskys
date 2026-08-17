@@ -56,4 +56,16 @@
     if (e.key === 'ArrowLeft') show(idx - 1);
     if (e.key === 'ArrowRight') show(idx + 1);
   });
+
+  /* braukimas pirštu telefone: kairėn – kita, dešinėn – ankstesnė */
+  var touchX = null;
+  lb.addEventListener('touchstart', function (e) {
+    touchX = e.touches[0].clientX;
+  }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
 })();
