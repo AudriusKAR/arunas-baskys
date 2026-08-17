@@ -35,15 +35,12 @@ function telShow(raw) {
   return m ? `+370 ${m[1]} ${m[2]} ${m[3]}` : d || String(raw || "");
 }
 
-const mapsUrl = (adresas) =>
-  "https://www.google.com/maps/search/?api=1&query=" +
-  encodeURIComponent(`${adresas}, Lietuva`);
-
-const wazeUrl = (adresas) =>
-  "https://waze.com/ul?q=" + encodeURIComponent(`${adresas}, Lietuva`) + "&navigate=yes";
-
-const appleMapsUrl = (adresas) =>
-  "https://maps.apple.com/?q=" + encodeURIComponent(`${adresas}, Lietuva`);
+/* Gmail laiškuose blokuoja sms: ir geo: nuorodas, todėl mygtukai veda į
+   svetainės tarpinius puslapius /nav ir /sms — jie iškviečia telefono
+   funkcionalumą (Android — sisteminis programos pasirinkimas). */
+const SITE = "https://arunas-baskys.netlify.app";
+const navUrl = (adresas) => `${SITE}/nav?q=${encodeURIComponent(`${adresas}, Lietuva`)}`;
+const smsUrl = (tel) => `${SITE}/sms?to=${encodeURIComponent(tel)}`;
 
 function fmtBytes(b) {
   if (!b && b !== 0) return "";
@@ -142,11 +139,8 @@ function laiskoHtml(v) {
       ${btn(v.smsHref, "Rašyti SMS", false)}
       ${v.email ? btn(`mailto:${v.email}?subject=${encodeURIComponent("Dėl jūsų gedimo užklausos " + v.nr)}`, "Rašyti email", false) : ""}
     </tr></table>
-    ${v.adresas ? `<div style="font-family:${MONO};font-size:10px;letter-spacing:1.5px;color:#94A3B8;text-transform:uppercase;padding:14px 0 8px 0;">Navigacija į objektą</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-      ${btn(v.mapsGoogle, "Google Maps", false)}
-      ${btn(v.mapsWaze, "Waze", false)}
-      ${btn(v.mapsApple, "Apple Maps", false)}
+    ${v.adresas ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;"><tr>
+      <td><a class="btn-a" href="${v.navUrl}" style="display:block;background:#FFFFFF;color:#0F172A;font-family:${SANS};font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:3px;mso-line-height-rule:exactly;line-height:16px;">&#128663; Navigacija į objektą — ${esc(v.adresas)}</a></td>
     </tr></table>` : ""}
   </td></tr>` : ""}
   <tr><td class="card px" style="background:#FFFFFF;padding:28px 32px 8px 32px;">
@@ -186,7 +180,7 @@ export async function handler(event) {
   const klientoEmail = (d.elpastas || "").trim();
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(klientoEmail) ? klientoEmail : "";
   const adresas = (d.adresas || "").trim();
-  const maps = mapsUrl(adresas);
+  const maps = navUrl(adresas);
 
   const priedai = ["priedas-1", "priedas-2", "priedas-3"]
     .map((k) => d[k])
@@ -235,9 +229,8 @@ export async function handler(event) {
     antraste: "Gedimo registracija",
     preheader: [klaida, adresas, telRod, d.iranga].filter(Boolean).join(" · "),
     veiksmai: true,
-    telHref, smsHref: "sms:" + telNorm(d.telefonas),
-    email: validEmail, adresas,
-    mapsGoogle: maps, mapsWaze: wazeUrl(adresas), mapsApple: appleMapsUrl(adresas),
+    telHref, smsHref: smsUrl(telNorm(d.telefonas)),
+    email: validEmail, adresas, navUrl: maps,
     turinys,
     porasteTekstas: "Užklausa gauta iš",
   });

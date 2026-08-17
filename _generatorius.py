@@ -1182,7 +1182,74 @@ def p_aciu():
 {FOOTER}"""
 
 
+def _tarpinis(title, body_html, script):
+    """Minimalus tarpinis puslapis laiško mygtukams (nav/sms) — be navigacijos,
+    greitai užsikraunantis, brand spalvomis."""
+    return f"""<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F172A">
+<title>{title} | Arūnas Baškys</title>
+<style>
+  body{{margin:0;background:#F8FAFC;color:#0F172A;font-family:'Hanken Grotesk','Inter',system-ui,sans-serif;
+       display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px}}
+  .box{{max-width:420px;width:100%;background:#fff;border:1px solid #E2E8F0;border-radius:2px;padding:32px;text-align:center}}
+  h1{{font-size:22px;margin:0 0 6px}}
+  .sub{{color:#475569;font-size:15px;margin:0 0 24px;word-break:break-word}}
+  a.b{{display:block;padding:16px;margin-bottom:12px;border-radius:2px;text-decoration:none;
+      font-weight:600;font-size:16px;background:#F1F5F9;color:#0F172A;border:1px solid #E2E8F0}}
+  a.b.pirmas{{background:#0055D4;color:#fff;border-color:#0055D4}}
+</style>
+</head>
+<body>
+<div class="box">
+{body_html}
+</div>
+<script>
+{script}
+</script>
+</body>
+</html>"""
+
+
+def p_nav():
+    """Laiško mygtukas „Navigacija į objektą": Android'ui iškviečia sisteminį
+    programos pasirinkimą (geo:), iPhone/desktop mato pasirinkimo mygtukus."""
+    body = """  <h1>Navigacija į objektą</h1>
+  <p class="sub" id="adr"></p>
+  <a class="b pirmas" id="g" href="#">Google Maps</a>
+  <a class="b" id="w" href="#">Waze</a>
+  <a class="b" id="a" href="#">Apple Maps</a>"""
+    script = """var q = new URLSearchParams(location.search).get('q') || 'Vilnius, Lietuva';
+var enc = encodeURIComponent(q);
+document.getElementById('adr').textContent = q;
+document.getElementById('g').href = 'https://www.google.com/maps/search/?api=1&query=' + enc;
+document.getElementById('w').href = 'https://waze.com/ul?q=' + enc + '&navigate=yes';
+document.getElementById('a').href = 'https://maps.apple.com/?q=' + enc;
+/* Android turi sisteminį „pasirink programą" langą — iškviečiam jį iš karto */
+if (/Android/i.test(navigator.userAgent)) location.href = 'geo:0,0?q=' + enc;"""
+    return _tarpinis("Navigacija", body, script)
+
+
+def p_sms():
+    """Laiško mygtukas „Rašyti SMS": Gmail neleidžia sms: nuorodų laiške,
+    todėl į žinučių programą nukreipia šis puslapis."""
+    body = """  <h1>Rašyti SMS</h1>
+  <p class="sub" id="nr"></p>
+  <a class="b pirmas" id="s" href="#">Atidaryti žinučių programą</a>"""
+    script = """var to = new URLSearchParams(location.search).get('to') || '';
+document.getElementById('nr').textContent = to;
+document.getElementById('s').href = 'sms:' + to;
+location.href = 'sms:' + to;"""
+    return _tarpinis("Rašyti SMS", body, script)
+
+
 PUSLAPIAI = {
+    "nav.html": p_nav,
+    "sms.html": p_sms,
     "index.html": p_index,
     "aciu.html": p_aciu,
     "paslaugos.html": p_paslaugos,

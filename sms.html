@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F172A">
+<title>Rašyti SMS | Arūnas Baškys</title>
+<style>
+  body{margin:0;background:#F8FAFC;color:#0F172A;font-family:'Hanken Grotesk','Inter',system-ui,sans-serif;
+       display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px}
+  .box{max-width:420px;width:100%;background:#fff;border:1px solid #E2E8F0;border-radius:2px;padding:32px;text-align:center}
+  h1{font-size:22px;margin:0 0 6px}
+  .sub{color:#475569;font-size:15px;margin:0 0 24px;word-break:break-word}
+  a.b{display:block;padding:16px;margin-bottom:12px;border-radius:2px;text-decoration:none;
+      font-weight:600;font-size:16px;background:#F1F5F9;color:#0F172A;border:1px solid #E2E8F0}
+  a.b.pirmas{background:#0055D4;color:#fff;border-color:#0055D4}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Rašyti SMS</h1>
+  <p class="sub" id="nr"></p>
+  <a class="b pirmas" id="s" href="#">Atidaryti žinučių programą</a>
+</div>
+<script>
+var to = new URLSearchParams(location.search).get('to') || '';
+document.getElementById('nr').textContent = to;
+document.getElementById('s').href = 'sms:' + to;
+location.href = 'sms:' + to;
+</script>
+</body>
+</html>
