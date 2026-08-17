@@ -74,9 +74,11 @@ export async function handler(event) {
       model: process.env.CLAUDE_MODEL,
       max_tokens: 40000,
       system: promptText(),
+      /* _20260209 variantai su dinaminiu filtravimu – rezultatai filtruojami
+         prieš patenkant į kontekstą, mažiau tokenų */
       tools: [
-        { type: "web_search_20250305", name: "web_search", max_uses: 8 },
-        { type: "web_fetch_20250910", name: "web_fetch", max_uses: 8 },
+        { type: "web_search_20260209", name: "web_search", max_uses: 8 },
+        { type: "web_fetch_20260209", name: "web_fetch", max_uses: 8 },
       ],
       messages: [{
         role: "user",
@@ -95,7 +97,6 @@ export async function handler(event) {
       headers: {
         "x-api-key": process.env.ANTHROPIC_API_KEY,
         "anthropic-version": "2023-06-01",
-        "anthropic-beta": "web-fetch-2025-09-10",
         "content-type": "application/json",
       },
       body: JSON.stringify(req),
@@ -142,10 +143,15 @@ export async function handler(event) {
 
     const u = j.usage || {};
     const webs = Math.max(u.server_tool_use?.web_search_requests || 0, searches);
+    /* kaina USD pagal oficialius įkainius (1M tokenų) + $10/1000 paieškų */
+    const KAINOS = { "claude-opus-5": [5, 25], "claude-sonnet-5": [3, 15], "claude-haiku-4-5": [1, 5] };
+    const [ki, ko] = KAINOS[process.env.CLAUDE_MODEL] || [0, 0];
+    const kaina = ((u.input_tokens || 0) * ki + (u.output_tokens || 0) * ko) / 1e6 + webs * 0.01;
     await dbUpdate("gedimu_analizes", `id=eq.${a.id}&busena=eq.vyksta`, {
       busena: "baigta", etapas: null, rezultatas,
       input_tokens: u.input_tokens || 0, output_tokens: u.output_tokens || 0,
-      web_searches: webs, baigta: new Date().toISOString(),
+      web_searches: webs, kaina_usd: kaina ? Number(kaina.toFixed(4)) : null,
+      baigta: new Date().toISOString(),
     });
     return { statusCode: 200, body: "ok" };
   } catch (e) {

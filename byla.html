@@ -173,7 +173,7 @@ function pieskRez(baigtos){
     h += sek('8. Saugumas', S.detales ? mini(`⚠️ ${md(S.esme||'')}`, md(S.detales)) : `<p>⚠️ ${md(S.esme||'')}</p>`);
   }
   if(R.saltiniai?.length) h += sek('9. Naudoti šaltiniai', R.saltiniai.map(x=>`<a class="saltinis" href="${esc(x.url)}" target="_blank" rel="noopener">${x.tipas&&x.tipas.includes('gamintojo')?'📄':'🔗'} ${esc(x.pavadinimas)}</a>`).join(''));
-  h += `<p class="mono" style="margin:4px 0 14px">v${a.versija} · ${esc(a.modelis||'')} · prompt ${esc(a.prompt_version||'')} · ${a.input_tokens||0}/${a.output_tokens||0} tok · ${a.web_searches||0} paieškos</p>`;
+  h += `<p class="mono" style="margin:4px 0 14px">v${a.versija} · ${esc(a.modelis||'')} · prompt ${esc(a.prompt_version||'')} · ${a.input_tokens||0}/${a.output_tokens||0} tok · ${a.web_searches||0} paieškos${a.kaina_usd?` · ~$${a.kaina_usd.toFixed(2)}`:''}</p>`;
   el.innerHTML = h;
 }
 

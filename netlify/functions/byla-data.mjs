@@ -16,7 +16,7 @@ export async function handler(event) {
   }
   const analizes = await dbSelect(
     "gedimu_analizes",
-    `gedimo_id=eq.${id}&select=id,versija,busena,etapas,rezultatas,klaida,modelis,prompt_version,input_tokens,output_tokens,web_searches,sukurta,baigta&order=versija.desc`
+    `gedimo_id=eq.${id}&select=id,versija,busena,etapas,rezultatas,klaida,modelis,prompt_version,input_tokens,output_tokens,web_searches,kaina_usd,sukurta,baigta&order=versija.desc`
   );
   return {
     statusCode: 200,
