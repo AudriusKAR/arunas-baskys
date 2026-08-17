@@ -16,7 +16,7 @@ PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
 BASE_URL = "https://arunas-baskys.netlify.app"
 # Keičiama su kiekvienu stiliaus/skriptų pakeitimu — priverčia naršykles
 # atsisiųsti naują CSS/JS iš karto, nelaukiant kol pasibaigs kešo galiojimas.
-VERSION = "2"
+VERSION = "3"
 
 NAV = [
     # „Paslaugos" – tai pats pradžios puslapis (atskiro subpuslapio nebėra)
@@ -72,7 +72,11 @@ def nav(page):
     )
     return f"""<header class="nav">
   <div class="nav-in">
-    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Arūnas Baškys"></a>
+    <a class="logo" href="index.html">
+      <img class="logo-mark" src="assets/logo-mark.png" alt="">
+      <span class="logo-name">Arūnas Baškys</span>
+      <img class="logo-face" src="images/arunas.jpg" alt="Arūnas Baškys">
+    </a>
     <nav class="nav-links">
 {links}      <a class="btn btn-primary btn-sm" href="{CTA_FILE}">{CTA_TEXT} <span class="ms ms-sm">arrow_forward</span></a>
     </nav>
@@ -88,7 +92,10 @@ def nav(page):
 FOOTER = f"""<footer class="site-footer">
   <div class="foot">
     <div>
-      <img src="assets/logo.png" alt="Arūnas Baškys">
+      <div class="foot-logo">
+        <img src="assets/logo-mark.png" alt="">
+        <span>Arūnas Baškys</span>
+      </div>
       <p class="muted" style="font-size:15px; max-width:34ch">
         Specializuota techninė diagnostika, remontas ir įrangos priežiūra.
         Naujos įrangos montavimu neužsiimu.
@@ -427,15 +434,20 @@ def p_index():
       </div>
       <div class="sec-index">SPECIALIZACIJA</div>
     </div>
-    <p class="lead body-lg" style="max-width:78ch">
-      Ne visi gedimai telpa į serviso instrukcijos lentelę. Kartais reikia perprasti konkrečios
-      sistemos veikimą, analizuoti matavimus, techninę dokumentaciją, automatiką ir kelių įrenginių
-      tarpusavio sąveiką. Tokie darbai – viena įdomiausių mano veiklos dalių.
-    </p>
-    <div class="btn-row" style="margin-top:32px">
-      <a class="btn btn-light" href="sudetingi-gedimai.html">
-        Kada tai aktualu <span class="ms ms-sm">arrow_forward</span>
-      </a>
+    <div class="who">
+      <img class="who-face" src="images/arunas.jpg" alt="Arūnas Baškys">
+      <div>
+        <p class="lead body-lg" style="max-width:78ch">
+          Ne visi gedimai telpa į serviso instrukcijos lentelę. Kartais reikia perprasti konkrečios
+          sistemos veikimą, analizuoti matavimus, techninę dokumentaciją, automatiką ir kelių įrenginių
+          tarpusavio sąveiką. Tokie darbai – viena įdomiausių mano veiklos dalių.
+        </p>
+        <div class="btn-row" style="margin-top:32px">
+          <a class="btn btn-light" href="sudetingi-gedimai.html">
+            Kada tai aktualu <span class="ms ms-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -781,10 +793,8 @@ IRANGOS_TIPAI = [
     "Komercinė kondicionavimo sistema",
     "Rekuperatorius / vėdinimo įranga",
     "Ventiliatorinis konvektorius („fancoil“)",
-    "Dujinis katilas",
-    "Granulinis katilas",
-    "Dyzelinis katilas",
-    "Kieto kuro katilas",
+    "Skysto kuro katilas (dujinis / dyzelinis)",
+    "Kieto kuro katilas (granulinis / malkos)",
     "Šaldymo mašina („čileris“)",
     "Pramoninis šaldytuvas / šaldymo įranga",
     "Serverinės šaldymo įranga (CRAC, CCU)",
@@ -815,51 +825,52 @@ def p_forma():
       </p>
 
       <form id="uzklausa" name="Gedimo registracija" method="POST" data-netlify="true"
-            netlify-honeypot="bot-field" action="/aciu.html" novalidate>
+            netlify-honeypot="bot-field" action="/aciu.html" enctype="multipart/form-data" novalidate>
         <input type="hidden" name="form-name" value="Gedimo registracija">
         <p style="display:none"><label>Nepildykite: <input name="bot-field"></label></p>
 
         <div class="form-section">
-          <h2><span class="ms">assignment</span> Užklausos tipas</h2>
-          <div class="field">
-            <label for="tipas">Ko reikia <span class="req">*</span></label>
-            <select id="tipas" name="tipas" required>
-              <option value="">Pasirinkite užklausos tipą</option>
-              <option>Gedimas – įranga neveikia arba veikia netinkamai</option>
-              <option>Sudėtingas gedimas – jau buvo bandyta taisyti</option>
-              <option>Įrangos aptarnavimas ir priežiūra (profilaktika)</option>
-              <option>Kasmetinis katilo ar sistemos servisas</option>
-              <option>Konsultacija / nuomonė dėl sistemos</option>
-            </select>
-            <div class="err-msg">Pasirinkite užklausos tipą</div>
+          <h2><span class="ms">assignment</span> Užklausa ir įranga</h2>
+          <div class="f2">
+            <div class="field">
+              <label for="tipas">Ko reikia <span class="req">*</span></label>
+              <select id="tipas" name="tipas" required>
+                <option value="">Pasirinkite užklausos tipą</option>
+                <option>Gedimas – įranga neveikia arba veikia netinkamai</option>
+                <option>Sudėtingas gedimas – jau buvo bandyta taisyti</option>
+                <option>Įrangos aptarnavimas ir priežiūra (profilaktika)</option>
+                <option>Kasmetinis katilo ar sistemos servisas</option>
+                <option>Konsultacija / nuomonė dėl sistemos</option>
+                <option>Kita (aprašysiu žemiau)</option>
+              </select>
+              <div class="err-msg">Pasirinkite užklausos tipą</div>
+            </div>
+            <div class="field">
+              <label for="iranga">Įrangos tipas <span class="req">*</span></label>
+              <select id="iranga" name="iranga" required>
+                <option value="">Pasirinkite įrangos tipą</option>
+{tipai}              </select>
+              <div class="err-msg">Pasirinkite įrangos tipą</div>
+            </div>
           </div>
-        </div>
-
-        <div class="form-section">
-          <h2><span class="ms">build</span> Įrangos informacija</h2>
-          <div class="field">
-            <label for="iranga">Įrangos tipas <span class="req">*</span></label>
-            <select id="iranga" name="iranga" required>
-              <option value="">Pasirinkite įrangos tipą</option>
-{tipai}            </select>
-            <div class="err-msg">Pasirinkite įrangos tipą</div>
-          </div>
-          <div class="field">
-            <label for="modelis">Gamintojas / Modelis</label>
-            <input type="text" id="modelis" name="modelis" placeholder="Pvz., Daikin Altherma 3">
-            <div class="hint">
-              <span class="ms ms-sm">info</span>
-              Užrašas paprastai būna ant įrenginio techninių duomenų lentelės.
+          <div class="f2">
+            <div class="field">
+              <label for="modelis">Gamintojas / Modelis</label>
+              <input type="text" id="modelis" name="modelis" placeholder="Pvz., Daikin Altherma 3">
+              <div class="hint">
+                <span class="ms ms-sm">info</span>
+                Užrašas paprastai būna ant įrenginio techninių duomenų lentelės.
+              </div>
+            </div>
+            <div class="field">
+              <label for="klaida">Klaidos kodas (jei rodo)</label>
+              <input type="text" id="klaida" name="klaida" placeholder="Pvz., E-04, U4, 7H">
             </div>
           </div>
         </div>
 
         <div class="form-section">
           <h2><span class="ms">warning</span> Problemos aprašymas</h2>
-          <div class="field">
-            <label for="klaida">Klaidos kodas (jei rodo)</label>
-            <input type="text" id="klaida" name="klaida" placeholder="Pvz., E-04, U4, 7H">
-          </div>
           <div class="field">
             <label for="simptomai">Simptomai ir situacija <span class="req">*</span></label>
             <textarea id="simptomai" name="simptomai" required placeholder="Išsamiai aprašykite, kas vyksta. Kada prasidėjo problema? Ar atsiranda specifinėmis sąlygomis? Ar jau buvo taisyta, kokios detalės keistos?"></textarea>
@@ -869,38 +880,62 @@ def p_forma():
             </div>
             <div class="err-msg">Trumpai aprašykite, kas vyksta</div>
           </div>
+          <div class="field">
+            <label>Nuotraukos ar dokumentai</label>
+            <div class="drop" id="drop">
+              <span class="ms">upload_file</span>
+              <p><b>Vilkite failus čia</b> arba paspauskite ir pasirinkite iš kompiuterio ar telefono</p>
+              <p class="drop-note">Iki 3 failų po 8 MB – nuotraukos arba PDF</p>
+            </div>
+            <input type="file" id="failai" accept="image/*,application/pdf" multiple style="display:none">
+            <input type="file" name="priedas-1" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
+            <input type="file" name="priedas-2" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
+            <input type="file" name="priedas-3" class="ghost-file" style="display:none" tabindex="-1" aria-hidden="true">
+            <ul class="file-list" id="file-list"></ul>
+            <div class="hint">
+              <span class="ms ms-sm">photo_camera</span>
+              Naudinga nufotografuoti: įrangos techninių duomenų lentelę (kur nurodytas modelis),
+              pačią įrangą ir klaidos pranešimą ekrane.
+            </div>
+          </div>
         </div>
 
         <div class="form-section">
           <h2><span class="ms">contact_page</span> Kontaktinė informacija</h2>
-          <div class="field">
-            <label for="vardas">Vardas <span class="req">*</span></label>
-            <input type="text" id="vardas" name="vardas" required autocomplete="name">
-            <div class="err-msg">Įrašykite vardą</div>
+          <div class="f2">
+            <div class="field">
+              <label for="vardas">Vardas ir pavardė <span class="req">*</span></label>
+              <input type="text" id="vardas" name="vardas" required placeholder="Vardenis Pavardenis" autocomplete="name">
+              <div class="err-msg">Įrašykite vardą ir pavardę</div>
+            </div>
+            <div class="field">
+              <label for="telefonas">Telefonas <span class="req">*</span></label>
+              <input type="tel" id="telefonas" name="telefonas" required placeholder="+370..." autocomplete="tel">
+              <div class="err-msg">Įrašykite telefono numerį</div>
+            </div>
           </div>
-          <div class="field">
-            <label for="telefonas">Telefonas <span class="req">*</span></label>
-            <input type="tel" id="telefonas" name="telefonas" required placeholder="+370..." autocomplete="tel">
-            <div class="err-msg">Įrašykite telefono numerį</div>
+          <div class="f2">
+            <div class="field">
+              <label for="elpastas">El. paštas</label>
+              <input type="email" id="elpastas" name="elpastas" placeholder="vardas@pastas.lt" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="adresas">Objekto adresas (miestas / rajonas) <span class="req">*</span></label>
+              <input type="text" id="adresas" name="adresas" required placeholder="Pvz., Vilnius, Antakalnis">
+              <div class="err-msg">Nurodykite miestą ar rajoną</div>
+            </div>
           </div>
-          <div class="field">
-            <label for="elpastas">El. paštas</label>
-            <input type="email" id="elpastas" name="elpastas" placeholder="vardas@pastas.lt" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="adresas">Objekto adresas (miestas / rajonas) <span class="req">*</span></label>
-            <input type="text" id="adresas" name="adresas" required placeholder="Pvz., Vilnius, Antakalnis">
-            <div class="err-msg">Nurodykite miestą ar rajoną</div>
-          </div>
-          <div class="field">
-            <label for="objektas">Objekto tipas</label>
-            <select id="objektas" name="objektas">
-              <option value="">Nenurodyta</option>
-              <option>Butas</option>
-              <option>Privatus namas</option>
-              <option>Komercinis objektas</option>
-              <option>Pramoninis objektas</option>
-            </select>
+          <div class="f2">
+            <div class="field">
+              <label for="objektas">Objekto tipas</label>
+              <select id="objektas" name="objektas">
+                <option value="">Nenurodyta</option>
+                <option>Butas</option>
+                <option>Privatus namas</option>
+                <option>Komercinis objektas</option>
+                <option>Pramoninis objektas</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -1002,6 +1037,11 @@ def p_forma():
       .map(function (r) {{ return r[0] + ': ' + r[1]; }})
       .join('\\n');
 
+    if (files.length) {{
+      text += '\\nPriedai: ' + files.map(function (f) {{ return f.name; }}).join(', ') +
+              ' (siunčiant el. paštu prisekite failus rankiniu būdu)';
+    }}
+
     summary.textContent = text;
 
     var subject = 'Užklausa: ' + val('iranga') + ' — ' + val('vardas');
@@ -1017,18 +1057,15 @@ def p_forma():
     btn.disabled = true;
     btn.innerHTML = 'Siunčiama…';
 
-    var data = new FormData(form);
-    var body = new URLSearchParams(data).toString();
-
     /* GitHub Pages ir vietinis failas formų nepriima – ten iš karto rankinis būdas */
     var canPost = location.protocol.indexOf('http') === 0 &&
                   location.hostname.indexOf('github.io') === -1;
     if (!canPost) {{ finish(false); return; }}
 
+    /* multipart – kartu su tekstu keliauja ir prisegti failai */
     fetch(form.getAttribute('action') || '/', {{
       method: 'POST',
-      headers: {{ 'Content-Type': 'application/x-www-form-urlencoded' }},
-      body: body
+      body: new FormData(form)
     }})
       .then(function (r) {{ finish(r.ok); }})
       .catch(function () {{ finish(false); }});
@@ -1066,6 +1103,52 @@ def p_forma():
     box.style.display = '';
     window.scrollTo({{ top: 0, behavior: 'smooth' }});
   }});
+
+  /* --- failų prisegimas: vilkimo zona + iki 3 failų po 8 MB --- */
+  var drop = document.getElementById('drop');
+  var picker = document.getElementById('failai');
+  var listEl = document.getElementById('file-list');
+  var slots = [].slice.call(form.querySelectorAll('.ghost-file'));
+  var files = [];
+
+  function syncSlots() {{
+    slots.forEach(function (inp, i) {{
+      var dt = new DataTransfer();
+      if (files[i]) dt.items.add(files[i]);
+      inp.files = dt.files;
+    }});
+    listEl.innerHTML = files.map(function (f, i) {{
+      var mb = (f.size / 1048576).toFixed(1);
+      return '<li><span class="ms ms-sm">attach_file</span><b>' + f.name +
+             '</b><span class="fsize">' + mb + ' MB</span>' +
+             '<button type="button" data-i="' + i + '" aria-label="Pašalinti">&times;</button></li>';
+    }}).join('');
+  }}
+
+  function addFiles(picked) {{
+    [].slice.call(picked).forEach(function (f) {{
+      if (files.length >= 3) {{ alert('Daugiausia 3 failai.'); return; }}
+      if (f.size > 8 * 1048576) {{ alert('„' + f.name + '“ didesnis nei 8 MB – nepridėtas.'); return; }}
+      files.push(f);
+    }});
+    syncSlots();
+  }}
+
+  if (drop && picker) {{
+    drop.addEventListener('click', function () {{ picker.click(); }});
+    picker.addEventListener('change', function () {{ addFiles(picker.files); picker.value = ''; }});
+    ['dragover', 'dragenter'].forEach(function (ev) {{
+      drop.addEventListener(ev, function (e) {{ e.preventDefault(); drop.classList.add('over'); }});
+    }});
+    ['dragleave', 'drop'].forEach(function (ev) {{
+      drop.addEventListener(ev, function (e) {{ e.preventDefault(); drop.classList.remove('over'); }});
+    }});
+    drop.addEventListener('drop', function (e) {{ addFiles(e.dataTransfer.files); }});
+    listEl.addEventListener('click', function (e) {{
+      var b = e.target.closest('button');
+      if (b) {{ files.splice(+b.getAttribute('data-i'), 1); syncSlots(); }}
+    }});
+  }}
 }})();
 </script>
 {FOOTER}"""
