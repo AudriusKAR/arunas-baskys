@@ -11,7 +11,7 @@
 */
 import nodemailer from "nodemailer";
 
-const FORMOS_URL = "https://arunas-baskys.netlify.app/registruoti-gedima";
+const FORMOS_URL = "https://arunas-baskys-dev.netlify.app/registruoti-gedima";
 const MAX_ATTACH_BYTES = 10 * 1024 * 1024; // priedai segami, kol telpa į 10 MB
 
 /* ---------- pagalbinės ---------- */
@@ -38,7 +38,7 @@ function telShow(raw) {
 /* Gmail laiškuose blokuoja sms: ir geo: nuorodas, todėl mygtukai veda į
    svetainės tarpinius puslapius /nav ir /sms — jie iškviečia telefono
    funkcionalumą (Android — sisteminis programos pasirinkimas). */
-const SITE = "https://arunas-baskys.netlify.app";
+const SITE = "https://arunas-baskys-dev.netlify.app";
 const navUrl = (adresas) => `${SITE}/nav?q=${encodeURIComponent(`${adresas}, Lietuva`)}`;
 const smsUrl = (tel) => `${SITE}/sms?to=${encodeURIComponent(tel)}`;
 
@@ -123,7 +123,7 @@ function laiskoHtml(v) {
       <td align="left" style="vertical-align:middle;">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
           <td style="background:#FFFFFF;border-radius:3px;padding:6px;">
-            <img src="https://arunas-baskys.netlify.app/assets/logo-mark.png" width="26" height="24" alt="AB" style="display:block;">
+            <img src="https://arunas-baskys-dev.netlify.app/assets/logo-mark.png" width="26" height="24" alt="AB" style="display:block;">
           </td>
           <td style="padding-left:12px;font-family:${SANS};font-size:18px;font-weight:800;letter-spacing:-0.2px;color:#FFFFFF;">Arūnas Baškys</td>
         </tr></table>

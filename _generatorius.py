@@ -13,7 +13,7 @@ TEL_RAW = "+37061170101"
 TEL = "+370 611 70101"
 EMAIL = "arunas@baskys.lt"
 PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
-BASE_URL = "https://arunas-baskys.netlify.app"
+BASE_URL = "https://arunas-baskys-dev.netlify.app"
 # Keičiama su kiekvienu stiliaus/skriptų pakeitimu — priverčia naršykles
 # atsisiųsti naują CSS/JS iš karto, nelaukiant kol pasibaigs kešo galiojimas.
 VERSION = "4"
