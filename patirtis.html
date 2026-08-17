@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
 <header class="nav">
@@ -49,7 +49,10 @@
 <section class="page-head">
   <div class="wrap">
     <div class="crumbs"><a href="index.html">Pradžia</a> <span>/</span> <span>Patirtis</span></div>
-    <h1 class="h-lg">Daugiau nei 25 metai ŠVOK servise</h1>
+    <div class="ph-row">
+      <h1 class="h-lg">Daugiau nei 25 metai ŠVOK servise</h1>
+      <a class="btn btn-outline" href="#galerija"><span class="ms ms-sm">photo_library</span> Nuotraukos iš objektų</a>
+    </div>
     <p class="lead">ŠVOK serviso inžinierius. Didelė dalis patirties sukaupta Londono komerciniuose pastatuose, kur sistemos negali sustoti, o gedimo priežastį reikia rasti greitai.</p>
   </div>
 </section>
@@ -57,7 +60,6 @@
 
 <section>
   <div class="wrap">
-    <a class="btn btn-outline goto-gal" href="#galerija"><span class="ms ms-sm">photo_library</span> Nuotraukos iš objektų</a>
     <div class="exp">
       <div>
       <ul class="tl">
@@ -105,11 +107,26 @@
         </li>
       </ul>
 
-      <div class="gal gal-mini">
+      <div class="sec-head" id="galerija" style="margin-top:48px; margin-bottom:24px">
+        <div>
+          <h2 class="h-md">Iš darbo objektuose</h2>
+          <p>Matavimai, šaldymo kontūrai, automatika, vėdinimo kameros, komercinė šaldymo įranga</p>
+        </div>
+        <div class="sec-index">FOTO</div>
+      </div>
+      <div class="gal gal-exp">
         <button type="button"><img src="images/darbas-01.jpg" alt="Skaitmeninio manometro ir programėlės matavimai objekte" loading="lazy"></button>
         <button type="button"><img src="images/darbas-03.jpg" alt="Komercinė šaldymo mašina – čilerio aptarnavimas" loading="lazy"></button>
         <button type="button"><img src="images/darbas-05.jpg" alt="Diagnostikos ir vakuumavimo įranga objekte lauke" loading="lazy"></button>
         <button type="button"><img src="images/darbas-06.jpg" alt="Šaldymo kontūro slėgių matavimas skaitmeniniu manometru" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-07.jpg" alt="Vėdinimo kameros ir ventiliatoriaus mazgas" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-09.jpg" alt="Šaldymo kontūro vakuumavimas prieš pildymą šaltnešiu" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-10.jpg" alt="Lauko blokas ir prijungta diagnostikos įranga" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-11.jpg" alt="Šaldymo agregatas su prijungtais matavimo prietaisais" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-12.jpg" alt="Šaldymo kontūro vamzdynas ir ventilių mazgas" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-13.jpg" alt="Automatikos spinta ir įrangos mazgas objekte" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-14.jpg" alt="Temperatūros matavimas vamzdyne matavimo prietaisu" loading="lazy"></button>
+        <button type="button"><img src="images/darbas-15.jpg" alt="Vakuumo matavimas šaldymo sistemoje" loading="lazy"></button>
       </div>
       </div>
 
@@ -138,27 +155,6 @@
   </div>
 </section>
 
-<section id="galerija">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">Iš darbo objektuose</h2>
-        <p>Matavimai, šaldymo kontūrai, automatika, vėdinimo kameros, komercinė šaldymo įranga</p>
-      </div>
-      <div class="sec-index">FOTO</div>
-    </div>
-    <div class="gal" id="gal">
-      <button type="button"><img src="images/darbas-07.jpg" alt="Vėdinimo kameros ir ventiliatoriaus mazgas" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-09.jpg" alt="Šaldymo kontūro vakuumavimas prieš pildymą šaltnešiu" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-10.jpg" alt="Lauko blokas ir prijungta diagnostikos įranga" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-11.jpg" alt="Šaldymo agregatas su prijungtais matavimo prietaisais" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-12.jpg" alt="Šaldymo kontūro vamzdynas ir ventilių mazgas" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-13.jpg" alt="Automatikos spinta ir įrangos mazgas objekte" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-14.jpg" alt="Temperatūros matavimas vamzdyne matavimo prietaisu" loading="lazy"></button>
-      <button type="button"><img src="images/darbas-15.jpg" alt="Vakuumo matavimas šaldymo sistemoje" loading="lazy"></button>
-    </div>
-  </div>
-</section>
 </main>
 
 <section class="dark">
@@ -219,6 +215,6 @@
   <a href="tel:+37061170101"><span class="ms ms-sm">call</span> Skambinti</a>
 </div>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=2"></script>
 </body>
 </html>

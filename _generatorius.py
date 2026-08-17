@@ -14,6 +14,9 @@ TEL = "+370 611 70101"
 EMAIL = "arunas@baskys.lt"
 PROFILIS = "https://paslaugos.lt/arunas-baskys-av3050"
 BASE_URL = "https://arunas-baskys.netlify.app"
+# Keičiama su kiekvienu stiliaus/skriptų pakeitimu — priverčia naršykles
+# atsisiųsti naują CSS/JS iš karto, nelaukiant kol pasibaigs kešo galiojimas.
+VERSION = "2"
 
 NAV = [
     # „Paslaugos" – tai pats pradžios puslapis (atskiro subpuslapio nebėra)
@@ -51,7 +54,7 @@ def head(title, desc, page):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v={VERSION}">
 </head>
 <body>
 {nav(page)}
@@ -119,7 +122,7 @@ FOOTER = f"""<footer class="site-footer">
   <a href="tel:{TEL_RAW}"><span class="ms ms-sm">call</span> Skambinti</a>
 </div>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v={VERSION}"></script>
 </body>
 </html>
 """
@@ -133,11 +136,15 @@ LIGHTBOX = """<div class="lb" id="lb">
 """
 
 
-def page_head(crumb, h1, lead, index=""):
+def page_head(crumb, h1, lead, aside=""):
+    """aside – neprivalomas HTML (pvz., mygtukas), rodomas dešinėje nuo antraštės."""
     return f"""<section class="page-head">
   <div class="wrap">
     <div class="crumbs"><a href="index.html">Pradžia</a> <span>/</span> <span>{crumb}</span></div>
-    <h1 class="h-lg">{h1}</h1>
+    <div class="ph-row">
+      <h1 class="h-lg">{h1}</h1>
+      {aside}
+    </div>
     <p class="lead">{lead}</p>
   </div>
 </section>
@@ -591,16 +598,9 @@ def p_iranga():
 
 
 def p_patirtis():
-    # Pirmos 4 nuotraukos rodomos kairėje kolonoje po patirties sąrašu (užpildo
-    # tuščią plotą šalia ilgų atsiliepimų), likusios 8 – galerijoje apačioje.
-    # Lightbox surenka visas .gal nuotraukas, tad varto per visas 12.
-    mini = "".join(
-        f'        <button type="button"><img src="images/darbas-{n}.jpg" alt="{alt}" loading="lazy"></button>\n'
-        for n, alt in GALERIJA[:4]
-    )
     gal = "".join(
-        f'      <button type="button"><img src="images/darbas-{n}.jpg" alt="{alt}" loading="lazy"></button>\n'
-        for n, alt in GALERIJA[4:]
+        f'        <button type="button"><img src="images/darbas-{n}.jpg" alt="{alt}" loading="lazy"></button>\n'
+        for n, alt in GALERIJA
     )
     return head(
         "Patirtis ir darbai — 25+ metai ŠVOK servise | Arūnas Baškys",
@@ -608,11 +608,11 @@ def p_patirtis():
         "patirtis.html",
     ) + f"""<main class="blueprint">
 {page_head("Patirtis", "Daugiau nei 25 metai ŠVOK servise",
-           "ŠVOK serviso inžinierius. Didelė dalis patirties sukaupta Londono komerciniuose pastatuose, kur sistemos negali sustoti, o gedimo priežastį reikia rasti greitai.")}
+           "ŠVOK serviso inžinierius. Didelė dalis patirties sukaupta Londono komerciniuose pastatuose, kur sistemos negali sustoti, o gedimo priežastį reikia rasti greitai.",
+           f'<a class="btn btn-outline" href="#galerija"><span class="ms ms-sm">photo_library</span> Nuotraukos iš objektų</a>')}
 
 <section>
   <div class="wrap">
-    <a class="btn btn-outline goto-gal" href="#galerija"><span class="ms ms-sm">photo_library</span> Nuotraukos iš objektų</a>
     <div class="exp">
       <div>
       <ul class="tl">
@@ -660,8 +660,15 @@ def p_patirtis():
         </li>
       </ul>
 
-      <div class="gal gal-mini">
-{mini}      </div>
+      <div class="sec-head" id="galerija" style="margin-top:48px; margin-bottom:24px">
+        <div>
+          <h2 class="h-md">Iš darbo objektuose</h2>
+          <p>Matavimai, šaldymo kontūrai, automatika, vėdinimo kameros, komercinė šaldymo įranga</p>
+        </div>
+        <div class="sec-index">FOTO</div>
+      </div>
+      <div class="gal gal-exp">
+{gal}      </div>
       </div>
 
       <div class="proof">
@@ -689,19 +696,6 @@ def p_patirtis():
   </div>
 </section>
 
-<section id="galerija">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h-md">Iš darbo objektuose</h2>
-        <p>Matavimai, šaldymo kontūrai, automatika, vėdinimo kameros, komercinė šaldymo įranga</p>
-      </div>
-      <div class="sec-index">FOTO</div>
-    </div>
-    <div class="gal" id="gal">
-{gal}    </div>
-  </div>
-</section>
 </main>
 
 {CTA_BLOCK}
@@ -719,9 +713,9 @@ def p_atsiliepimai():
 {page_head("Atsiliepimai", "Ką sako klientai",
            "Atsiliepimai iš Paslaugos.lt portalo, kur vertinama kokybė, kaina, bendravimas ir terminai.")}
 
-<section style="padding-top:0">
+<section>
   <div class="wrap">
-    <div class="score" style="margin-top:16px">
+    <div class="score">
       <div class="num">5,0</div>
       <div>
         {STARS}

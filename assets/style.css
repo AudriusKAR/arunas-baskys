@@ -144,7 +144,10 @@ section{padding:64px 0}
 /* ============================================================
    PUSLAPIO ANTRAŠTĖ (vidiniams puslapiams)
    ============================================================ */
-.page-head{padding:56px 0 48px; border-bottom:1px solid var(--grid-line)}
+.page-head{padding:56px 0 28px; border-bottom:1px solid var(--grid-line)}
+/* tarpas tarp puslapio antraštės ir turinio — apie 1,5 cm */
+.page-head + section{padding-top:28px}
+.ph-row{display:flex; align-items:flex-start; justify-content:space-between; gap:16px 24px; flex-wrap:wrap}
 .crumbs{
   font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; color:var(--slate);
   display:flex; align-items:center; gap:8px; margin-bottom:20px;
@@ -338,9 +341,8 @@ figcaption{
    GALERIJA
    ============================================================ */
 .gal{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
-.gal-mini{grid-template-columns:repeat(2,1fr); margin-top:32px}
-/* mygtukas „Nuotraukos iš objektų" — rodomas tik telefone */
-.goto-gal{display:none}
+/* galerija kairėje patirties kolonoje — 3 nuotraukos eilutėje */
+.gal-exp{grid-template-columns:repeat(3,1fr)}
 .gal button{padding:6px; border:1px solid var(--grid-line); background:var(--surface-white); cursor:zoom-in; transition:border-color .15s; display:block}
 .gal button:hover{border-color:var(--primary)}
 .gal img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:contrast(1.05) saturate(.85)}
@@ -488,7 +490,7 @@ a.v:hover{color:var(--light-blue)}
   .h-lg{font-size:32px} .h-md{font-size:26px} .h-sm{font-size:20px}
   section{padding:48px 0}
   .hero{padding:40px 0}
-  .page-head{padding:36px 0 32px}
+  .page-head{padding:36px 0 20px}
   .g2,.g3,.rev,.sympt,.checklist,.quotes,.facts-in{grid-template-columns:1fr}
   .gal{grid-template-columns:repeat(2,1fr)}
   .fact{border-right:0; border-bottom:1px solid var(--grid-line); padding:18px 0}
@@ -499,7 +501,6 @@ a.v:hover{color:var(--light-blue)}
   .foot{grid-template-columns:1fr; gap:32px}
   .btn{width:100%}
   .hero-fig>img{height:300px}
-  .goto-gal{display:flex; margin-bottom:24px}
   .clip:not(.open) img{max-height:260px; object-fit:cover; object-position:top}
   .clip-btn{
     display:flex; width:100%; align-items:center; justify-content:center; gap:8px;
