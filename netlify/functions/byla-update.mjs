@@ -23,6 +23,12 @@ export async function handler(event) {
     await dbUpdate("gedimai", `id=eq.${d.id}`, { statusas: d.statusas });
     return { statusCode: 200, body: "ok" };
   }
+  if (d.veiksmas === "nutraukti") {
+    await dbUpdate("gedimu_analizes",
+      `gedimo_id=eq.${d.id}&busena=eq.vyksta`,
+      { busena: "klaida", etapas: null, klaida: "Nutraukta vartotojo", baigta: new Date().toISOString() });
+    return { statusCode: 200, body: "ok" };
+  }
   if (d.veiksmas === "galutine") {
     await dbUpdate("gedimai", `id=eq.${d.id}`, {
       statusas: "sutvarkyta",

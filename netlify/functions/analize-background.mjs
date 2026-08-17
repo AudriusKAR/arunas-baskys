@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { dbInsert, dbUpdate, dbSelect, storageDownload, verify } from "./_supabase.mjs";
 
-const PROMPT_VERSION = "1.0";
+const PROMPT_VERSION = "1.1";
 
 function promptText() {
   const kandidatai = [
@@ -17,8 +17,9 @@ function promptText() {
   throw new Error("prompt failas nerastas: " + kandidatai.join(" | "));
 }
 
+/* atnaujinimai tik kol busena=vyksta — jei vartotojas nutraukė, nebeperrašom */
 async function etapas(aid, tekstas) {
-  await dbUpdate("gedimu_analizes", `id=eq.${aid}`, { etapas: tekstas }).catch(() => {});
+  await dbUpdate("gedimu_analizes", `id=eq.${aid}&busena=eq.vyksta`, { etapas: tekstas }).catch(() => {});
 }
 
 export async function handler(event) {
@@ -141,7 +142,7 @@ export async function handler(event) {
 
     const u = j.usage || {};
     const webs = Math.max(u.server_tool_use?.web_search_requests || 0, searches);
-    await dbUpdate("gedimu_analizes", `id=eq.${a.id}`, {
+    await dbUpdate("gedimu_analizes", `id=eq.${a.id}&busena=eq.vyksta`, {
       busena: "baigta", etapas: null, rezultatas,
       input_tokens: u.input_tokens || 0, output_tokens: u.output_tokens || 0,
       web_searches: webs, baigta: new Date().toISOString(),

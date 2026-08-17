@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Atidaroma byla… | Arūnas Baškys</title>
+<style>body{font-family:system-ui;background:#F8FAFC;color:#0F172A;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:20px}
+a{display:inline-block;margin-top:16px;background:#0055D4;color:#fff;text-decoration:none;padding:14px 22px;border-radius:3px;font-weight:600}</style>
+</head>
+<body>
+<div><p>Atidaroma gedimo byla…</p><a id="f" href="#">Atidaryti bylą</a></div>
+<script>
+/* Gmail atidaro nuorodas savo ribotoje naršyklėje. Šis puslapis Android'e
+   peršoka į tikrą Chrome (intent://), iPhone bando Chrome app, kitur — įprastai. */
+var p = new URLSearchParams(location.search);
+var kelias = '/byla?id=' + p.get('id') + '&t=' + p.get('t');
+var pilnas = location.origin + kelias;
+document.getElementById('f').href = pilnas;
+var ua = navigator.userAgent;
+if (/Android/i.test(ua)) {
+  location.href = 'intent://' + location.host + kelias +
+    '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' +
+    encodeURIComponent(pilnas) + ';end';
+} else if (/iPhone|iPad/i.test(ua)) {
+  location.href = 'googlechromes://' + location.host + kelias;
+  setTimeout(function(){ location.href = pilnas; }, 1200);
+} else location.href = pilnas;
+</script>
+</body>
+</html>

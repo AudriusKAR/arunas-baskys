@@ -299,7 +299,8 @@ export async function handler(event) {
       klaidos_kodas: klaida || null, aprasymas: d.simptomai,
       forma: d, failai: failaiDb,
     });
-    bylosUrl = `${SITE}/byla?id=${cid}&t=${sign(cid)}`;
+    /* per /atidaryk – Gmail vidinė naršyklė peršoka į tikrą Chrome */
+    bylosUrl = `${SITE}/atidaryk?id=${cid}&t=${sign(cid)}`;
   } catch (e) { console.error("byla:", e.message); }
 
   laiskoV.ctaUrl = bylosUrl;
