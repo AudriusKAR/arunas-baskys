@@ -39,6 +39,12 @@ const mapsUrl = (adresas) =>
   "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent(`${adresas}, Lietuva`);
 
+const wazeUrl = (adresas) =>
+  "https://waze.com/ul?q=" + encodeURIComponent(`${adresas}, Lietuva`) + "&navigate=yes";
+
+const appleMapsUrl = (adresas) =>
+  "https://maps.apple.com/?q=" + encodeURIComponent(`${adresas}, Lietuva`);
+
 function fmtBytes(b) {
   if (!b && b !== 0) return "";
   return b >= 1024 * 1024 ? (b / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1024)) + " KB";
@@ -133,9 +139,15 @@ function laiskoHtml(v) {
   ${v.veiksmai ? `<tr><td class="px" style="background:#1E293B;padding:16px 32px;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
       ${btn(v.telHref, "Skambinti", true)}
-      ${v.email ? btn(`mailto:${v.email}?subject=${encodeURIComponent("Dėl jūsų gedimo užklausos " + v.nr)}`, "Rašyti", false) : ""}
-      ${v.adresas ? btn(v.mapsUrl, "Žemėlapis", false) : ""}
+      ${btn(v.smsHref, "Rašyti SMS", false)}
+      ${v.email ? btn(`mailto:${v.email}?subject=${encodeURIComponent("Dėl jūsų gedimo užklausos " + v.nr)}`, "Rašyti email", false) : ""}
     </tr></table>
+    ${v.adresas ? `<div style="font-family:${MONO};font-size:10px;letter-spacing:1.5px;color:#94A3B8;text-transform:uppercase;padding:14px 0 8px 0;">Navigacija į objektą</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      ${btn(v.mapsGoogle, "Google Maps", false)}
+      ${btn(v.mapsWaze, "Waze", false)}
+      ${btn(v.mapsApple, "Apple Maps", false)}
+    </tr></table>` : ""}
   </td></tr>` : ""}
   <tr><td class="card px" style="background:#FFFFFF;padding:28px 32px 8px 32px;">
     ${v.turinys}
@@ -223,7 +235,9 @@ export async function handler(event) {
     antraste: "Gedimo registracija",
     preheader: [klaida, adresas, telRod, d.iranga].filter(Boolean).join(" · "),
     veiksmai: true,
-    telHref, email: validEmail, adresas, mapsUrl: maps,
+    telHref, smsHref: "sms:" + telNorm(d.telefonas),
+    email: validEmail, adresas,
+    mapsGoogle: maps, mapsWaze: wazeUrl(adresas), mapsApple: appleMapsUrl(adresas),
     turinys,
     porasteTekstas: "Užklausa gauta iš",
   });
