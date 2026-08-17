@@ -10,6 +10,10 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# diagnostikos prompt'as keliauja kartu su funkcija (skaitomas per fs)
+[functions."analize-background"]
+  included_files = ["ai/prompts/*.md"]
+
 # Subpuslapis „Paslaugos" panaikintas – jį atstoja pradžios puslapis
 [[redirects]]
   from = "/paslaugos"

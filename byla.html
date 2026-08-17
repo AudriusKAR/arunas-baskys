@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F172A">
+<title>Gedimo byla | Arūnas Baškys</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--pr:#0F172A;--bl:#0055D4;--ln:#E2E8F0;--mut:#475569;--sl:#64748B;--bg:#F8FAFC;--lo:#F1F5F9}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--pr);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.55;padding-bottom:84px}
+  .wrap{max-width:680px;margin:0 auto;padding:14px}
+  h1,h2,h3{font-family:'Hanken Grotesk',sans-serif;margin:0}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--sl);text-transform:uppercase}
+  .kort{background:#fff;border:1px solid var(--ln);border-radius:3px;padding:18px;margin-bottom:12px}
+  .virsus{background:var(--pr);color:#fff;border-radius:3px;padding:18px;margin-bottom:12px}
+  .virsus h1{font-size:21px;color:#fff}
+  .virsus .m{color:#94A3B8;font-size:14px;margin-top:4px}
+  .virsus .id{font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .status{display:inline-block;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600;background:#334155;color:#fff}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border:1px solid transparent;border-radius:3px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center}
+  .btn-ai{background:var(--bl);color:#fff}
+  .btn-ai[disabled]{opacity:.6}
+  .btn-o{background:#fff;color:var(--pr);border-color:var(--ln);font-weight:600;font-size:14px;padding:11px}
+  .eiga{display:none;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:3px;padding:16px;margin-bottom:12px}
+  .eiga .sp{display:inline-block;width:14px;height:14px;border:2px solid var(--bl);border-top-color:transparent;border-radius:50%;animation:s 1s linear infinite;vertical-align:-2px;margin-right:8px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  details{background:#fff;border:1px solid var(--ln);border-radius:3px;margin-bottom:10px}
+  summary{padding:14px 16px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:var(--sl)}
+  details[open] summary::after{content:"▴"}
+  .det-in{padding:0 16px 16px;border-top:1px solid var(--ln);padding-top:12px}
+  .kopij{display:inline-flex;align-items:center;gap:6px;background:var(--lo);border:1px solid var(--ln);border-radius:3px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px}
+  .eil{border-bottom:1px solid var(--ln);padding:9px 0}
+  .eil:last-child{border-bottom:0}
+  .eil .k{font-size:12px;color:var(--sl)}
+  .hip{border-left:3px solid var(--bl);background:var(--lo);padding:10px 12px;margin:8px 0;border-radius:0 3px 3px 0}
+  .hip b{font-family:'Hanken Grotesk',sans-serif}
+  .foto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+  .foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;border:1px solid var(--ln)}
+  .apacia{position:fixed;left:0;right:0;bottom:0;background:var(--pr);display:flex;z-index:50}
+  .apacia a,.apacia button{flex:1;background:none;border:0;color:#fff;padding:13px 4px 11px;text-align:center;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-size:11px;cursor:pointer}
+  .apacia .ic{display:block;font-size:19px;margin-bottom:2px}
+  .apacia>*+*{border-left:1px solid #334155}
+  textarea,input[type=text],select{width:100%;border:1px solid var(--ln);border-radius:3px;padding:11px;font:inherit;background:#fff;margin-bottom:8px}
+  textarea{min-height:80px}
+  .saltinis{display:block;padding:8px 0;border-bottom:1px solid var(--ln);color:var(--bl);text-decoration:none;font-size:14px}
+  .versijos{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .versijos button{border:1px solid var(--ln);background:#fff;border-radius:99px;padding:5px 12px;font-size:12px;cursor:pointer}
+  .versijos button.akt{background:var(--pr);color:#fff;border-color:var(--pr)}
+  .pastaba{background:var(--lo);border-radius:3px;padding:9px 11px;margin-top:6px;font-size:14px}
+  .pastaba .mono{font-size:10px}
+  .klaida-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:3px;padding:14px;margin-bottom:12px;display:none}
+  #zinute{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:var(--pr);color:#fff;padding:9px 18px;border-radius:99px;font-size:13px;display:none;z-index:99}
+</style>
+</head>
+<body>
+<div id="zinute"></div>
+<div class="wrap">
+  <div class="virsus" id="virsus">Kraunama…</div>
+
+  <button class="btn btn-ai" id="ai-btn" style="display:none">🤖 AI DIAGNOSTIKA</button>
+  <div class="eiga" id="eiga"><span class="sp"></span><b>Claude analizuoja gedimą…</b><div id="etapas" style="margin-top:6px;color:var(--mut);font-size:14px"></div></div>
+  <div class="klaida-box" id="klaida-box">Analizės atlikti nepavyko. <button class="kopij" id="retry" style="margin-top:8px">🔄 Bandyti dar kartą</button></div>
+
+  <div id="rez"></div>
+  <div id="turinys"></div>
+</div>
+
+<div class="apacia" id="apacia" style="display:none">
+  <a id="a-tel" href="#"><span class="ic">📞</span>Skambinti</a>
+  <button id="a-kli"><span class="ic">📋</span>Klientui</button>
+  <button id="a-add"><span class="ic">📷</span>Pridėti</button>
+  <button id="a-ai"><span class="ic">🤖</span>AI</button>
+</div>
+
+<script>
+const P = new URLSearchParams(location.search);
+const ID = P.get('id'), T = P.get('t');
+const API = (f) => `/.netlify/functions/${f}`;
+let BYLA = null, ANALIZES = [], rodomaV = null, poll = null;
+
+const STAT = {naujas:['🟡','Naujas'],analizuojamas:['🔵','Analizuojamas'],reikia_info:['🟣','Reikia informacijos'],suplanuotas:['🟠','Suplanuotas vizitas'],sutvarkyta:['🟢','Sutvarkyta'],uzdaryta:['⚫','Uždaryta']};
+const esc = s => String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const zin = t => { const z=document.getElementById('zinute'); z.textContent=t; z.style.display='block'; setTimeout(()=>z.style.display='none',2200); };
+const kop = t => navigator.clipboard.writeText(t).then(()=>zin('Nukopijuota'));
+
+async function krauk(tylus){
+  const r = await fetch(API('byla-data')+`?id=${ID}&t=${T}`, {cache:'no-store'});
+  if(!r.ok){ document.getElementById('virsus').textContent = 'Byla nerasta arba nuoroda negalioja.'; return; }
+  const d = await r.json(); BYLA = d.byla; ANALIZES = d.analizes;
+  if(!tylus) rodomaV = null;
+  piesk();
+}
+
+function piesk(){
+  const b = BYLA, st = STAT[b.statusas]||['',''];
+  document.getElementById('virsus').innerHTML = `
+    <h1>${esc(b.iranga||'')}</h1>
+    <div class="m">${esc(b.gamintojas_modelis||'')}</div>
+    <div class="m">${esc(b.adresas||'')} · ${esc(b.vardas||'')}</div>
+    <div class="id"><span>#${b.id}</span>
+      <select id="st-sel" style="width:auto;margin:0;background:#1E293B;color:#fff;border-color:#334155;font-size:12px;padding:5px 8px">
+        ${Object.entries(STAT).map(([k,v])=>`<option value="${k}"${k===b.statusas?' selected':''}>${v[0]} ${v[1]}</option>`).join('')}
+      </select></div>`;
+  document.getElementById('st-sel').onchange = async e => {
+    await fetch(API('byla-update'),{method:'POST',body:JSON.stringify({id:ID,t:T,veiksmas:'statusas',statusas:e.target.value})});
+    zin('Statusas pakeistas'); krauk(true);
+  };
+  document.getElementById('a-tel').href = 'tel:'+(b.telefonas||'');
+  document.getElementById('apacia').style.display = 'flex';
+
+  const vyksta = ANALIZES.find(a=>a.busena==='vyksta');
+  const baigtos = ANALIZES.filter(a=>a.busena==='baigta');
+  const btn = document.getElementById('ai-btn');
+  btn.style.display = vyksta ? 'none' : 'flex';
+  btn.textContent = baigtos.length ? '🔄 Atnaujinti AI analizę' : '🤖 AI DIAGNOSTIKA';
+  document.getElementById('eiga').style.display = vyksta ? 'block' : 'none';
+  if(vyksta){ document.getElementById('etapas').textContent = vyksta.etapas||''; startPoll(); }
+  else if(poll){ clearInterval(poll); poll=null; }
+  const pask = ANALIZES[0];
+  document.getElementById('klaida-box').style.display = (!vyksta && pask && pask.busena==='klaida') ? 'block' : 'none';
+
+  pieskRez(baigtos);
+  pieskTurini(b);
+}
+
+function pieskRez(baigtos){
+  const el = document.getElementById('rez');
+  if(!baigtos.length){ el.innerHTML=''; return; }
+  if(rodomaV===null) rodomaV = baigtos[0].versija;
+  const a = baigtos.find(x=>x.versija===rodomaV) || baigtos[0];
+  const R = a.rezultatas || {};
+  const sek = (pav, vidus, open) => `<details${open?' open':''}><summary>${pav}</summary><div class="det-in">${vidus}</div></details>`;
+  let h = `<div class="versijos">${baigtos.map(x=>`<button class="${x.versija===a.versija?'akt':''}" onclick="rodomaV=${x.versija};piesk()">Analizė v${x.versija} · ${new Date(x.sukurta).toLocaleString('lt-LT',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}</button>`).join('')}</div>`;
+
+  const pk = R.pasitikejimas||{};
+  const pkI = {aukštas:'🟢',vidutinis:'🟡',žemas:'🔴'}[pk.lygis]||'';
+  h += sek('1. Greita išvada' + (pkI?` &nbsp;${pkI}`:''), `<p>${esc(R.greita_isvada||'')}</p>${pk.lygis?`<p class="mono">AI pasitikėjimas: ${pkI} ${esc(pk.lygis)}</p><p style="font-size:13px;color:var(--sl)">${esc(pk.kodel||'')}</p>`:''}`, true);
+  if(R.klientui) h += sek('2. Informacija klientui', `<p id="kli-txt">${esc(R.klientui)}</p><button class="kopij" onclick="kop(document.getElementById('kli-txt').textContent)">📋 Kopijuoti klientui</button>`);
+  if(R.hipotezes?.length) h += sek('3. Tikėtinos priežastys', R.hipotezes.map(x=>`<div class="hip"><b>${esc(x.tikimybe)}</b> — ${esc(x.priezastis)}<div style="font-size:13px;margin-top:4px;color:var(--mut)">Kodėl: ${esc(x.kodel)}<br>Patvirtintų: ${esc(x.patvirtintu)}<br>Paneigtų: ${esc(x.paneigtu)}</div></div>`).join(''));
+  if(R.diagnostikos_seka?.length) h += sek('4. Diagnostikos seka', '<ol style="padding-left:18px;margin:0">'+R.diagnostikos_seka.map(x=>`<li style="margin-bottom:6px">${esc(String(x).replace(/^\d+\.\s*/,''))}</li>`).join('')+'</ol>');
+  if(R.konkretus_patikrinimai?.length) h += sek('5. Konkretūs patikrinimai', R.konkretus_patikrinimai.map(x=>`<div class="hip"><b>${esc(x.patikra)}</b> <span class="mono">${x.saltinis==='dokumentacija'?'📄 dokumentacija':'💡 logika'}</span><div style="font-size:13px;margin-top:4px;color:var(--mut)">Kur: ${esc(x.kur)}<br>Tikėtina: ${esc(x.tiketina_reiksme)}<br>Jei nėra: ${esc(x.jei_nera)}<br>Jei yra: ${esc(x.jei_yra)}</div></div>`).join(''));
+  if(R.klaidu_kodai?.length) h += sek('6. Klaidų kodai', R.klaidu_kodai.map(x=>`<div class="hip"><b style="font-family:'JetBrains Mono',monospace">${esc(x.kodas)}</b> — ${esc(x.reiksme)}<div style="font-size:13px;margin-top:4px;color:var(--mut)">Priežastys: ${esc(x.priezastys)}<br>Diagnostika: ${esc(x.gamintojo_diagnostika)}${x.reset?`<br>Reset: ${esc(x.reset)}`:''}<br>Šaltinis: ${esc(x.saltinis)}</div></div>`).join(''));
+  if(R.pasitikslinti?.reikia) h += sek('7. Ko paprašyti prieš vizitą', `<ol style="padding-left:18px">${(R.pasitikslinti.klausimai||[]).map(x=>`<li>${esc(String(x).replace(/^\d+\.\s*/,''))}</li>`).join('')}</ol><p id="pra-txt" style="background:var(--lo);padding:10px;border-radius:3px">${esc(R.pasitikslinti.zinute_klientui||'')}</p><button class="kopij" onclick="kop(document.getElementById('pra-txt').textContent)">📋 Paprašyti papildomos informacijos</button>`);
+  const ps = R.pasiimti||{};
+  if(ps.matavimo_iranga?.length||ps.irankiai?.length||ps.dalys?.length) h += sek('8. Ką pasiimti į objektą', ['matavimo_iranga','irankiai','dalys','dokumentacija'].filter(k=>ps[k]?.length).map(k=>`<div class="eil"><span class="k">${{matavimo_iranga:'Matavimo įranga',irankiai:'Įrankiai',dalys:'Galimos dalys',dokumentacija:'Dokumentacija'}[k]}</span><br>${ps[k].map(esc).join(', ')}</div>`).join(''));
+  if(R.saugumas) h += sek('9. Saugumas', `<p>⚠️ ${esc(R.saugumas)}</p>`);
+  if(R.saltiniai?.length) h += sek('10. Naudoti šaltiniai', R.saltiniai.map(x=>`<a class="saltinis" href="${esc(x.url)}" target="_blank" rel="noopener">${x.tipas&&x.tipas.includes('gamintojo')?'📄':'🔗'} ${esc(x.pavadinimas)}</a>`).join(''));
+  h += `<p class="mono" style="margin:4px 0 14px">v${a.versija} · ${esc(a.modelis||'')} · prompt ${esc(a.prompt_version||'')} · ${a.input_tokens||0}/${a.output_tokens||0} tok · ${a.web_searches||0} paieškos</p>`;
+  el.innerHTML = h;
+}
+
+function pieskTurini(b){
+  const el = document.getElementById('turinys');
+  let h = '';
+  h += `<details><summary>Kliento pranešimas</summary><div class="det-in">
+    <div class="eil"><span class="k">Užklausa</span><br>${esc(b.tipas||'')}</div>
+    ${b.klaidos_kodas?`<div class="eil"><span class="k">Klaidos kodas</span><br><b style="font-family:'JetBrains Mono',monospace">${esc(b.klaidos_kodas)}</b></div>`:''}
+    <div class="eil"><span class="k">Aprašymas</span><br>${esc(b.aprasymas||'')}</div>
+    <div class="eil"><span class="k">Kontaktai</span><br>${esc(b.vardas||'')} · <a href="tel:${esc(b.telefonas)}">${esc(b.telefonas||'')}</a>${b.el_pastas?` · <a href="mailto:${esc(b.el_pastas)}">${esc(b.el_pastas)}</a>`:''}</div>
+    ${b.failai?.length?`<div class="foto">${b.failai.map(f=>f.perziura?`<a href="${esc(f.perziura)}" target="_blank"><img src="${esc(f.perziura)}" alt="${esc(f.pavadinimas)}"></a>`:'').join('')}</div>`:''}
+  </div></details>`;
+  h += `<details id="prid"><summary>+ Pridėti diagnostikos informaciją</summary><div class="det-in">
+    <select id="p-rusys"><option value="pastaba">Pastaba</option><option value="matavimas">Matavimo rezultatas</option><option value="klaidos_kodas">Klaidos kodas</option></select>
+    <textarea id="p-tekstas" placeholder="Įrašykite informaciją…"></textarea>
+    <button class="btn btn-o" onclick="pridek()">Išsaugoti</button>
+    ${b.pastabos?.length?b.pastabos.map(p=>`<div class="pastaba"><span class="mono">${new Date(p.laikas).toLocaleString('lt-LT')} · ${esc(p.rusys)}</span><br>${esc(p.tekstas)}</div>`).join(''):''}
+  </div></details>`;
+  const g = b.galutine;
+  h += `<details><summary>Galutinė diagnostika ${g?'🟢':''}</summary><div class="det-in">
+    <input type="text" id="g-gedimas" placeholder="Tikras nustatytas gedimas" value="${esc(g?.gedimas||'')}">
+    <textarea id="g-darbai" placeholder="Atlikti darbai">${esc(g?.darbai||'')}</textarea>
+    <input type="text" id="g-dalys" placeholder="Pakeistos dalys" value="${esc(g?.dalys||'')}">
+    <input type="text" id="g-matavimai" placeholder="Matavimai" value="${esc(g?.matavimai||'')}">
+    <input type="text" id="g-rezultatas" placeholder="Rezultatas" value="${esc(g?.rezultatas||'')}">
+    <textarea id="g-pastabos" placeholder="Papildomos pastabos">${esc(g?.pastabos||'')}</textarea>
+    <button class="btn btn-o" onclick="galutine()">Išsaugoti galutinę diagnostiką</button>
+  </div></details>`;
+  el.innerHTML = h;
+}
+
+async function pridek(){
+  const t = document.getElementById('p-tekstas').value.trim();
+  if(!t) return;
+  await fetch(API('byla-update'),{method:'POST',body:JSON.stringify({id:ID,t:T,veiksmas:'pastaba',rusys:document.getElementById('p-rusys').value,tekstas:t})});
+  zin('Išsaugota — gali atnaujinti AI analizę'); krauk(true);
+}
+async function galutine(){
+  const v = k => document.getElementById('g-'+k).value.trim();
+  await fetch(API('byla-update'),{method:'POST',body:JSON.stringify({id:ID,t:T,veiksmas:'galutine',gedimas:v('gedimas'),darbai:v('darbai'),dalys:v('dalys'),matavimai:v('matavimai'),rezultatas:v('rezultatas'),pastabos:v('pastabos')})});
+  zin('Galutinė diagnostika išsaugota'); krauk(true);
+}
+async function paleisk(){
+  document.getElementById('ai-btn').style.display='none';
+  document.getElementById('klaida-box').style.display='none';
+  document.getElementById('eiga').style.display='block';
+  document.getElementById('etapas').textContent='Pradedama…';
+  await fetch(API('analize-background'),{method:'POST',body:JSON.stringify({id:ID,t:T})});
+  startPoll();
+}
+function startPoll(){
+  if(poll) return;
+  poll = setInterval(async ()=>{
+    await krauk(true);
+    const vyksta = ANALIZES.find(a=>a.busena==='vyksta');
+    if(!vyksta){ clearInterval(poll); poll=null; rodomaV=null; piesk(); }
+  }, 5000);
+}
+document.getElementById('ai-btn').onclick = paleisk;
+document.getElementById('retry').onclick = paleisk;
+document.getElementById('a-ai').onclick = ()=>{ const b=document.getElementById('ai-btn'); if(b.style.display!=='none') paleisk(); else zin('Analizė jau vyksta'); };
+document.getElementById('a-kli').onclick = ()=>{ const t=document.getElementById('kli-txt'); if(t) kop(t.textContent); else zin('Dar nėra analizės'); };
+document.getElementById('a-add').onclick = ()=>{ const d=document.getElementById('prid'); d.open=true; d.scrollIntoView({behavior:'smooth'}); };
+
+/* auto-start: atėjus iš laiško mygtuko, jei analizės dar nėra – paleidžiam */
+krauk().then(()=>{
+  if(BYLA && !ANALIZES.length) paleisk();
+});
+</script>
+</body>
+</html>
