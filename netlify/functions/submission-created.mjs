@@ -10,6 +10,7 @@
                   vėliau perjungiama į arunas@baskys.lt)
 */
 import nodemailer from "nodemailer";
+import { dbInsert, storageUpload, sign } from "./_supabase.mjs";
 
 const FORMOS_URL = "https://arunas-baskys-dev.netlify.app/registruoti-gedima";
 const MAX_ATTACH_BYTES = 10 * 1024 * 1024; // priedai segami, kol telpa į 10 MB
@@ -143,6 +144,19 @@ function laiskoHtml(v) {
       <td><a class="btn-a" href="${v.navUrl}" style="display:block;background:#FFFFFF;color:#0F172A;font-family:${SANS};font-size:14px;font-weight:600;text-decoration:none;text-align:center;padding:14px 10px;border-radius:3px;mso-line-height-rule:exactly;line-height:16px;">&#128663; Navigacija į objektą — ${esc(v.adresas)}</a></td>
     </tr></table>` : ""}
   </td></tr>` : ""}
+  ${v.ctaUrl ? `<tr><td class="px" style="background:#FFFFFF;padding:24px 32px 0 32px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr><td style="background:#F1F5F9;border:1px solid #E2E8F0;border-radius:3px;padding:22px 20px;text-align:center;">
+        <div style="font-family:${MONO};font-size:11px;letter-spacing:1.5px;color:#64748B;text-transform:uppercase;">&#129302; AI diagnostika</div>
+        <div class="t-main" style="font-family:${SANS};font-size:14px;line-height:1.55;color:#0F172A;padding:10px 0 16px;">
+          Claude išanalizuos kliento informaciją, nuotraukas, įrangos dokumentaciją
+          ir parengs preliminarų diagnostikos planą.
+        </div>
+        <a class="btn-a" href="${v.ctaUrl}" style="display:block;background:#0055D4;color:#FFFFFF;font-family:${SANS};font-size:16px;font-weight:700;text-decoration:none;text-align:center;padding:17px 12px;border-radius:3px;mso-line-height-rule:exactly;line-height:18px;">&#129302; ATLIKTI AI DIAGNOSTIKĄ</a>
+        <div class="t-sub" style="font-family:${SANS};font-size:12px;color:#64748B;padding-top:10px;">Atidarys gedimo bylą ir automatiškai paleis analizę.</div>
+      </td></tr>
+    </table>
+  </td></tr>` : ""}
   <tr><td class="card px" style="background:#FFFFFF;padding:28px 32px 8px 32px;">
     ${v.turinys}
     <div style="height:20px;line-height:20px;">&nbsp;</div>
@@ -224,7 +238,7 @@ export async function handler(event) {
     turinys += priedai.map(priedoKortele).join("");
   }
 
-  const html = laiskoHtml({
+  const laiskoV = {
     nr, laikas, skubu,
     antraste: "Gedimo registracija",
     preheader: [klaida, adresas, telRod, d.iranga].filter(Boolean).join(" · "),
@@ -233,7 +247,7 @@ export async function handler(event) {
     email: validEmail, adresas, navUrl: maps,
     turinys,
     porasteTekstas: "Užklausa gauta iš",
-  });
+  };
 
   /* plain-text alternatyva */
   const text = [
@@ -250,20 +264,47 @@ export async function handler(event) {
     ...priedai.map((f, i) => `Priedas ${i + 1}: ${f.filename} — ${f.url}`),
   ].filter((x) => x !== null).join("\n");
 
-  /* priedų prisegimas prie laiško (kol telpa į 10 MB) */
+  /* priedai: parsisiunčiami vieną kartą — segami prie laiško (iki 10 MB)
+     IR keliami į Supabase saugyklą originalia kokybe (visi) */
+  const cid = nr.slice(1); // '2026-0817-001'
   const attachments = [];
+  const failaiDb = [];
   let used = 0;
   for (const f of priedai) {
     try {
-      if (used + (f.size || 0) > MAX_ATTACH_BYTES) continue;
       const r = await fetch(f.url);
       if (!r.ok) continue;
       const buf = Buffer.from(await r.arrayBuffer());
-      if (used + buf.length > MAX_ATTACH_BYTES) continue;
-      used += buf.length;
-      attachments.push({ filename: f.filename, content: buf });
+      const saugus = f.filename.replace(/[^\w.\-]+/g, "_");
+      const kelias = `${cid}/${saugus}`;
+      try {
+        await storageUpload(kelias, buf, f.type === "file" ? "application/octet-stream" : (f.type || "application/octet-stream"));
+      } catch (e) { console.error("storage:", e.message); }
+      failaiDb.push({ pavadinimas: f.filename, storage_path: kelias, url: f.url, dydis: buf.length });
+      if (used + buf.length <= MAX_ATTACH_BYTES) {
+        used += buf.length;
+        attachments.push({ filename: f.filename, content: buf });
+      }
     } catch { /* priedo nepavyko parsisiųsti – laiške lieka nuoroda */ }
   }
+
+  /* gedimo byla Supabase — laiškas išeina net jei DB nepasiekiama */
+  let bylosUrl = "";
+  try {
+    await dbInsert("gedimai", {
+      id: cid, numeris: payload.number || 0, sukurta: created,
+      vardas: d.vardas, telefonas: telNorm(d.telefonas), el_pastas: validEmail || null,
+      adresas, objekto_tipas: d.objektas || null,
+      tipas, iranga: d.iranga, gamintojas_modelis: (d.modelis || "").trim() || null,
+      klaidos_kodas: klaida || null, aprasymas: d.simptomai,
+      forma: d, failai: failaiDb,
+    });
+    bylosUrl = `${SITE}/byla?id=${cid}&t=${sign(cid)}`;
+  } catch (e) { console.error("byla:", e.message); }
+
+  laiskoV.ctaUrl = bylosUrl;
+  const html = laiskoHtml(laiskoV);
+  const textFinal = bylosUrl ? `${text}\nAI diagnostika: ${bylosUrl}` : text;
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com", port: 465, secure: true,
@@ -290,7 +331,7 @@ export async function handler(event) {
     from: { name: "Gedimo registracija · Arūnas Baškys", address: process.env.SMTP_USER },
     to: process.env.NOTIFY_TO,
     replyTo: validEmail ? { name: d.vardas || "", address: validEmail } : undefined,
-    subject, html, text, attachments,
+    subject, html, text: textFinal, attachments,
   });
 
   /* autoatsakas klientui (klaida čia nesužlugdo pagrindinio laiško) */
